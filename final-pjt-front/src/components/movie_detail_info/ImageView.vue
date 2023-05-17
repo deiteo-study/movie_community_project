@@ -1,9 +1,9 @@
 <template>
   <div>
     <h1>Image</h1>
-    <button @click='move1'> 옆으로 </button>
+    <img id="img" src="@/assets/left.png" @click='move1' alt="" style="width:35px;">
     <img :src="image_url" alt="">
-    <button @click='move2'> 뒤로 </button>
+    <img id="img" src="@/assets/right.png" @click='move2' alt="" style="width:35px;">
   </div>
 </template>
 
@@ -78,6 +78,9 @@ export default {
 
 <style scoped>
 img {
-    width:1000px;
+    width:800px;
+}
+#img {
+  margin-bottom: 20%;
 }
 </style>

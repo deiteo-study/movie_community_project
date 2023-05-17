@@ -1,17 +1,21 @@
 <template>
   <div class="detail">
-    <h1>영화 상세페이지</h1>
+    <h1></h1>
     <!-- {{moviedata}} -->
-    <div class="movie_detail">
+    <div id="background">
+      <br>
+      <div class="movie_detail">
       <img :src="movie_poster" alt="">
-      <div class="movie_info">
-        <h2>{{ moviedata.title }}</h2>
-        <p>{{ moviedata.vote_average }}</p>
-        <p>{{ moviedata.overview }}</p>
+        <div class="movie_info">
+          <h2>{{ moviedata.title }}</h2>
+          <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️</p>
+          <p>{{ moviedata.overview }}</p>
+        </div>
       </div>
+      <br>
+      <hr>      
     </div>
-    <br>
-    <hr>
+
     <div class="movie_detail1">
       <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
     </div>
@@ -23,6 +27,8 @@
       <button @click="move_page2">리뷰</button>
       <button @click="move_page3">이미지</button>
       <button @click="move_page4">토론방</button>
+      <img id="cursor" src="@/assets/cursor.png" alt="cursor" style="width:30px">
+    
     </div>
   
     <YouTubeView v-if="page==1" :movieId='movieId' />
@@ -107,7 +113,7 @@ a.router-link-exact-active {
 .movie_detail {
   display:flex;
     margin: 0 100px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 .movie_detail1 {
   display:flex;
@@ -119,5 +125,26 @@ a.router-link-exact-active {
   padding: 0 60px;
   text-align: left;;
 }
-
+h2 {
+  font-size: 30px;
+}
+#score{
+  font-size: 18px;
+}
+#background{
+  background-color: rgb(61, 65, 68);
+  color: rgb(185, 211, 222);
+}
+button{
+  /* border: solid rgb(97, 114, 135); */
+  border: none;
+  border-radius: 1rem;
+  background-color: rgb(234, 246, 250);
+  height: 30px;
+  width: 70px;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+#cursor{
+}
 </style>
