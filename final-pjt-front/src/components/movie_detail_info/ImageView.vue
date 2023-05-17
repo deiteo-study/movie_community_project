@@ -1,23 +1,25 @@
 <template>
   <div>
     <h1>Image</h1>
-    <!-- <ImageItems :image="image_list[0]"/> -->
-    <ImageItems v-for='(image,idx) in image_list' :key="idx" :image='image' />
+    <button @click='move1'> 옆으로 </button>
+    <img :src="image_url" alt="">
+    <button @click='move2'> 뒤로 </button>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import ImageItems from '@/components/movie_detail_info/ImageItems'
+// import ImageItems from '@/components/movie_detail_info/ImageItems'
 
 export default {
     name:'ImageView',
     components:{
-        ImageItems
+        // ImageItems
     },
     data(){
       return {
         image_list: [],
+        image_url:null,
         num:0,
       }
     },
@@ -43,9 +45,29 @@ export default {
                     this.image_list.push(images[index].file_path)
                 }
             }
-            console.log(this.image_list)
+            const image=this.image_list[this.num]
+            this.image_url = `https://image.tmdb.org/t/p/w500${image}`
         })
-
+      },
+      move1(){
+        if (this.num==0) {
+          alert('첫 이미지입니다.')
+        }
+        else {
+          this.num-=1
+          const image=this.image_list[this.num]
+          this.image_url = `https://image.tmdb.org/t/p/w500${image}`
+        }
+      },
+      move2(){
+        if (this.num==this.image_list.length-1) {
+          alert('마지막 이미지입니다.')
+        }
+        else {
+          this.num+=1
+          const image=this.image_list[this.num]
+          this.image_url = `https://image.tmdb.org/t/p/w500${image}`
+        }
       }
     },
     created(){
@@ -54,6 +76,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+img {
+    width:1000px;
+}
 </style>
