@@ -12,9 +12,9 @@
     </div>
   
     <YouTubeView v-if="page==1" :movieId='movieId' />
-    <ReviewView v-else-if="page==2"/>
-    <ImageView v-else-if="page==3"/>
-    <OpinionView v-else-if="page==4"/>
+    <ReviewView v-else-if="page==2" :movieId='movieId' />
+    <ImageView v-else-if="page==3" :movieId='movieId' />
+    <OpinionView v-else-if="page==4" :movieId='movieId' />
 
   </div>
 </template>
