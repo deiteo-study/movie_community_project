@@ -18,11 +18,12 @@ export default {
     },
     data(){
       return {
-        image_list: [],
+        image_list: [],     // 이미지를 불러와서 저장해줄 리스트 생성
         image_url:null,
-        num:0,
+        num:0,              // 이미지 한개씩 넘어가면서 보여주기 위한 순서 번호 생성
       }
     },
+    // movieId number로 받기
     props:{
       movieId : Number
     },
@@ -34,7 +35,9 @@ export default {
           url:url,
         })
         .then(res => {
+          // 디테일 페이지의 영화 배경 사진 받아오기
             const images=res.data.backdrops
+            // 배경 사진이 5개 이하면 하나씩 돌면서 이미지 리스트에 저장하고 5개 이상이면 앞에서부터 5개씩 뽑아와서 저장하기
             if (images.length <= 5) {
                 images.forEach(ele =>{
                     this.image_list.push(ele.file_path)
@@ -42,7 +45,7 @@ export default {
             }
             else {
                 for (let index = 0; index < 5; index++) {
-                    this.image_list.push(images[index].file_path)
+                    this.image_list.push(images[index].file_path)   // push로 넣어준다.
                 }
             }
             const image=this.image_list[this.num]

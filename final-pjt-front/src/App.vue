@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <!-- 기본 네비게이션 바(홈+검색+프로필) -->
     <nav>
       <router-link to="/home">
         <img src="./assets/home.png" alt="home" style="width:35px;" >

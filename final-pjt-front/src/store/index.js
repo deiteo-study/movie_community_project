@@ -37,6 +37,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    // API로 인기순위 영화 20개 받아오기
     GetMovies(context){
       const url = 'https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1&api_key=5dcc6dd1aa73987866c715e255d2af47'
       axios({
