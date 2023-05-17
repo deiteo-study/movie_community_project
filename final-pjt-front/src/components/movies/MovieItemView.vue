@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="card" @click="detail(movie.id)" >
       <img class="card-img-top" :src="poster_url" />
       <div class="card-body">
         <b class="card-title">{{ movie.title }}</b>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    name: 'MovieCard',
+    name: 'MovieItemView',
     props: {
         movie: Object
     },
@@ -23,6 +23,12 @@ export default {
     // this. 으로 define 오류 발생
     created(){
         this.poster_url += this.movie.poster_path
+        // console.log(this.movie)
+    }, 
+    methods: {
+        detail(movie_id){
+            this.$router.push({name:'moviedetail', params:{movieId:movie_id, moviedata:this.movie}})
+        }
     }
 
 }
