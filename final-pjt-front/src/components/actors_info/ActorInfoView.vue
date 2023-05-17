@@ -1,7 +1,8 @@
 <template>
     <div>
-        <img :src="actor_poster" alt="">
-      {{ actor.name }}
+        <img v-if='actor_poster' :src="actor_poster" alt="">
+        <img v-else src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png" alt="">
+        <p>{{ actor.name }}</p>
     </div>
 </template>
 
@@ -26,7 +27,9 @@ export default {
 
 <style scoped>
 img {
-    width: 50px;
+    width: 70px;
+    height: 105px;
+    margin: 20px;
 }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Youtube</h1>
-    <iframe v-if="movie_url" :src="movie_url" frameborder="0"></iframe>
+    <iframe v-if="movie_url" :src="movie_url" frameborder="0" width="1000" height="600"></iframe>
   </div>
 </template>
 

@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/home">Home</router-link>
+      
+      <router-link to="/home">
+        <img src="./assets/logo.png" alt="logo" style="width:35px;" >
+      </router-link>
       <input type="text" name="" id="">
       <router-link to="/profile">Profile</router-link>
     </nav>
@@ -32,5 +35,12 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+</style>
+
+<style scoped>
+input {
+  width: 60%;
+  border-radius: 20px;
 }
 </style>

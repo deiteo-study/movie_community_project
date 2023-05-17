@@ -1,8 +1,22 @@
 <template>
   <div class="detail">
     <h1>영화 상세페이지</h1>
-    {{moviedata}}
-    <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
+    <!-- {{moviedata}} -->
+    <div class="movie_detail">
+      <img :src="movie_poster" alt="">
+      <div class="movie_info">
+        <h2>{{ moviedata.title }}</h2>
+        <p>{{ moviedata.vote_average }}</p>
+        <p>{{ moviedata.overview }}</p>
+      </div>
+    </div>
+    <br>
+    <hr>
+    <div class="movie_detail1">
+      <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
+    </div>
+    <br>
+    <hr>
     
     <div>
       <button @click="move_page1">영상</button>
@@ -41,6 +55,7 @@ export default {
     return{
       actors:null,
       page:1,
+      movie_poster:null,
     }
   },
   props: {
@@ -49,6 +64,7 @@ export default {
   },
   created(){
     this.get_actor()
+    this.movie_poster = `https://image.tmdb.org/t/p/w300${this.moviedata.poster_path}`
   },
   methods:{
     get_actor(){
@@ -88,4 +104,20 @@ a {
 a.router-link-exact-active {
   color: #42b983;
 }
+.movie_detail {
+  display:flex;
+    margin: 0 100px;
+  border: 1px solid black;
+}
+.movie_detail1 {
+  display:flex;
+}
+.movie_detail > img {
+  width: 30%;
+}
+.movie_info {
+  padding: 0 60px;
+  text-align: left;;
+}
+
 </style>
