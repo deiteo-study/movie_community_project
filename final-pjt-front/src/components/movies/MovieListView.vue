@@ -28,7 +28,6 @@ export default {
   },
 
   created(){
-    this.$store.dispatch('GetMovies')
     this.movies=this.$store.state.movies
   }
 

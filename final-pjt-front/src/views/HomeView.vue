@@ -15,6 +15,9 @@ export default {
   components: {
     MovieListView
 
+  },
+  created(){
+    this.$store.dispatch('GetDBMovies')
   }
 }
 </script>
