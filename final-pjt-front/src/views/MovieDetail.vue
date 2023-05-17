@@ -3,30 +3,48 @@
     <h1>영화 상세페이지</h1>
     {{moviedata}}
     <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
-    <!-- <router-link :to="{ name:'youtube', params:{movieId:movieId} }">영상</router-link>
-    <router-link :to="{ name:'review', params:{movieId:movieId} }">리뷰</router-link>
-    <router-link :to="{ name:'image', params:{movieId:movieId} }">이미지</router-link>
-    <router-link :to="{ name:'opinion', params:{movieId:movieId} }">토론</router-link> -->
-    <router-view name='youtube'></router-view>
+    
+    <div>
+      <button @click="move_page1">영상</button>
+      <button @click="move_page2">리뷰</button>
+      <button @click="move_page3">이미지</button>
+      <button @click="move_page4">토론방</button>
+    </div>
+  
+    <YouTubeView v-if="page==1" :movieId='movieId' />
+    <ReviewView v-else-if="page==2"/>
+    <ImageView v-else-if="page==3"/>
+    <OpinionView v-else-if="page==4"/>
+
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import ActorInfoView from '@/components/actors_info/ActorInfoView'
+import YouTubeView from '../components/movie_detail_info/YouTubeView.vue'
+import ReviewView from '../components/movie_detail_info/ReviewView.vue'
+import ImageView from '../components/movie_detail_info/ImageView.vue'
+import OpinionView from '../components/movie_detail_info/OpinionView.vue'
+
 
 export default {
   name:'MovieDetail',
   components:{
     ActorInfoView,
+    YouTubeView,
+    ReviewView,
+    ImageView,
+    OpinionView
   },
   data(){
     return{
-      actors:null
+      actors:null,
+      page:1,
     }
   },
   props: {
-    movieId: String,
+    movieId: Number,
     moviedata:Object,
   },
   created(){
@@ -43,6 +61,19 @@ export default {
         this.actors=res.data.cast
       })
 
+    },
+
+    move_page1(){
+      this.page=1
+    },
+    move_page2(){
+      this.page=2
+    },
+    move_page3(){
+      this.page=3
+    },
+    move_page4(){
+      this.page=4
     },
   },
   

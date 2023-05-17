@@ -20,35 +20,6 @@ const routes = [
     name: 'moviedetail',
     component: () => import('../views/MovieDetail.vue'),
     props:true,
-    // children 안에서만 작동하게
-    // redirec로 보내주기 ***
-    // redirect:'/movie/:movieId',
-    children:[
-      {
-        path: '',
-        name: 'youtube',
-        component: () => import('@/components/movie_detail_info/YouTubeView.vue'),
-        props: true,
-      },
-      {
-        path: 'review',
-        name: 'review',
-        component: () => import('@/components/movie_detail_info/ReviewView.vue'),
-        props: true,
-      },
-      {
-        path: 'image',
-        name: 'image',
-        component: () => import('@/components/movie_detail_info/ImageView.vue'),
-        props: true,
-      },
-      {
-        path: 'opinion',
-        name: 'opinion',
-        component: () => import('@/components/movie_detail_info/OpinionView.vue'),
-        props: true,
-      }
-    ]
   }
 ]
 
