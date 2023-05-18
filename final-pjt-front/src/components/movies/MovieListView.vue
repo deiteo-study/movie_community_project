@@ -18,17 +18,11 @@ import MovieItemView from '@/components/movies/MovieItemView.vue'
 
 export default {
   name: 'MovieListView',
-  data(){
-    return{
-      movies:null
-    }
-  },
   components: {
     MovieItemView,
   },
-
-  created(){
-    this.movies=this.$store.state.movies
+  props:{
+    movies:Array
   }
 
 }

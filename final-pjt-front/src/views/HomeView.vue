@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>메인 홈</h1>
-    <MovieListView/>
+    <MovieListView :movies="movies"/>
   </div>
 </template>
 
@@ -14,10 +14,18 @@ export default {
   name: 'HomeView',
   components: {
     MovieListView
-
+  },
+  data(){
+    return {
+      movies:null
+    }
   },
   created(){
     this.$store.dispatch('GetDBMovies')
+    this.movies=this.$store.state.movies
+    if (!this.$store.state.token){
+      this.$router.push({path: "/"})
+    }
   }
 }
 </script>

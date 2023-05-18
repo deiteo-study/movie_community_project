@@ -8,7 +8,8 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    props:true,
   },
   {
     path: '/profile',
@@ -20,6 +21,16 @@ const routes = [
     name: 'moviedetail',
     component: () => import('../views/MovieDetail.vue'),
     props:true,
+  },
+  {
+    path:'/signup',
+    name: 'SignUp',
+    component: () => import('../views/SignupView.vue'),
+  },
+  {
+    path:'/login',
+    name: 'Login',
+    component: () => import('../views/LoginView.vue'),
   }
 ]
 
