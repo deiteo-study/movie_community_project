@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name:'OpinionView'
+    name:'DebateView'
 }
 </script>
 

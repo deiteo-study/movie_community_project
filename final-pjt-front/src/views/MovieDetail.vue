@@ -34,7 +34,7 @@
     <YouTubeView v-if="page==1" :movieId='movieId' />
     <ReviewView v-else-if="page==2" :movieId='movieId' />
     <ImageView v-else-if="page==3" :movieId='movieId' />
-    <OpinionView v-else-if="page==4" :movieId='movieId' />
+    <DebateView v-else-if="page==4" :movieId='movieId' />
 
   </div>
 </template>
@@ -45,7 +45,7 @@ import ActorInfoView from '@/components/actors_info/ActorInfoView'
 import YouTubeView from '../components/movie_detail_info/YouTubeView.vue'
 import ReviewView from '../components/movie_detail_info/ReviewView.vue'
 import ImageView from '../components/movie_detail_info/ImageView.vue'
-import OpinionView from '../components/movie_detail_info/OpinionView.vue'
+import DebateView from '../components/movie_detail_info/DebateView.vue'
 
 
 export default {
@@ -55,7 +55,7 @@ export default {
     YouTubeView,
     ReviewView,
     ImageView,
-    OpinionView
+    DebateView
   },
   data(){
     return{
