@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 import DebateListView from './DebateListView.vue'
 
 export default {

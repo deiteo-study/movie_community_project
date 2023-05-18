@@ -90,3 +90,13 @@ def debatecreate(request, movieId):
         return Response(serializer.data)
     return Response({'error':'저장 실패'})
 
+
+# 전역변수와 연결 >(axios)
+# 토론글 불러오기
+@api_view(['GET'])
+def debate(request, movieId):
+    movie=get_object_or_404(Movie,id=movieId)
+    debates = get_list_or_404(Debate,movie=movie)
+    serializer = DebateSerializer(debates,many=True)
+    return Response(serializer.data)
+

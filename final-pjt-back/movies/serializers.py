@@ -35,3 +35,9 @@ class DebateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Debate
         fields = '__all__'
+
+# 토론글을 DB에서 받아오기 위해
+class DebateListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Debate
+        fields = '__all__'
