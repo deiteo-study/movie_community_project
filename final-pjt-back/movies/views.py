@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from .serializers import GenreSerializer, MovieSerializer
-from .models import Genre, Movie
+from .serializers import GenreSerializer, MovieSerializer, ReviewSerializer
+from .models import Genre, Movie,Review
+from accounts.models import User
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
@@ -30,6 +31,7 @@ def get_genres(request):
 # 영화 정보 불러와서 db에 저장하는 코드
 @api_view(['GET'])
 def get_movies(request):
+    print(request.user)
     movies=Movie.objects.all()
     serializer=MovieSerializer(movies,many=True)
     return Response(serializer.data)
@@ -49,3 +51,27 @@ def savemovies(request):
         if movie.is_valid():
             movie.save()
     return Response({'save':'저장완료'})
+
+@api_view(['POST'])
+def reviewcreate(request, movieId):
+    user=get_object_or_404(User, username=request.user)
+    movie=get_object_or_404(Movie, id=movieId)
+    serializer=ReviewSerializer(data=request.data)
+    if serializer.is_valid():
+        # 참조키를 넣기 위해 (read_only_fields)로 참조키를 제외한 데이터만 입력받아도
+        # 유효성 검사에 통과하도록 함
+        # save시에 참조키를 대칭해서 넣어준 뒤 저장
+        serializer.save(user=user, movie=movie)
+        return Response(serializer.data)
+    return Response({'error':'저장 실패'})
+
+
+@api_view(['GET'])
+def review(request, movieId):
+    # (디테일페이지의) 영화에 해당하는 영화를 movie로 받고
+    movie=get_object_or_404(Movie,id=movieId)
+    # 받아온 영화와 리뷰모델에 참조되어 있는 영화랑 동일하것 뽑아오기 
+    reviews = get_list_or_404(Review,movie=movie)
+    # 데이터 전송
+    serializer = ReviewSerializer(reviews,many=True)
+    return Response(serializer.data)

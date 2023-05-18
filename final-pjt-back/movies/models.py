@@ -15,9 +15,10 @@ class Movie(models.Model):
     poster_path=models.TextField()
     genres = models.ManyToManyField(Genre)
 
-class Comment(models.Model):
+class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    vote = models.FloatField()
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

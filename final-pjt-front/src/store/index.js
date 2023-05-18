@@ -16,6 +16,7 @@ export default new Vuex.Store({
   state: {
     movies:[
     ],
+    reviews:[],
     token: null,
   },
   getters: {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
     LOGOUT(state){
       state.token=null
       router.push({name:'home'})
+    },
+    GET_REVIEW(state,reviews){
+      state.reviews=reviews
     }
     
   },
@@ -66,6 +70,8 @@ export default new Vuex.Store({
       axios({
         method: 'get',
         url: 'http://127.0.0.1:8000/api/v1/get_movies/',
+        headers : {
+          Authorization: ` Token ${context.state.token }`}
       })
       .then(res=>{
         context.commit('GET_MOVIES',res.data)
@@ -101,7 +107,17 @@ export default new Vuex.Store({
     },
     LogOUT(context){
       context.commit('LOGOUT')
-    }
+    },
+    // axios의 요청이 views.py의 request로 -> axios의 then으로 응답
+    GetReview(context, movieId){
+      axios({
+        method: 'get',
+        url:`http://127.0.0.1:8000/api/v1/${movieId}/review/`,
+      })
+      .then(res => {
+        context.commit('GET_REVIEW',res.data)
+      }) 
+    },
 
   },
   modules: {
