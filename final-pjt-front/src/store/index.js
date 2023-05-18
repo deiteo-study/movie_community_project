@@ -17,6 +17,7 @@ export default new Vuex.Store({
     movies:[
     ],
     reviews:[],
+    debates: [],
     token: null,
   },
   getters: {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     },
     GET_REVIEW(state,reviews){
       state.reviews=reviews
+    },
+    GET_DEBATE(state, debates){
+      state.debates = debates
     }
     
   },
@@ -118,6 +122,17 @@ export default new Vuex.Store({
         context.commit('GET_REVIEW',res.data)
       }) 
     },
+    // 토론
+    // vue에서의 axios와 index.js(여기)에서의 axios의 차이는?
+    GetDebate(context, movieId){
+      axios({
+        method: 'get',
+        url: `http://127.0.0.1:8000/api/v1/${movieId}/debate/`,
+      })
+      .then(res => {
+        context.commit('GET_DEBATE', res.data)
+      })
+    }
 
   },
   modules: {
