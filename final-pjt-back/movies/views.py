@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from .serializers import GenreSerializer, MovieSerializer, ReviewSerializer
-from .models import Genre, Movie,Review
+from .serializers import GenreSerializer, MovieSerializer, ReviewSerializer, DebateSerializer
+from .models import Genre, Movie,Review, Debate
 from accounts.models import User
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -52,6 +52,7 @@ def savemovies(request):
             movie.save()
     return Response({'save':'저장완료'})
 
+# 리뷰작성하기
 @api_view(['POST'])
 def reviewcreate(request, movieId):
     user=get_object_or_404(User, username=request.user)
@@ -75,3 +76,15 @@ def review(request, movieId):
     # 데이터 전송
     serializer = ReviewSerializer(reviews,many=True)
     return Response(serializer.data)
+
+# 토론방에서 의견 등록하기
+@api_view(['POST'])
+def debatecreate(request, movieId):
+    user=get_object_or_404(User, username=request.user)
+    movie = get_object_or_404(Movie, id=movieId)
+    serializer = DebateSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save(user=user, movie=movie)
+        return Response(serializer.data)
+    return Response({'error':'저장 실패'})
+

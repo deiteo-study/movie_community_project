@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Review, Genre
+from .models import Movie, Review, Genre, Debate
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -28,4 +28,10 @@ class ReviewListSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
+        fields = '__all__'
+
+# 토론
+class DebateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Debate
         fields = '__all__'
