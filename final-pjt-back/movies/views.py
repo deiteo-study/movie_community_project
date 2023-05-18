@@ -66,7 +66,7 @@ def reviewcreate(request, movieId):
         return Response(serializer.data)
     return Response({'error':'저장 실패'})
 
-
+# 전역변수와 연결
 @api_view(['GET'])
 def review(request, movieId):
     # (디테일페이지의) 영화에 해당하는 영화를 movie로 받고
@@ -77,7 +77,9 @@ def review(request, movieId):
     serializer = ReviewSerializer(reviews,many=True)
     return Response(serializer.data)
 
+
 # 토론방에서 의견 등록하기
+# DebateView의 axios와 연결
 @api_view(['POST'])
 def debatecreate(request, movieId):
     user=get_object_or_404(User, username=request.user)
