@@ -1,9 +1,33 @@
 <template>
   <div>
     <h1>Image</h1>
-    <img id="img" src="@/assets/left.png" @click='move1' alt="" style="width:35px;">
-    <img :src="image_url" alt="">
-    <img id="img" src="@/assets/right.png" @click='move2' alt="" style="width:35px;">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active" v-if="image_list[0]">
+            <img :src="image_list[0]" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item" v-if="image_list[1]">
+            <img :src="image_list[1]" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item" v-if="image_list[2]">
+            <img :src="image_list[2]" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item" v-if="image_list[3]">
+            <img :src="image_list[3]" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item" v-if="image_list[4]">
+            <img :src="image_list[4]" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
   </div>
 </template>
 
@@ -19,8 +43,6 @@ export default {
     data(){
       return {
         image_list: [],     // 이미지를 불러와서 저장해줄 리스트 생성
-        image_url:null,
-        num:0,              // 이미지 한개씩 넘어가면서 보여주기 위한 순서 번호 생성
       }
     },
     // movieId string로 받기
@@ -40,38 +62,21 @@ export default {
             // 배경 사진이 5개 이하면 하나씩 돌면서 이미지 리스트에 저장하고 5개 이상이면 앞에서부터 5개씩 뽑아와서 저장하기
             if (images.length <= 5) {
                 images.forEach(ele =>{
-                    this.image_list.push(ele.file_path)
+                  const image=ele.file_path
+                  const image_url=`https://image.tmdb.org/t/p/w500${image}`
+                  this.image_list.push(image_url)
                 })
             }
             else {
                 for (let index = 0; index < 5; index++) {
-                    this.image_list.push(images[index].file_path)   // push로 넣어준다.
+                  const image=images[index].file_path
+                  const image_url=`https://image.tmdb.org/t/p/w500${image}`
+                  this.image_list.push(image_url)   // push로 넣어준다.
                 }
             }
-            const image=this.image_list[this.num]
-            this.image_url = `https://image.tmdb.org/t/p/w500${image}`
         })
       },
-      move1(){
-        if (this.num==0) {
-          alert('첫 이미지입니다.')
-        }
-        else {
-          this.num-=1
-          const image=this.image_list[this.num]
-          this.image_url = `https://image.tmdb.org/t/p/w500${image}`
-        }
-      },
-      move2(){
-        if (this.num==this.image_list.length-1) {
-          alert('마지막 이미지입니다.')
-        }
-        else {
-          this.num+=1
-          const image=this.image_list[this.num]
-          this.image_url = `https://image.tmdb.org/t/p/w500${image}`
-        }
-      }
+
     },
     created(){
       this.get_image()
@@ -85,5 +90,9 @@ img {
 }
 #img {
   margin-bottom: 20%;
+}
+#carouselExampleControls {
+  margin: 0 auto;
+  width: 1000px;
 }
 </style>

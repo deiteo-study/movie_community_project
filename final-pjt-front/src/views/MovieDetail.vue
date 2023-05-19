@@ -161,7 +161,11 @@ a.router-link-exact-active {
   /* border: 1px solid black; */
 }
 .movie_detail1 {
-  display:flex;
+  width: 1000px;
+  height: 300px;
+  overflow-x: scroll;
+  white-space:nowrap
+
 }
 .movie_detail > img {
   width: 30%;

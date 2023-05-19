@@ -6,13 +6,18 @@
       <router-link to="/home">
         <img src="./assets/home.png" alt="home" style="width:35px;" >
       </router-link>
-      <input type="text" name="" id="serch"  placeholder="검색어를 입력해주세요 :)">
+      <input type="text" name="" id="serch"  placeholder="검색어를 입력해주세요 :)" v-model="serach_word">
         <!-- <img src="./assets/magnify.png" alt="serch" style="width:18px; height:18px" >  -->
 
-        <router-link to="/profile">
-        <img src="./assets/user.png" alt="profile" style="width:40px;" > 
-        </router-link>
-        <button @click='logout'>로그아웃</button>
+      <div class="btn-group c">
+        <img src="./assets/user.png" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" alt="profile" style="width:40px;" >
+        <ul class="dropdown-menu">
+          <li><router-link to="/profile" class="dropdown-item">내 정보</router-link></li>
+          <li><a class="dropdown-item" href="#">회원정보수정</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><p class="dropdown-item" @click='logout'>로그아웃</p></li>
+        </ul>
+      </div>
       
       </nav>
       <hr>
@@ -55,6 +60,7 @@ export default {
   },
   data(){
     return{
+      serach_word:null,
       num:0
     }
   },
@@ -91,7 +97,8 @@ export default {
 nav {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  margin: 15px 50px;
+ 
 }
 
 nav a {
@@ -109,8 +116,7 @@ input {
   width: 50%;
   height: 30px;
   border-radius: 18px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   border: solid 1.5px rgb(108, 119, 127);
   padding-left: 20px;
 }
@@ -118,5 +124,14 @@ input::placeholder {
     color: #cccccc;
     text-align: center;
 }
+.c {
+  cursor: pointer;
+}
+</style>
 
+<style scoped>
+div > hr {
+  margin-top:0;
+  margin-bottom: 0;
+}
 </style>
