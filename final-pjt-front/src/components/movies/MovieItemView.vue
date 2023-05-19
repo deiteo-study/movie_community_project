@@ -13,7 +13,8 @@
 export default {
     name: 'MovieItemView',
     props: {
-        movie: Object
+        movie: Object,
+        movies: Array,
     },
     data(){
         return {
@@ -28,7 +29,8 @@ export default {
     methods: {
         detail(movie_id){
             this.$router.push({name:'moviedetail', params:{movieId:movie_id}})
-        }
+        },
+
     }
 
 }
@@ -46,5 +48,7 @@ img {
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-
+.card {
+    width: 200px;
+}
 </style>
