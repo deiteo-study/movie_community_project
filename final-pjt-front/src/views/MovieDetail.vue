@@ -9,6 +9,7 @@
         <div class="movie_info">
           <h2>{{ moviedata.title }}</h2>
           <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️</p>
+          <button @click="movielike">좋아요</button>
           <p>{{ moviedata.overview }}</p>
         </div>
       </div>
@@ -91,9 +92,22 @@ export default {
   },
   methods:{
     get_moviedata(){
+      const movieId=this.movieId
+      axios({
+        method:'post',
+        url:`http://127.0.0.1:8000/api/v1/get_movie/`,
+        data:{movieId,}
+      })
+      .then(res=>{
+        console.log(res.data)
+        this.moviedata=res.data
+        console.log(this.moviedata)
+      })
+
       for (var movie of this.$store.state.movies) {
         if (movie['id']==this.movieId){
           this.moviedata=movie
+          console.log(this.moviedata)
           return
         }
       }
@@ -108,7 +122,6 @@ export default {
       .then(res => {
         this.actors=res.data.cast
       })
-
     },
 
     move_page1(){
@@ -123,6 +136,9 @@ export default {
     move_page4(){
       this.page=4
     },
+    movielike(){
+
+    }
   },
   
 

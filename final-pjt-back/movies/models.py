@@ -14,6 +14,7 @@ class Movie(models.Model):
     vote_average=models.FloatField()
     poster_path=models.TextField()
     genres = models.ManyToManyField(Genre)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
 
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

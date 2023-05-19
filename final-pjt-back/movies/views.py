@@ -42,6 +42,13 @@ def get_dbdata():
             except:
                 continue
 
+@api_view(['POST'])
+def get_movie(request):
+    
+    movie=Movie.objects.get(id=request.data['movieId'])
+    serializer=MovieSerializer(movie)
+    return Response(serializer.data)
+
 @api_view(['GET'])
 def get_movies(request):
     movies=Movie.objects.all()
@@ -107,3 +114,14 @@ def get_reviews(request):
     reviews=Review.objects.all()
     serializers=ReviewSerializer(reviews,many=True)
     return Response(serializers.data)
+
+
+# 영화 좋아요
+def movielikes(request, movieId):
+    movie = Movie.objects.get(id = movieId)
+    if movie.like_users.filter(pk=request.user.pk).exists():
+            movie.like_users.remove(request.user)
+    else:
+        movie.like_users.add(request.user)
+        return redirect('movies:index')
+    return redirect('movies:login')
