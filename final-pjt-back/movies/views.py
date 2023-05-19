@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from .serializers import GenreSerializer, MovieSerializer, ReviewSerializer, DebateSerializer
+from .serializers import GenreSerializer, MovieSerializer, ReviewSerializer, DebateSerializer,MovieListSerializer
 from .models import Genre, Movie,Review, Debate
 from accounts.models import User
 from rest_framework.response import Response
@@ -24,8 +24,8 @@ def get_dbdata():
             genre.save()
     
     # 영화정보 불러오기
-    for page in range(1,101):
-        movielist_url=f'https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}&api_key={api_key}&include_adult=false'
+    for page in range(1,11):
+        movielist_url=f'https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}&api_key={api_key}'
         res=requests.get(movielist_url).json()['results']
         for data in res:
             try:
@@ -35,19 +35,23 @@ def get_dbdata():
                 'release_date':data['release_date'],
                 'vote_average':data['vote_average'],
                 'poster_path':data['poster_path'],
-                'genres':data['genre_ids']}
+                'genres':data['genre_ids'],}
                 movie=MovieSerializer(data=a)
                 if movie.is_valid():
                     movie.save()
             except:
                 continue
 
-@api_view(['POST'])
-def get_movie(request):
+@api_view(['GET'])
+def get_movie(request,movieId):
+    movie=Movie.objects.get(id=movieId)
+    if movie.like_users.filter(pk=request.user.pk).exists():
+        likes=True
+    else:
+        likes=False
+    serializer=MovieListSerializer(movie)
     
-    movie=Movie.objects.get(id=request.data['movieId'])
-    serializer=MovieSerializer(movie)
-    return Response(serializer.data)
+    return Response({'data':serializer.data,'likes':likes})
 
 @api_view(['GET'])
 def get_movies(request):
@@ -109,19 +113,30 @@ def debate(request, movieId):
     serializer = DebateSerializer(debates,many=True)
     return Response(serializer.data)
 
+@api_view(['post'])
+def get_review(request):
+    try:
+        reviews=Review.objects.filter(movie=request.data['movieId'])
+        serializers=ReviewSerializer(reviews,many=True)
+        return Response(serializers.data)
+    except:
+        return Response({})
+
 @api_view(['GET'])
 def get_reviews(request):
     reviews=Review.objects.all()
-    serializers=ReviewSerializer(reviews,many=True)
+    serializers=ReviewSerializer(reviews, many=True)
     return Response(serializers.data)
 
 
 # 영화 좋아요
+@api_view(['GET'])
 def movielikes(request, movieId):
     movie = Movie.objects.get(id = movieId)
+    print(movie)
     if movie.like_users.filter(pk=request.user.pk).exists():
-            movie.like_users.remove(request.user)
+        movie.like_users.remove(request.user)
+        return Response(False)
     else:
         movie.like_users.add(request.user)
-        return redirect('movies:index')
-    return redirect('movies:login')
+        return Response(True)

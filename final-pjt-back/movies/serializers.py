@@ -28,7 +28,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        fields = '__all__'
+        exclude=('like_users',)
 
 # 토론
 class DebateSerializer(serializers.ModelSerializer):

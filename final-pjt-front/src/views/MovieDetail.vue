@@ -6,10 +6,10 @@
       <br>
       <div class="movie_detail">
       <img :src="movie_poster" alt="">
-        <div class="movie_info">
+        <div class="movie_info" v-if="moviedata">
           <h2>{{ moviedata.title }}</h2>
           <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️</p>
-          <button @click="movielike">좋아요</button>
+          <button @click="movielike"> <span v-if="!likes">좋아요</span> <span v-else>좋아요 취소</span> </button>
           <p>{{ moviedata.overview }}</p>
         </div>
       </div>
@@ -66,8 +66,9 @@ export default {
     return{
       actors:null,
       page:1,
-      movie_poster:null,
+      likes:null,
       moviedata:null,
+      movie_poster:null,
 
       // link1:null,
       // link2:null,
@@ -86,32 +87,25 @@ export default {
 
 
     this.get_moviedata()
-    this.get_actor()
-    this.$store.dispatch('get_dbreview')
-    this.movie_poster = `https://image.tmdb.org/t/p/w300${this.moviedata.poster_path}`
+
+    // this.$store.dispatch('get_dbreview')
+    
   },
   methods:{
     get_moviedata(){
       const movieId=this.movieId
       axios({
-        method:'post',
-        url:`http://127.0.0.1:8000/api/v1/get_movie/`,
-        data:{movieId,}
+        method:'get',
+        url:`http://127.0.0.1:8000/api/v1/${movieId}/get_movie/`,
+        headers : {
+          Authorization: ` Token ${this.$store.state.token }`}
       })
-      .then(res=>{
-        console.log(res.data)
-        this.moviedata=res.data
-        console.log(this.moviedata)
+      .then((res)=>{
+        this.moviedata=res.data.data
+        this.likes=res.data.likes
+        this.get_actor()
+        this.movie_poster = `https://image.tmdb.org/t/p/w300${this.moviedata.poster_path}`
       })
-
-      for (var movie of this.$store.state.movies) {
-        if (movie['id']==this.movieId){
-          this.moviedata=movie
-          console.log(this.moviedata)
-          return
-        }
-      }
-
     },
     get_actor(){
       const url=`https://api.themoviedb.org/3/movie/${this.movieId}/credits?language=ko-kr&api_key=5dcc6dd1aa73987866c715e255d2af47`
@@ -121,6 +115,18 @@ export default {
       })
       .then(res => {
         this.actors=res.data.cast
+      })
+    },
+    movielike(){
+      const movieId=this.movieId
+      axios({
+        method:'get',
+        url:`http://127.0.0.1:8000/api/v1/movie/${movieId}/likes/`,
+        headers : {
+          Authorization: ` Token ${this.$store.state.token }`}
+      })
+      .then(res=>{
+        this.likes= res.data
       })
     },
 
@@ -136,9 +142,6 @@ export default {
     move_page4(){
       this.page=4
     },
-    movielike(){
-
-    }
   },
   
 

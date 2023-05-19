@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import ReviewCreateView from './ReviewCreateView.vue'
 import ReviewItemView from './ReviewItemView.vue'
 
@@ -27,13 +28,21 @@ export default {
       movieId: String
     },
     created(){
-        this.$store.state.reviews.forEach(element => {
-          if (element['movie']==this.movieId) {
-            this.reviews.push(element)
-          }
-        });
-        
-    },    
+      this.get_review()    
+    },
+    methods:{
+      get_review(){
+        const movieId= this.movieId
+        axios({
+          method:'post',
+          url:`http://127.0.0.1:8000/api/v1/get_review/`,
+          data:{movieId,}
+        })
+        .then(res=>{
+          this.reviews=res.data
+        })
+    },
+    } 
 }
 </script>
 
