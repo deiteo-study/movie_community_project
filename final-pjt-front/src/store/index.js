@@ -19,6 +19,9 @@ export default new Vuex.Store({
     reviews: [],
     debates: [],
     token: null,
+
+    now_playing:null,
+    popular_ten:null
   },
   getters: {
     isLogin(state) {
@@ -26,9 +29,53 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    now_playing(state){
+      axios({
+        method:'get',
+        url : 'https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=1&api_key=5dcc6dd1aa73987866c715e255d2af47'
+      })
+      .then(res=>{
+        state.now_playing=res.data.results.slice(0,10)
+        // 상세정보로 무언가 트라이할거면 밑에 코드로...
+        // state.now_playing=[]
+        // res.data.results.slice(0,5).forEach(element => {
+        //   axios({
+        //     method:'get',
+        //     url:`https://api.themoviedb.org/3/movie/${element['id']}?language=ko-KR&api_key=5dcc6dd1aa73987866c715e255d2af47`
+        //   })
+        //   .then(res=>{
+        //     state.now_playing.push(res.data)
+        //     console.log(state.now_playing)
+        //   })
+        //   .catch(err=>console.log(err))
+        // });
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+
+    popular_ten(state){
+      axios({
+        method:'get',
+        url:'https://api.themoviedb.org/3/movie/popular?language=ko-kr&page=1&api_key=5dcc6dd1aa73987866c715e255d2af47'
+      })
+      .then(res=>{
+        state.popular_ten=res.data.results.slice(0,10)
+        console.log(state.popular_ten)
+      })
+      .catch(err=>console.log(err))
+    },
+
+
     GET_MOVIES(state,movies){
       state.movies=movies
-      // router.push({name:'home'})
+    },
+    GET_REVIEWS(state,reviews){
+      state.reviews=reviews
+    },
+    GET_DEBATE(state, debates){
+      state.debates = debates
     },
     SAVE_TOKEN(state,token) {
       state.token = token
@@ -38,27 +85,11 @@ export default new Vuex.Store({
       state.token=null
       router.push({name:'home'})
     },
-    GET_REVIEWS(state,reviews){
-      state.reviews=reviews
-    },
-    GET_DEBATE(state, debates){
-      state.debates = debates
-    }
     
   },
   actions: {
-    GetDBMovies(context){
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/api/v1/get_movies/',
-        headers : {
-          Authorization: ` Token ${context.state.token }`}
-      })
-      .then(res=>{
-        context.commit('GET_MOVIES',res.data)
-      })
-    },
-    signUp(context,payload){
+    // 회원가입 요청
+    signup(context,payload){
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/accounts/signup/`,
@@ -72,7 +103,8 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    trylogin(context, payload){
+    // 로그인 요청
+    login(context, payload){
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/accounts/login/`,
@@ -80,15 +112,24 @@ export default new Vuex.Store({
       })
       .then(res => {
         context.commit('SAVE_TOKEN', res.data.key)
-        console.log(res)
       })
       .catch((err) => console.log(err))
 
     },
-    LogOUT(context){
-      context.commit('LOGOUT')
-    },
 
+
+    // DB로부터 
+    GetDBMovies(context){
+      axios({
+        method: 'get',
+        url: 'http://127.0.0.1:8000/api/v1/get_movies/',
+        headers : {
+          Authorization: ` Token ${context.state.token }`}
+      })
+      .then(res=>{
+        context.commit('GET_MOVIES',res.data)
+      })
+    },
     get_dbreview(context){
       axios({
         method: 'get',

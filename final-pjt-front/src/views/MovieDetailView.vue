@@ -31,10 +31,10 @@
       <img id="cursor" src="@/assets/cursor.png" alt="cursor" style="width:30px">
     </div>
 
-    <!-- <router-link :to='link1'>영상</router-link>
-    <router-link :to='link2'>리뷰</router-link>
-    <router-link :to='link3'>이미지</router-link>
-    <router-link :to='link4'>토론</router-link> 
+    <!-- <router-link :to="{ name: 'moviedetail', params:{ movieId:movieId } }">영상</router-link>
+    <router-link :to="{ name: 'reviews'}">리뷰</router-link>
+    <router-link :to="{ name: 'image'}">이미지</router-link>
+    <router-link :to="{ name: 'debate'}">토론</router-link> 
     <router-view></router-view> -->
     <YouTubeView v-if="page==1" :movieId='movieId' />
     <ReviewView v-else-if="page==2" :movieId='movieId' />
@@ -161,14 +161,6 @@ a.router-link-exact-active {
   /* border: 1px solid black; */
 }
 
-.wrap {
-  display:flex;
-  width:100%;
-  height:222px;
-  white-space:nowrap;
-	overflow-x:scroll;
-  overflow: auto;
-}
 .movie_detail > img {
   width: 30%;
 }

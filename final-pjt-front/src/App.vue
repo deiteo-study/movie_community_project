@@ -35,6 +35,7 @@
         <button @click="change_home">홈으로</button>
       </div>
     </div>
+    <button @click='themeChange'>Dark</button>
   </div>
 
 </template>
@@ -79,19 +80,42 @@ export default {
 
     },
     logout(){
-      this.$store.dispatch('LogOUT')
+      this.$store.commit('LOGOUT')
+    },
+    themeChange(event){
+      document.body.classList.toggle('dark')
+      if (event.target.innerText=='Dark'){
+        event.target.innerText='Light'
+      }
+      else {
+        event.target.innerText='Dark'
+      }
     }
   }
 }
 </script>
 
 <style>
+.wrap {
+  display:flex;
+  width:100%;
+  height:222px;
+  white-space:nowrap;
+	overflow-x:scroll;
+  overflow: auto;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+.dark {
+  background: #121212;
+  color: #bbb;
 }
 
 nav {
@@ -108,6 +132,19 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+html {
+  color: #343434;
+}
+
+html.dark {
+  background: #121212;
+  color: #bbb;
+}
+
+html.dark a {
+  color: #3ea6ff;
 }
 </style>
 

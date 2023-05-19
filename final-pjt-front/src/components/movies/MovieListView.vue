@@ -1,5 +1,5 @@
 <template>
-  <div class="movie active-next">
+  <div class="wrap movie active-next">
     <MovieItemView
     v-for="movie in movies" :key="movie.id"
     :movie="movie"
@@ -32,9 +32,10 @@ export default {
 
 <style scoped>
 .movie {
+  height:400px;
   display:grid;
-  margin:0 20%;
-  grid-template-columns: repeat(5,1fr);
+  margin: 0 20px;
+  grid-template-columns: repeat(10,1fr);
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   margin-bottom: 50px; 
