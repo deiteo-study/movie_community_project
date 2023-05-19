@@ -17,7 +17,7 @@
       <hr>      
     </div>
 
-    <div class="movie_detail1">
+    <div class="wrap">
       <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
     </div>
     <br>
@@ -160,12 +160,14 @@ a.router-link-exact-active {
     margin: 0 100px;
   /* border: 1px solid black; */
 }
-.movie_detail1 {
-  width: 1000px;
-  height: 300px;
-  overflow-x: scroll;
-  white-space:nowrap
 
+.wrap {
+  display:flex;
+  width:100%;
+  height:222px;
+  white-space:nowrap;
+	overflow-x:scroll;
+  overflow: auto;
 }
 .movie_detail > img {
   width: 30%;

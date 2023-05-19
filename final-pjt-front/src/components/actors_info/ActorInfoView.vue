@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style scoped>
+div {
+    margin: auto;
+}
 img {
     width: 70px;
     height: 105px;
