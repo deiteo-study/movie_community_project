@@ -2,16 +2,15 @@
   <div>
     <h1>Debate Page</h1>
     <form @submit.prevent="create_opinion">
-      <input type="text" @keyup.enter = "create_opinion">
+      <input type="text" @keyup.enter = "create_opinion" v-model="content">
       <button type="submit"></button>
     </form>
-    <DebateListView/>
+    <DebateListView :movieId="movieId"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-
 import DebateListView from './DebateListView.vue'
 
 export default {
@@ -25,6 +24,7 @@ export default {
       }
     },
     props: {
+      movieId: String
 
     },
     methods: {

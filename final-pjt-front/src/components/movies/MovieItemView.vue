@@ -27,7 +27,7 @@ export default {
     }, 
     methods: {
         detail(movie_id){
-            this.$router.push({name:'moviedetail', params:{movieId:movie_id, moviedata:this.movie}})
+            this.$router.push({name:'moviedetail', params:{movieId:movie_id}})
         }
     }
 

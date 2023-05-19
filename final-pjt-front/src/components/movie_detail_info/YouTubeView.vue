@@ -20,7 +20,7 @@ export default {
     },
     // movieId 보내주기
     props:{
-      movieId : Number
+      movieId : String
     },
     methods:{
       // youtube url 받아오기(get 방식)

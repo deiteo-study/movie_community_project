@@ -9,48 +9,44 @@ from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
-
 import requests
 # Create your views here.
 
-# 장르 정보 불러와서 저장하는 코드
-@api_view(['GET'])
-def get_genres(request):
-    url = "https://api.themoviedb.org/3/genre/movie/list?language=ko&api_key=5dcc6dd1aa73987866c715e255d2af47"
-    res=requests.get(url).json()['genres']
+def get_dbdata():
+    api_key='5dcc6dd1aa73987866c715e255d2af47'
+
+    # 장르정보 불러오기
+    genre_url=f'https://api.themoviedb.org/3/genre/movie/list?language=ko&api_key={api_key}'
+    res=requests.get(genre_url).json()['genres']
     for data in res:
         genre=GenreSerializer(data=data)
         if genre.is_valid():
             genre.save()
     
-    genres=Genre.objects.all()
-    serializer=GenreSerializer(genres, many=True)
-    return Response(serializer.data)
+    # 영화정보 불러오기
+    for page in range(1,101):
+        movielist_url=f'https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}&api_key={api_key}&include_adult=false'
+        res=requests.get(movielist_url).json()['results']
+        for data in res:
+            try:
+                a={'id':data['id'],
+                'title':data['title'],
+                'overview':data['overview'],
+                'release_date':data['release_date'],
+                'vote_average':data['vote_average'],
+                'poster_path':data['poster_path'],
+                'genres':data['genre_ids']}
+                movie=MovieSerializer(data=a)
+                if movie.is_valid():
+                    movie.save()
+            except:
+                continue
 
-
-# 영화 정보 불러와서 db에 저장하는 코드
 @api_view(['GET'])
 def get_movies(request):
-    print(request.user)
     movies=Movie.objects.all()
     serializer=MovieSerializer(movies,many=True)
     return Response(serializer.data)
-
-@api_view(['POST'])
-def savemovies(request):
-    res=request.data['results']
-    for data in res:
-        a={'id':data['id'],
-           'title':data['title'],
-           'overview':data['overview'],
-           'release_date':data['release_date'],
-           'vote_average':data['vote_average'],
-           'poster_path':data['poster_path'],
-           'genres':data['genre_ids']}
-        movie=MovieSerializer(data=a)
-        if movie.is_valid():
-            movie.save()
-    return Response({'save':'저장완료'})
 
 # 리뷰작성하기
 @api_view(['POST'])
@@ -70,12 +66,16 @@ def reviewcreate(request, movieId):
 @api_view(['GET'])
 def review(request, movieId):
     # (디테일페이지의) 영화에 해당하는 영화를 movie로 받고
-    movie=get_object_or_404(Movie,id=movieId)
-    # 받아온 영화와 리뷰모델에 참조되어 있는 영화랑 동일하것 뽑아오기 
-    reviews = get_list_or_404(Review,movie=movie)
-    # 데이터 전송
-    serializer = ReviewSerializer(reviews,many=True)
-    return Response(serializer.data)
+    
+    # 받아온 영화와 리뷰모델에 참조되어 있는 영화랑 동일한 것 뽑아오기 
+    # 리뷰가 없는 초기화 상태에서 404에러 발생 -> 리뷰가 있으면 가져오고, 없으면 빈 결과 출력(오류 수정)
+    try:
+        reviews = get_list_or_404(Review,movie_id=movieId)
+        # 데이터 전송
+        serializer = ReviewSerializer(reviews,many=True)
+        return Response(serializer.data)
+    except:
+        return Response({})
 
 
 # 토론방에서 의견 등록하기
@@ -95,8 +95,15 @@ def debatecreate(request, movieId):
 # 토론글 불러오기
 @api_view(['GET'])
 def debate(request, movieId):
+    # MOVIE에서 현재 영화랑 같은 영화 뽑아오기 
     movie=get_object_or_404(Movie,id=movieId)
+    # debate에서 현재 영화 아이디와 일치하는 의견 뽑아와서 serializer형식으로 저장
     debates = get_list_or_404(Debate,movie=movie)
     serializer = DebateSerializer(debates,many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_reviews(request):
+    reviews=Review.objects.all()
+    serializers=ReviewSerializer(reviews,many=True)
+    return Response(serializers.data)

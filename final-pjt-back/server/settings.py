@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     # apps
     'movies',
     'accounts',
-    
+    "django_apscheduler",
     "corsheaders",
     
     # Auth
@@ -56,6 +56,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
 ]
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
+APSCHEDULER_RUN_NOW_TIMEOUT = 25
+SCHEDULER_DEFAULT = True
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -156,7 +160,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

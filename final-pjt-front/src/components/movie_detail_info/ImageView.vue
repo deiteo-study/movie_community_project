@@ -23,9 +23,9 @@ export default {
         num:0,              // 이미지 한개씩 넘어가면서 보여주기 위한 순서 번호 생성
       }
     },
-    // movieId number로 받기
+    // movieId string로 받기
     props:{
-      movieId : Number
+      movieId : String
     },
     methods:{
       get_image(){

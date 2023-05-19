@@ -38,7 +38,6 @@
 export default {
   name:'App',
   created(){
-    this.$store.dispatch('getMovies')
     if (this.$store.state.token){
       //기존 주소와 같다면 home으로 보내주기
       if (document.location.href=='http://localhost:8080/') {

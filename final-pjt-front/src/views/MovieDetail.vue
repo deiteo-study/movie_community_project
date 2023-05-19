@@ -28,9 +28,13 @@
       <button @click="move_page3">이미지</button>
       <button @click="move_page4">토론방</button>
       <img id="cursor" src="@/assets/cursor.png" alt="cursor" style="width:30px">
-    
     </div>
-  
+
+    <!-- <router-link :to='link1'>영상</router-link>
+    <router-link :to='link2'>리뷰</router-link>
+    <router-link :to='link3'>이미지</router-link>
+    <router-link :to='link4'>토론</router-link> 
+    <router-view></router-view> -->
     <YouTubeView v-if="page==1" :movieId='movieId' />
     <ReviewView v-else-if="page==2" :movieId='movieId' />
     <ImageView v-else-if="page==3" :movieId='movieId' />
@@ -62,17 +66,39 @@ export default {
       actors:null,
       page:1,
       movie_poster:null,
+      moviedata:null,
+
+      // link1:null,
+      // link2:null,
+      // link3:null,
+      // link4:null,
     }
   },
   props: {
-    movieId: Number,
-    moviedata:Object,
+    movieId: String,
   },
   created(){
+    // this.link1='/movie/'+this.movieId
+    // this.link2='/movie/'+this.movieId +'/reviews'
+    // this.link3='/movie/'+this.movieId +'/image'
+    // this.link4='/movie/'+this.movieId +'/debate'
+
+
+    this.get_moviedata()
     this.get_actor()
+    this.$store.dispatch('get_dbreview')
     this.movie_poster = `https://image.tmdb.org/t/p/w300${this.moviedata.poster_path}`
   },
   methods:{
+    get_moviedata(){
+      for (var movie of this.$store.state.movies) {
+        if (movie['id']==this.movieId){
+          this.moviedata=movie
+          return
+        }
+      }
+
+    },
     get_actor(){
       const url=`https://api.themoviedb.org/3/movie/${this.movieId}/credits?language=ko-kr&api_key=5dcc6dd1aa73987866c715e255d2af47`
       axios({

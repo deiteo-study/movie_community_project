@@ -16,7 +16,7 @@ export default new Vuex.Store({
   state: {
     movies:[
     ],
-    reviews:[],
+    reviews: [],
     debates: [],
     token: null,
   },
@@ -38,7 +38,7 @@ export default new Vuex.Store({
       state.token=null
       router.push({name:'home'})
     },
-    GET_REVIEW(state,reviews){
+    GET_REVIEWS(state,reviews){
       state.reviews=reviews
     },
     GET_DEBATE(state, debates){
@@ -47,29 +47,6 @@ export default new Vuex.Store({
     
   },
   actions: {
-    // Django DB에 저장
-    saveMovies(context,data){
-      axios({
-        method: 'post',
-        url: 'http://127.0.0.1:8000/api/v1/save_movies/',
-        data:data
-      })
-      .then(res=>{
-        console.log(res)
-      })
-    },
-    getMovies(context){
-      const url = 'https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1&api_key=5dcc6dd1aa73987866c715e255d2af47'
-      axios({
-        method: 'get',
-        url: url,
-      })
-      .then(res=>{
-        const data=res.data
-        context.dispatch('saveMovies',data)
-      })
-    },
-
     GetDBMovies(context){
       axios({
         method: 'get',
@@ -82,7 +59,6 @@ export default new Vuex.Store({
       })
     },
     signUp(context,payload){
-      
       axios({
         method: 'post',
         url: `http://127.0.0.1:8000/accounts/signup/`,
@@ -112,16 +88,18 @@ export default new Vuex.Store({
     LogOUT(context){
       context.commit('LOGOUT')
     },
-    // axios의 요청이 views.py의 request로 -> axios의 then으로 응답
-    GetReview(context, movieId){
+
+    get_dbreview(context){
       axios({
         method: 'get',
-        url:`http://127.0.0.1:8000/api/v1/${movieId}/review/`,
+        url:`http://127.0.0.1:8000/api/v1/get_reviews/`,
       })
       .then(res => {
-        context.commit('GET_REVIEW',res.data)
+        context.commit('GET_REVIEWS',res.data)
       }) 
     },
+    // axios의 요청이 views.py의 request로 -> axios의 then으로 응답
+
     // 토론
     // vue에서의 axios와 index.js(여기)에서의 axios의 차이는?
     GetDebate(context, movieId){

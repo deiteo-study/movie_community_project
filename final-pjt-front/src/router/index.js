@@ -21,6 +21,24 @@ const routes = [
     name: 'moviedetail',
     component: () => import('../views/MovieDetail.vue'),
     props:true,
+    // children: [
+    //   {
+    //     path: '',
+    //     component: () => import('../components/movie_detail_info/YouTubeView.vue'),
+    //   },
+    //   {
+    //     path: 'reviews',
+    //     component: () => import('../components/movie_detail_info/ReviewView.vue'),
+    //   },
+    //   {
+    //     path: 'image',
+    //     component: () => import('../components/movie_detail_info/ImageView.vue'),
+    //   },
+    //   {
+    //     path: 'debate',
+    //     component: () => import('../components/movie_detail_info/DebateView.vue'),
+    //   }
+    // ]
   },
   {
     path:'/signup',

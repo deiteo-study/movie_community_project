@@ -1,7 +1,6 @@
 <template>
   <div>
     <p>이름 : {{name}}</p>
-    <p>별점 : {{review.vote}}</p>
     <p>작성내용 : {{review.content}}</p>
     <hr>
 
