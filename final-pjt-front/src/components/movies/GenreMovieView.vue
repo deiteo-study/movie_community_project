@@ -1,7 +1,7 @@
 <template>
   <div class='GenreMovie'>
     
-    <div class="card" v-for='movie,index in movies' :key="index">
+    <div class="card" v-for='movie,index in movies' :key="index" @click="detail(movie.id)">
         <img class="card-img-top" :src="poster_url+movie.poster_path" />
         <div class="card-body">
         <b class="card-title">{{ movie.title }}</b>
@@ -20,6 +20,11 @@ export default {
         return {
             poster_url:`https://image.tmdb.org/t/p/w300`,
         }
+    },
+    methods:{
+      detail(movie_id){
+            this.$router.push({name:'moviedetail', params:{movieId:movie_id}})
+        },
     }
 }
 </script>

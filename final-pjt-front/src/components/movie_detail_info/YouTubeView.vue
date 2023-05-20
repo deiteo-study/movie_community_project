@@ -31,8 +31,10 @@ export default {
           url:url,
         })
         .then(res => {
-          const key=res.data.results[res.data.results.length-1].key   // 인덱스[-1] 적용 불가
-          this.movie_url = 'https://www.youtube.com/embed/' + key     // key를 통해 영화 정보 url 완성시키기
+          if (res.data.results.length >0) {
+            const key=res.data.results[res.data.results.length-1].key   // 인덱스[-1] 적용 불가
+            this.movie_url = 'https://www.youtube.com/embed/' + key     // key를 통해 영화 정보 url 완성시키기
+          }
         })
 
       }
