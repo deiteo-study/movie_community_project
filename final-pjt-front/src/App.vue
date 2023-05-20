@@ -111,7 +111,7 @@ export default {
 .wrap {
   display:flex;
   width:100%;
-  height:222px;
+  height:250px;
   white-space:nowrap;
 	overflow-x:scroll;
   overflow: auto;

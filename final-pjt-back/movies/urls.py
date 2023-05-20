@@ -17,10 +17,12 @@ urlpatterns = [
     # 한개의 영화의 리뷰 생성
     path('<int:movieId>/review_create/', views.reviewcreate),
 
-    
+    # 한개의 영화 모든 리뷰 요청
     path('<int:movieId>/review/', views.review),
+
     path('<int:movieId>/debate_create/', views.debatecreate),
     path('<int:movieId>/debate/', views.debate),
+    
     path('movie/<int:movieId>/likes/', views.movielikes),
 
     # 장르별 영화데이터 가져가기

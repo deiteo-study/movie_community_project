@@ -9,7 +9,10 @@
         <div class="movie_info" v-if="moviedata">
           <h2>{{ moviedata.title }}</h2>
           <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️</p>
-          <button @click="movielike"> <span v-if="!likes">좋아요</span> <span v-else>좋아요 취소</span> </button>
+          <button @click="movielike"> 
+            <span v-if="!likes">좋아요</span> 
+            <span v-else>좋아요 취소</span> 
+          </button>
           <p>{{ moviedata.overview }}</p>
         </div>
       </div>
@@ -167,9 +170,10 @@ button{
   border-radius: 1rem;
   background-color: rgb(234, 246, 250);
   height: 30px;
-  width: 70px;
+  width: 100px;
   margin-left: 3px;
   margin-right: 3px;
+  margin-bottom: 20px;
 }
 #cursor{
 }
