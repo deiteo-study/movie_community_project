@@ -24,7 +24,7 @@ def get_dbdata():
             genre.save()
     
     # 영화정보 불러오기
-    for page in range(1,11):
+    for page in range(1,101):
         movielist_url=f'https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}&api_key={api_key}'
         res=requests.get(movielist_url).json()['results']
         for data in res:
@@ -32,6 +32,7 @@ def get_dbdata():
                 a={'id':data['id'],
                 'title':data['title'],
                 'overview':data['overview'],
+                'popularity':data['popularity'],
                 'release_date':data['release_date'],
                 'vote_average':data['vote_average'],
                 'poster_path':data['poster_path'],
@@ -140,3 +141,22 @@ def movielikes(request, movieId):
     else:
         movie.like_users.add(request.user)
         return Response(True)
+    
+@api_view(['post'])
+def gernemovies(request):
+    genre_id=request.data['genre_id']
+    sort_method=request.data['sort_method']
+    if genre_id==9999:
+        if sort_method:
+            movies=Movie.objects.all().order_by('-popularity')
+        else:
+            movies=Movie.objects.all().order_by('-release_date')
+    else:
+        genre=Genre.objects.get(id=genre_id)
+        if sort_method:
+            movies=Movie.objects.filter(genres=genre).order_by('-popularity')
+        else:
+            movies=Movie.objects.filter(genres=genre).order_by('-release_date')
+    serializers=MovieSerializer(movies, many=True)
+    return Response(serializers.data)
+

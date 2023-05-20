@@ -44,6 +44,12 @@ const routes = [
     // ]
   },
   {
+    path: '/movies/:genre',
+    name: 'genremovies',
+    component: () => import('../views/GenreMoviesView.vue'),
+    props:true
+  },
+  {
     path:'/signup',
     name: 'SignUp',
     component: () => import('../views/SignupView.vue'),

@@ -34,24 +34,26 @@
         </button>
       </div>
     </div>
-    <button type="button" class="btn btn-outline-primary">코미디</button>
-    <button type="button" class="btn btn-outline-secondary">로맨스</button>
-    <button type="button" class="btn btn-outline-success">SF</button>
-    <button type="button" class="btn btn-outline-danger">판타지</button>
-    <button type="button" class="btn btn-outline-warning">범죄</button>
-    <button type="button" class="btn btn-outline-info">스릴러</button>
-    <button type="button" class="btn btn-outline-primary">공포</button>
-    <button type="button" class="btn btn-outline-secondary">모험</button>
-    <button type="button" class="btn btn-outline-success">애니메이션</button>
-    <button type="button" class="btn btn-outline-danger">드라마</button>
-    <button type="button" class="btn btn-outline-warning">역사</button>
-    <button type="button" class="btn btn-outline-info">서부</button>
-    <button type="button" class="btn btn-outline-primary">다큐멘터리</button>
-    <button type="button" class="btn btn-outline-secondary">미스터리</button>
-    <button type="button" class="btn btn-outline-success">음악</button>
-    <button type="button" class="btn btn-outline-danger">가족</button>
-    <button type="button" class="btn btn-outline-warning">전쟁</button>
-    <button type="button" class="btn btn-outline-info">TV 영화</button>
+    <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/All' ">All</button>
+    <button type="button" class="btn btn-outline-primary" onclick = "location.href = '/movies/Comedy' ">코미디</button>
+    <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Romance' ">로맨스</button>
+    <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/ScienceFiction' ">SF</button>
+    <button type="button" class="btn btn-outline-danger" onclick = "location.href = '/movies/Fantasy' ">판타지</button>
+    <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/Action' ">액션</button>
+    <button type="button" class="btn btn-outline-warning" onclick = "location.href = '/movies/Crime' ">범죄</button>
+    <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/Thriller' ">스릴러</button>
+    <button type="button" class="btn btn-outline-primary" onclick = "location.href = '/movies/Horror' ">공포</button>
+    <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Adventure' ">모험</button>
+    <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/Animation' ">애니메이션</button>
+    <button type="button" class="btn btn-outline-danger" onclick = "location.href = '/movies/Drama' ">드라마</button>
+    <button type="button" class="btn btn-outline-warning" onclick = "location.href = '/movies/History' ">역사</button>
+    <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/Western' ">서부</button>
+    <button type="button" class="btn btn-outline-primary" onclick = "location.href = '/movies/Documentary' ">다큐멘터리</button>
+    <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Mystery' ">미스터리</button>
+    <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/Music' ">음악</button>
+    <button type="button" class="btn btn-outline-danger" onclick = "location.href = '/movies/Family' ">가족</button>
+    <button type="button" class="btn btn-outline-warning" onclick = "location.href = '/movies/War' ">전쟁</button>
+    <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/TV_Movie' ">TV 영화</button>
     <br>
 
     <p>현재 상영중인 영화 10개 출력</p>

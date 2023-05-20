@@ -10,6 +10,7 @@ class Movie(models.Model):
     id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=100)
     overview = models.TextField()
+    popularity=models.FloatField()
     release_date=models.DateField()
     vote_average=models.FloatField()
     poster_path=models.TextField()
