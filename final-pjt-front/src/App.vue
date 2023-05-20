@@ -35,7 +35,8 @@
         <button @click="change_home">홈으로</button>
       </div>
     </div>
-    <button @click='themeChange'>Dark</button>
+    <button v-if="$store.state.mode" class='rounded-circle fix' @click='themeChange'>Light</button>
+    <button v-else class='rounded-circle fix col_b' @click='themeChange'>Dark</button>
   </div>
 
 </template>
@@ -44,6 +45,15 @@
 export default {
   name:'App',
   created(){
+    console.log(document.querySelector('body'))
+    if (this.$store.state.mode) {
+      document.body.classList.add('dark')
+    }
+    else {
+      document.body.classList.remove('dark')
+    }
+
+
     if (this.$store.state.token){
       //기존 주소와 같다면 home으로 보내주기
       if (document.location.href=='http://localhost:8080/') {
@@ -82,20 +92,22 @@ export default {
     logout(){
       this.$store.commit('LOGOUT')
     },
-    themeChange(event){
+    themeChange(){
+      this.$store.commit('MODE')
       document.body.classList.toggle('dark')
-      if (event.target.innerText=='Dark'){
-        event.target.innerText='Light'
-      }
-      else {
-        event.target.innerText='Dark'
-      }
     }
   }
 }
 </script>
 
 <style>
+.fix {
+  position: fixed;
+  right:30px;
+  bottom:30px;
+  width: 80px;
+  height: 80px;
+}
 .wrap {
   display:flex;
   width:100%;
@@ -104,7 +116,11 @@ export default {
 	overflow-x:scroll;
   overflow: auto;
 }
-
+.col_b {
+  background-color: #121212;
+  color: #bbb;
+  border-color: #bbb;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -116,6 +132,17 @@ export default {
 .dark {
   background: #121212;
   color: #bbb;
+}
+
+.dark .dropdown-menu {
+  background-color: darkgray;
+  color:white;
+}
+.dark .card {
+  background-color: #121212;
+}
+.dark a {
+  background-color: #121212;
 }
 
 nav {
@@ -134,18 +161,6 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 
-html {
-  color: #343434;
-}
-
-html.dark {
-  background: #121212;
-  color: #bbb;
-}
-
-html.dark a {
-  color: #3ea6ff;
-}
 </style>
 
 <style scoped>

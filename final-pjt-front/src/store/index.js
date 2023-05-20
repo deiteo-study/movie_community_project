@@ -19,6 +19,7 @@ export default new Vuex.Store({
     reviews: [],
     debates: [],
     token: null,
+    mode:false,
 
     now_playing:null,
     popular_ten:null
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    MODE(state){
+      state.mode=!state.mode
+    },
     now_playing(state){
       axios({
         method:'get',
@@ -62,7 +66,7 @@ export default new Vuex.Store({
       })
       .then(res=>{
         state.popular_ten=res.data.results.slice(0,10)
-        console.log(state.popular_ten)
+        // console.log(state.popular_ten)
       })
       .catch(err=>console.log(err))
     },
