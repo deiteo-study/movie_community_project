@@ -31,11 +31,6 @@
       <img id="cursor" src="@/assets/cursor.png" alt="cursor" style="width:30px">
     </div>
 
-    <!-- <router-link :to="{ name: 'moviedetail', params:{ movieId:movieId } }">영상</router-link>
-    <router-link :to="{ name: 'reviews'}">리뷰</router-link>
-    <router-link :to="{ name: 'image'}">이미지</router-link>
-    <router-link :to="{ name: 'debate'}">토론</router-link> 
-    <router-view></router-view> -->
     <YouTubeView v-if="page==1" :movieId='movieId' />
     <ReviewView v-else-if="page==2" :movieId='movieId' />
     <ImageView v-else-if="page==3" :movieId='movieId' />
@@ -70,25 +65,13 @@ export default {
       moviedata:null,
       movie_poster:null,
 
-      // link1:null,
-      // link2:null,
-      // link3:null,
-      // link4:null,
     }
   },
   props: {
     movieId: String,
   },
   created(){
-    // this.link1='/movie/'+this.movieId
-    // this.link2='/movie/'+this.movieId +'/reviews'
-    // this.link3='/movie/'+this.movieId +'/image'
-    // this.link4='/movie/'+this.movieId +'/debate'
-
-
     this.get_moviedata()
-
-    // this.$store.dispatch('get_dbreview')
     
   },
   methods:{

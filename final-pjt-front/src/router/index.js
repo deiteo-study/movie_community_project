@@ -21,27 +21,6 @@ const routes = [
     name: 'moviedetail',
     component: () => import('../views/MovieDetailView.vue'),
     props:true,
-    // children: [
-    //   {
-    //     path: '',
-    //     component: () => import('../components/movie_detail_info/YouTubeView.vue'),
-    //   },
-    //   {
-    //     path: 'reviews',
-    //     name:'reviews',
-    //     component: () => import('../components/movie_detail_info/ReviewView.vue'),
-    //   },
-    //   {
-    //     path: 'image',
-    //     name:'image',
-    //     component: () => import('../components/movie_detail_info/ImageView.vue'),
-    //   },
-    //   {
-    //     path: 'debate',
-    //     name:'debate',
-    //     component: () => import('../components/movie_detail_info/DebateView.vue'),
-    //   }
-    // ]
   },
   {
     path: '/movies/:genre',

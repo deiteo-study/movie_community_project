@@ -134,15 +134,15 @@ export default new Vuex.Store({
         context.commit('GET_MOVIES',res.data)
       })
     },
-    get_dbreview(context){
-      axios({
-        method: 'get',
-        url:`http://127.0.0.1:8000/api/v1/get_reviews/`,
-      })
-      .then(res => {
-        context.commit('GET_REVIEWS',res.data)
-      }) 
-    },
+    // get_dbreview(context){
+    //   axios({
+    //     method: 'get',
+    //     url:`http://127.0.0.1:8000/api/v1/get_reviews/`,
+    //   })
+    //   .then(res => {
+    //     context.commit('GET_REVIEWS',res.data)
+    //   }) 
+    // },
     // axios의 요청이 views.py의 request로 -> axios의 then으로 응답
 
     // 토론
