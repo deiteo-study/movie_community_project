@@ -20,9 +20,13 @@ urlpatterns = [
     # 한개의 영화 모든 리뷰 요청
     path('<int:movieId>/review/', views.review),
 
+    # 한개의 영화 모든 토론글 생성
     path('<int:movieId>/debate_create/', views.debatecreate),
+
+    # 한개의 영화 모든 토론글 요청
     path('<int:movieId>/debate/', views.debate),
     
+    # 사용자가 좋아하는 영화 체크
     path('movie/<int:movieId>/likes/', views.movielikes),
 
     # 장르별 영화데이터 가져가기

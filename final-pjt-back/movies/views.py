@@ -157,12 +157,17 @@ def get_reviews(request):
 # 영화 좋아요
 @api_view(['GET'])
 def movielikes(request, movieId):
+    # 해당 영화를 movie로 받아서
     movie = Movie.objects.get(id = movieId)
     print(movie)
+    # 좋아요한 유저 중에 존재한다면
     if movie.like_users.filter(pk=request.user.pk).exists():
+        # 좋아요 유저에서 제외
         movie.like_users.remove(request.user)
+        # 제외했으니까 false상태로 
         return Response(False)
     else:
+        # 좋아요 유저에 추가
         movie.like_users.add(request.user)
         return Response(True)
     
