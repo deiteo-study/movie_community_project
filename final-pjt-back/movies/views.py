@@ -10,6 +10,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 import requests
+import pandas as pd
 # Create your views here.
 
 def get_dbdata():
@@ -19,6 +20,8 @@ def get_dbdata():
     genre_url=f'https://api.themoviedb.org/3/genre/movie/list?language=ko&api_key={api_key}'
     res=requests.get(genre_url).json()['genres']
     for data in res:
+        # if data['id']==10749:
+        #     continue
         genre=GenreSerializer(data=data)
         if genre.is_valid():
             genre.save()
@@ -28,6 +31,8 @@ def get_dbdata():
         movielist_url=f'https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}&api_key={api_key}'
         res=requests.get(movielist_url).json()['results']
         for data in res:
+            # if 10749 in data['genre_ids']:
+            #     continue
             try:
                 a={'id':data['id'],
                 'title':data['title'],
@@ -42,6 +47,25 @@ def get_dbdata():
                     movie.save()
             except:
                 continue
+# 리뷰 가져오기...
+# def reviewpush():
+#     df=pd.read_csv('C:/Users/lrune/Desktop/pj/REVIEW.csv')
+#     user=User.objects.get(username='defaultUser')
+#     for movie_id, content in df.values.tolist():
+#         try:
+#             movie=Movie.objects.get(id=int(movie_id))
+#         except:
+#             continue
+        
+#         data={
+#             'content':content
+#         }
+#         review=ReviewSerializer(data=data)
+#         if review.is_valid():
+#             review.save(user=user,movie=movie)
+        
+
+
 
 @api_view(['GET'])
 def get_movie(request,movieId):

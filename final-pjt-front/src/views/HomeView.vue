@@ -36,7 +36,7 @@
     </div>
     <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/All' ">All</button>
     <button type="button" class="btn btn-outline-primary" onclick = "location.href = '/movies/Comedy' ">코미디</button>
-    <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Romance' ">로맨스</button>
+    <!-- <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Romance' ">로맨스</button> -->
     <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/ScienceFiction' ">SF</button>
     <button type="button" class="btn btn-outline-danger" onclick = "location.href = '/movies/Fantasy' ">판타지</button>
     <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/Action' ">액션</button>

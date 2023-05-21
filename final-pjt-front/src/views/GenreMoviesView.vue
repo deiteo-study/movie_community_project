@@ -34,7 +34,23 @@
     
     <div class='f'>
         <div>
-          <ul class="pagination" v-if='page<2'>
+           <ul class="pagination" v-if='movie_list.length<5'>
+            <li v-if='page==0' class="page-item disabled"><p class="page-link" @click='prev'>Prev</p></li>
+            <li v-else class="page-item"><p class="page-link" @click='prev'>Prev</p></li>
+            <li v-if='page==0' class="page-item active"><p class="page-link" @click='move_page'>1</p></li>
+            <li v-else class="page-item"><p class="page-link" @click='move_page'>1</p></li>
+
+            <li v-if='page==1 && 1<movie_list.length' class="page-item active"><p class="page-link" @click='move_page'>2</p></li>
+            <li v-else-if='page!=1 && 1<movie_list.length' class="page-item"><p class="page-link" @click='move_page'>2</p></li>
+            
+            <li v-if='page==2 && 2<movie_list.length' class="page-item"><p class="page-link" @click='move_page'>3</p></li>
+            <li v-else-if='page!=2 && 2<movie_list.length' class="page-item"><p class="page-link" @click='move_page'>3</p></li>
+            <li v-if='page==2 && 3<movie_list.length' class="page-item"><p class="page-link" @click='move_page'>4</p></li>
+            <li v-else-if='page!=2 && 3<movie_list.length' class="page-item"><p class="page-link" @click='move_page'>4</p></li>
+            <li v-if='page==movie_list.length-1' class="page-item disabled"><p class="page-link" @click='next'>Next</p></li>
+            <li v-else class="page-item"><p class="page-link" @click='next'>Next</p></li>
+          </ul>
+          <ul class="pagination" v-else-if='page<2'>
             <li v-if='page==0' class="page-item disabled"><p class="page-link" @click='prev'>Prev</p></li>
             <li v-else class="page-item"><p class="page-link" @click='prev'>Prev</p></li>
             <li v-if='page==0' class="page-item active"><p class="page-link" @click='move_page'>1</p></li>
@@ -68,11 +84,13 @@
             <li class="page-item"><p class="page-link" @click='next'>Next</p></li>
           </ul>
         </div>
-
-        <form @submit.prevent="onemove">
-            <input type="text" placeholder="이동할 페이지를 입력" v-model='movepage'>
-            <button>이동</button>
-        </form>
+        
+        <div>
+            <p>페이지 한번에 이동</p>
+            <select v-model='page'>
+                <option v-for='(movie,idx) in movie_list' :key='idx' :value="idx">{{idx+1}}</option>
+            </select>
+        </div>
     </div>
 </div>
     
@@ -97,7 +115,7 @@ export default {
       sort_method: true,
       movie_list: null,
       page:0,
-      movepage:null
+
     };
   },
   methods:{
@@ -109,8 +127,8 @@ export default {
         } else {
         if (this.genre == "Comedy") {
             genre_id = 35;
-        } else if (this.genre == "Romance") {
-            genre_id = 10749;
+        // } else if (this.genre == "Romance") {
+        //     genre_id = 10749;
         } else if (this.genre == "ScienceFiction") {
             genre_id = 878;
         } else if (this.genre == "Fantasy") {
@@ -178,16 +196,6 @@ export default {
             this.page +=1
         }
     },
-    onemove(){
-        if (Number(this.movepage)>this.movie_list.length){
-            alert(`마지막 페이지는 ${this.movie_list.length} 입니다!
-다시시도 해주세요.`)
-        }
-        else {
-            this.page=Number(this.movepage)-1
-        }
-        this.movepage=null
-    },
     sort_change(event){
         if (event.target.innerText=='인기순' && !this.sort_method){
             this.sort_method=true
@@ -195,8 +203,7 @@ export default {
         }
         else if (event.target.innerText=='최신순' && this.sort_method){
             this.sort_method=false
-            this.get_movies()
-            
+            this.get_movies()  
         }
     }
     
