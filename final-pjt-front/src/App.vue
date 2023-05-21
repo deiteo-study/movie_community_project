@@ -136,7 +136,7 @@ export default {
 }
 
 .dark .dropdown-menu {
-  background-color: darkgray;
+  background-color: rgb(108, 109, 110);
   color: #c9cccf;
 }
 .dark .card {
