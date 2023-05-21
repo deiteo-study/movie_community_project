@@ -55,6 +55,7 @@ img {
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical; */
+  font-family: 'Sunflower', sans-serif;
 }
 .card {
     width: 200px;

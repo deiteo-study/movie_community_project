@@ -56,32 +56,15 @@
     <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/TV_Movie' ">TV 영화</button>
     <br>
 
-    <p>현재 상영중인 영화 10개 출력</p>
+    <p class="category">현재 상영중인 영화 10개 출력</p>
     <hr>
     <MovieListView :movies="now_playing"/>
 
-    <p>인기영화 10개 출력</p>
+    <p class="category">인기영화 10개 출력</p>
     <hr>
     <MovieListView :movies="popular_ten"/>
 
     <hr>
-    <!-- <MovieListView :movies="movies"/> -->
-    <div class="container">
-			<div class="row">
-				<div class="col">
-					<p><strong>Pagination</strong></p>
-					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item"><a class="page-link" href="#">4</a></li>
-						<li class="page-item"><a class="page-link" href="#">5</a></li>
-						<li class="page-item"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
   </div>
 </template>
 
@@ -139,5 +122,24 @@ export default {
 button {
   margin: 0 10px;
   margin-bottom: 20px;
+}
+
+h2 {
+  /* font-family: 'Hi Melody', cursive; */
+  font-family: 'Sunflower', sans-serif;
+  font-size: 45px;
+}
+.btn {
+  font-family: 'Dongle', sans-serif;
+  font-size: 23px;
+  /* font-family: 'Sunflower', sans-serif; */
+}
+/* 메인 홈 출력 영화 제목 */
+.category{
+  font-family: 'Dongle', sans-serif;
+  font-size: 30px;
+  text-align: left;
+  margin-left: 10px;
+
 }
 </style>

@@ -36,7 +36,7 @@
       </div>
     </div>
     <button v-if="$store.state.mode" class='rounded-circle fix' @click='themeChange'>Light</button>
-    <button v-else class='rounded-circle fix col_b' @click='themeChange'>Dark</button>
+    <button v-else class='rounded-circle fix col_b text-white' @click='themeChange'>Dark</button>
   </div>
 
 </template>
@@ -92,6 +92,7 @@ export default {
     logout(){
       this.$store.commit('LOGOUT')
     },
+    // 테마 색 변경
     themeChange(){
       this.$store.commit('MODE')
       document.body.classList.toggle('dark')
@@ -118,7 +119,7 @@ export default {
 }
 .col_b {
   background-color: #121212;
-  color: #bbb;
+  color: #ebebec;
   border-color: #bbb;
 }
 #app {
@@ -131,18 +132,20 @@ export default {
 
 .dark {
   background: #121212;
-  color: #bbb;
+  color: #c9cccf;
 }
 
 .dark .dropdown-menu {
   background-color: darkgray;
-  color:white;
+  color: #c9cccf;
 }
 .dark .card {
   background-color: #121212;
+  color: #a3a5a8;
 }
 .dark a {
   background-color: #121212;
+  color: #a8acb0;
 }
 
 nav {
@@ -173,7 +176,7 @@ input {
   padding-left: 20px;
 }
 input::placeholder {
-    color: #cccccc;
+    color: #d0d2d3;
     text-align: center;
 }
 .c {
