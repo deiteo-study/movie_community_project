@@ -189,3 +189,19 @@ def gernemovies(request):
     serializers=MovieSerializer(movies, many=True)
     return Response(serializers.data)
 
+
+# 토론
+@api_view(['post'])
+def get_debate(request):
+    try:
+        debates=Debate.objects.filter(movie=request.data['movieId'])
+        serializers=ReviewSerializer(debates,many=True)
+        return Response(serializers.data)
+    except:
+        return Response({})
+
+@api_view(['GET'])
+def get_debates(request):
+    debates=Debate.objects.all()
+    serializers=ReviewSerializer(debates, many=True)
+    return Response(serializers.data)
