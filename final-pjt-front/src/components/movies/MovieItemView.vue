@@ -54,6 +54,7 @@ export default {
 <style scoped>
 img {
     height: 300px;
+    margin-bottom: 10px;
 }
 .card-title {
     white-space:normal;

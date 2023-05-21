@@ -25,14 +25,14 @@
     </div>
     <!-- 로그인 -->
     <div v-else>
-      <div v-if="num==0">
-        <p>로고 뭐시기</p>
-        <button @click="change_page1">로그인</button>
-        <button @click="change_page2">회원가입</button>
+      <div class="logo" v-if="num==0">
+        <p class="logo-font">Logo(site name)</p>
+        <button  class="logo-btn" @click="change_page1">로그인</button>
+        <button class="logo-btn" @click="change_page2">회원가입</button>
       </div>
       <div v-else>
         <router-view/>
-        <button @click="change_home">홈으로</button>
+        <button class="mt-2" @click="change_home">홈으로</button>
       </div>
     </div>
     <button v-if="$store.state.mode" class='rounded-circle fix' @click='themeChange'>Light</button>
@@ -181,6 +181,21 @@ input::placeholder {
 }
 .c {
   cursor: pointer;
+}
+
+.logo {
+  font-family: 'Hi Melody', cursive;
+  text-align: center;
+  margin-top: 20%;
+}
+.logo-font{
+  font-size: 53px;
+}
+.logo-btn{
+  margin: 5px;
+  border: solid rgb(218, 229, 240);
+  background-color: #dfe5e8;
+  font-size: 17px;
 }
 </style>
 

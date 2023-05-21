@@ -4,9 +4,11 @@
 
     <!-- 리뷰 작성 폼  -->
     <form @submit.prevent="create_review">
-      <input type="text" v-model='content'>
-      <button type="submit">리뷰작성</button>
+      <input type="text" v-model='content' placeholder="리뷰를 작성해주세요 💬">
+      <button type="submit">등록</button>
     </form>
+    <br>
+    <h5>[워드클라우드 들어가기]</h5>
 
     <ReviewItemView 
     v-for = "(review, index) in reviews" :key="index"
@@ -73,6 +75,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+button {
+  background-color: rgb(245, 243, 235);
+  border: 1px;
+  border-radius: 0.7rem;
+  border-style: dotted rgb(202, 203, 172);
+  width: 60px;
+  height: 40px;
+}
 
+input {
+  width: 300px;
+  height: 50px;
+  padding-left: 70px;
+  margin-right: 10px;
+}
 </style>
