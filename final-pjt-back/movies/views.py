@@ -49,7 +49,7 @@ def get_dbdata():
                 continue
 # 리뷰 가져오기...
 # def reviewpush():
-#     df=pd.read_csv('C:/Users/lrune/Desktop/pj/REVIEW.csv')
+#     df=pd.read_csv('C:/Users/SSAFY/Desktop/data/review.csv')
 #     user=User.objects.get(username='defaultUser')
 #     for movie_id, content in df.values.tolist():
 #         try:
