@@ -2,9 +2,11 @@
   <div>
     <!-- 기본 리뷰창 -->
     <!-- 개별 리뷰 클릭시 모달창으로 -->
-    <div v-if='review' class="review" @click="modalopen">
+    <div v-if='review' class="review">
       <p>작성자 : {{name}}</p>
-      <p class="content">작성내용 : {{review.content}}</p>
+      <!-- 구역 말고 리뷰 내용을 눌렀을때 모달창 등장 -->
+      <p class="content" @click="modalopen">작성내용 : {{review.content}}</p>
+      <!-- 모달 내용 -->
         <button @click="reviewlike"> 
             <span v-if="!likes">좋아요</span> 
             <span v-else>좋아요 취소</span> 
@@ -12,7 +14,7 @@
     </div>
     <hr> 
     <ReviewModal v-if="modalOpen"  
-    :reviewId="reviewId" :name='name'/>
+    :reviewId="reviewId" :name='name' :modalcheck='modalcheck' />
     
   </div>
 </template>
@@ -75,6 +77,8 @@ export default {
 
         modalopen(){
             this.modalOpen=true
+            // this.modalCheck = !this.modalCheck
+  
             // document.body.classList.add('Notouch')
         },
         // //data보관함에 저장된 modalopend을 함수에서 사용하기 위해 this 필수

@@ -134,6 +134,10 @@ export default new Vuex.Store({
         console.log(res)
         context.commit('LOGOUT')
       })
+      // 장고에서는 로그아웃이 되었지만 vue에서는 토큰이 남아있어서 발생하는 오류
+      .catch(()=>{
+        context.commit('LOGOUT')
+      })
     },
     change_password(context,payload){
       axios({
