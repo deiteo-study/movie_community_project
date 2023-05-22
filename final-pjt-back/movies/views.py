@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
-from .serializers import GenreSerializer, MovieSerializer, ReviewSerializer, DebateSerializer,MovieListSerializer
-from .models import Genre, Movie,Review, Debate
+from .serializers import GenreSerializer, MovieSerializer, ReviewSerializer, CommentSerializer,MovieListSerializer
+from .models import Genre, Movie,Review, Comment
 from accounts.models import User
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -114,30 +114,6 @@ def review(request, movieId):
         return Response({})
 
 
-# 토론방에서 의견 등록하기
-# DebateView의 axios와 연결
-@api_view(['POST'])
-def debatecreate(request, movieId):
-    user=get_object_or_404(User, username=request.user)
-    movie = get_object_or_404(Movie, id=movieId)
-    serializer = DebateSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save(user=user, movie=movie)
-        return Response(serializer.data)
-    return Response({'error':'저장 실패'})
-
-
-# 전역변수와 연결 >(axios)
-# 토론글 불러오기
-@api_view(['GET'])
-def debate(request, movieId):
-    # MOVIE에서 현재 영화랑 같은 영화 뽑아오기 
-    movie=get_object_or_404(Movie,id=movieId)
-    # debate에서 현재 영화 아이디와 일치하는 의견 뽑아와서 serializer형식으로 저장
-    debates = get_list_or_404(Debate,movie=movie)
-    serializer = DebateSerializer(debates,many=True)
-    return Response(serializer.data)
-
 @api_view(['post'])
 def get_review(request):
     try:
@@ -190,18 +166,46 @@ def gernemovies(request):
     return Response(serializers.data)
 
 
-# 토론
-@api_view(['post'])
-def get_debate(request):
+# 리뷰댓글 작성하기
+@api_view(['POST'])
+def commentcreate(request, movieId):
+    user=get_object_or_404(User, username=request.user)
+    movie=get_object_or_404(Movie, id=movieId)
+    serializer=CommentSerializer(data=request.data)
+    if serializer.is_valid():
+        # 참조키를 넣기 위해 (read_only_fields)로 참조키를 제외한 데이터만 입력받아도
+        # 유효성 검사에 통과하도록 함
+        # save시에 참조키를 대칭해서 넣어준 뒤 저장
+        serializer.save(user=user, movie=movie)
+        return Response(serializer.data)
+    return Response({'error':'저장 실패'})
+
+# 전역변수와 연결
+@api_view(['GET'])
+def comment(request, reviewId):
+    # 해당 리뷰에 해당하는 댓글을 review로 받고
+    
+    # 받아온 리뷰와 댓글모델에 참조되어 있는 리뷰랑 동일한 것 뽑아오기 
+    # 댓글이 없는 초기화 상태에서 404에러 발생 -> 댓글 있으면 가져오고, 없으면 빈 결과 출력(오류 수정)
     try:
-        debates=Debate.objects.filter(movie=request.data['movieId'])
-        serializers=ReviewSerializer(debates,many=True)
+        comments = get_list_or_404(Comment,review_id=reviewId)
+        # 데이터 전송
+        serializer = CommentSerializer(comments,many=True)
+        return Response(serializer.data)
+    except:
+        return Response({})
+    
+@api_view(['post'])
+def get_comment(request):
+    try:
+        comments=Comment.objects.filter(movie=request.data['reviewId'])
+        serializers=CommentSerializer(comments,many=True)
         return Response(serializers.data)
     except:
         return Response({})
 
 @api_view(['GET'])
-def get_debates(request):
-    debates=Debate.objects.all()
-    serializers=ReviewSerializer(debates, many=True)
+def get_comments(request):
+    comments=Comment.objects.all()
+    serializers=CommentSerializer(comments, many=True)
     return Response(serializers.data)

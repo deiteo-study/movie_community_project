@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Review, Genre, Debate
+from .models import Movie, Review, Genre, Comment
 
 
 class GenreSerializer(serializers.ModelSerializer):
@@ -31,13 +31,13 @@ class MovieSerializer(serializers.ModelSerializer):
         exclude=('like_users',)
 
 # 토론
-class DebateSerializer(serializers.ModelSerializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Debate
+        model = Comment
         fields = '__all__'
 
 # 토론글을 DB에서 받아오기 위해
-class DebateListSerializer(serializers.ModelSerializer):
+class CommentListSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Debate
+        model=Comment
         fields = '__all__'

@@ -35,14 +35,14 @@
       <button @click="move_page1">영상</button>
       <button @click="move_page2">리뷰</button>
       <button @click="move_page3">이미지</button>
-      <button @click="move_page4">토론방</button>
+      <!-- <button @click="move_page4">토론방</button> -->
       <img id="cursor" src="@/assets/cursor.png" alt="cursor" style="width:30px">
     </div>
 
     <YouTubeView v-if="page==1" :movieId='movieId' />
     <ReviewView v-else-if="page==2" :movieId='movieId' />
     <ImageView v-else-if="page==3" :movieId='movieId' />
-    <DebateView v-else-if="page==4" :movieId='movieId' />
+    <!-- <DebateView v-else-if="page==4" :movieId='movieId' /> -->
 
   </div>
 </template>
@@ -53,7 +53,7 @@ import ActorInfoView from '@/components/actors_info/ActorInfoView'
 import YouTubeView from '../components/movie_detail_info/YouTubeView.vue'
 import ReviewView from '../components/movie_detail_info/ReviewView.vue'
 import ImageView from '../components/movie_detail_info/ImageView.vue'
-import DebateView from '../components/movie_detail_info/DebateView.vue'
+// import DebateView from '../components/movie_detail_info/DebateView.vue'
 
 
 export default {
@@ -63,7 +63,7 @@ export default {
     YouTubeView,
     ReviewView,
     ImageView,
-    DebateView
+    // DebateView
   },
   data(){
     return{

@@ -3,24 +3,88 @@
         <div class="white-bg">
           <p>작성자 : {{name}}</p>
           <p class="content">작성내용 : {{review.content}}</p>
-            <div>
-                <input type="text" v-model='content' placeholder="댓글을 작성해주세요 💬">  
-                <button type="submit" class="">등록</button>
+          <!-- 리뷰 작성 폼 -->
+            <div> 
+                <form @submit.prevent="create_comment">
+                  <input type="text" v-model='content' placeholder="댓글을 작성해주세요 💬">  
+                  <button type="submit">등록</button>  
+                </form>
             </div>
         </div>
+    <CommentItemView
+    v-for = "(comment, index) in comments" :key="index"
+    :comment="comments" reviewId="reviewId"/>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+import CommentItemView from './CommentItemView.vue'
+
 export default {
     name: 'ReviewModal',
+    components :{
+      CommentItemView,
+    },
     props: {
         review: Object,
-        name:String,
+        reviewId: String,
+        // name:String,
     },
-
-    methods: {
-
+    data(){
+      return {
+        // name:null,
+        comments: [],
+        content: null,
+      }
+    },
+    created(){
+        this.get_username()
+        this.get_comment()
+    },
+    methods:{
+        get_username(){
+            const userid=this.debate.user
+            axios({
+                method:"get",
+                url:`http://127.0.0.1:8000/accounts/${userid}/get_name/`,
+            })
+            .then(res => {
+                this.name=res.data['name']
+            })
+        },
+        // 리뷰아이디를 기준으로 댓글 가져오기
+        get_comment(){
+          const reviewId = this.reviewId
+          axios({
+          method:'post',
+          url:`http://127.0.0.1:8000/api/v1/get_comment/`,
+          data:{reviewId,}
+          })
+          .then(res=>{
+            this.comments=res.data
+          })
+        },
+        create_comment(){
+          if(!this.content) {
+            alert('리뷰에 대한 댓글을 작성해주세요')
+          }
+          else {
+            const content = this.content
+            axios({
+              mtehod: 'post',
+              url:`http://127.0.0.1:8000/api/v1/${this.reviewId}/comment_create/`,
+              data:{content,},
+              headers : {
+              Authorization: ` Token ${this.$store.state.token }`}
+            })
+            .then(() => {
+              this.content=null
+              this.get_comment()
+            })
+            .catch(err=>console.log(err))
+          }
+        }
     }
 
 }

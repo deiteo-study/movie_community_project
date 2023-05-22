@@ -17,6 +17,7 @@ class Movie(models.Model):
     genres = models.ManyToManyField(Genre)
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
 
+# 리뷰
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
@@ -25,9 +26,11 @@ class Review(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 # auto 주의해서 유효성 검사 진행
-class Debate(models.Model):
+# 리뷰 댓글 모델 작성
+# review를 작성해야할까?
+class Comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
