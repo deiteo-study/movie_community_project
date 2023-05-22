@@ -30,7 +30,7 @@ export default {
     data(){
       return{
         reviews:[],
-        content:null
+        content:null,
       }
     },
     props:{
