@@ -44,13 +44,19 @@
 <script>
 export default {
   name:'App',
+  mounted(){
+    if (this.$store.state.mode) {
+      document.querySelector('#app').classList.add('text-white')
+    }
+  },
   created(){
     if (this.$store.state.mode) {
       document.body.classList.add('dark')
     }
-    else {
-      document.body.classList.remove('dark')
-    }
+    // else {
+    //   document.body.classList.remove('dark')
+    //   document.querySelector('#app').classList.remove('text-white')
+    // }
 
 
     if (this.$store.state.token){
@@ -94,7 +100,8 @@ export default {
     // 테마 색 변경
     themeChange(){
       this.$store.commit('MODE')
-      document.body.classList.toggle('dark')
+      document.body.classList.toggle('dark') 
+      document.querySelector('#app').classList.toggle('text-white')
     }
   }
 }
@@ -143,7 +150,7 @@ export default {
   color: #a3a5a8;
 }
 .dark a {
-  background-color: #121212;
+  /* background-color: #121212; */
   color: #a8acb0;
 }
 

@@ -18,12 +18,15 @@
             </div>
             <div class='set_box'>
                 <h1>비밀번호 변경</h1>
-                <p>아이디 : {{user.username}}</p>
+                <label for="">아이디 : </label>
+                <input type="text" :value='user.username' disabled/>
+                <br>
                 <label for="">비밀번호 : </label>
                 <input type="password" v-model="password1" />
                 <br>
                 <label for="">비밀번호 확인 : </label>
                 <input type="password" v-model="password2" @keyup.enter="change_password"/>
+                <br>
                 <button @click='change_password'>확인</button>
             </div>
         </div>

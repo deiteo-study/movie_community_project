@@ -5,7 +5,9 @@
     <div id="background">
       <br>
       <div class="movie_detail">
-      <img :src="movie_poster" alt="">
+
+        <img :src="movie_poster" height="500">
+
         <div class="movie_info" v-if="moviedata">
           <h2>{{ moviedata.title }}</h2>
           <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️</p>
@@ -14,15 +16,18 @@
             <span v-else>좋아요 취소</span> 
           </button>
           <p>{{ moviedata.overview }}</p>
+          <div class="wrap">
+          <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
+          </div>
         </div>
+        
       </div>
+      
       <br>
       <hr>      
     </div>
 
-    <div class="wrap">
-      <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
-    </div>
+  
     <br>
     <hr>
     
@@ -135,6 +140,14 @@ export default {
 </script>
 
 <style scoped>
+.wrap {
+  display:flex;
+  width:100%;
+  height:250px;
+  white-space:nowrap;
+	overflow-x:scroll;
+  overflow: auto;
+}
 a {
   /* border: 1px solid white; */
 }
@@ -147,10 +160,11 @@ a.router-link-exact-active {
   /* border: 1px solid black; */
 }
 
-.movie_detail > img {
+/* .movie_detail > img {
   width: 30%;
-}
+} */
 .movie_info {
+  width:85%;
   padding: 0 60px;
   text-align: left;;
 }

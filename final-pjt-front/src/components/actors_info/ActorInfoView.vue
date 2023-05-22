@@ -19,7 +19,7 @@ export default {
     },
     created(){
         if (this.actor.profile_path) {
-            this.actor_poster= `https://image.tmdb.org/t/p/w300${this.actor.profile_path}`
+            this.actor_poster= `https://image.tmdb.org/t/p/original${this.actor.profile_path}`
         }
     }
 }
