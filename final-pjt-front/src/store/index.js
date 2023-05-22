@@ -20,6 +20,7 @@ export default new Vuex.Store({
     debates: [],
     
     startpage:0,
+    my_name:null,
     token: null,
     mode:false,
     now_playing:null,
@@ -88,9 +89,12 @@ export default new Vuex.Store({
     },
     LOGOUT(state){
       state.token=null
+      state.my_name=null
       router.push({path: "/"})
     },
-    
+    MY_NAME(state,name){
+      state.my_name=name
+    }
   },
   actions: {
     // 회원가입 요청
@@ -103,6 +107,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         context.commit('SAVE_TOKEN', res.data.key)
+        context.commit('MY_NAME',payload.username)
         context.state.startpage=0
       })
       .catch((err) => {
@@ -118,6 +123,7 @@ export default new Vuex.Store({
       })
       .then(res => {
         context.commit('SAVE_TOKEN', res.data.key)
+        context.commit('MY_NAME',payload.username)
         context.state.startpage=0
       })
       .catch((err) => console.log(err))
@@ -130,8 +136,7 @@ export default new Vuex.Store({
         headers : {
           Authorization: ` Token ${context.state.token }`},
       })
-      .then(res=>{
-        console.log(res)
+      .then(()=>{
         context.commit('LOGOUT')
       })
     },

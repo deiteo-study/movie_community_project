@@ -12,7 +12,7 @@
       <div class="btn-group c">
         <img src="./assets/user.png" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" alt="profile" style="width:40px;" >
         <ul class="dropdown-menu">
-          <li><router-link to="/profile" class="dropdown-item">내 정보</router-link></li>
+          <li><router-link :to="`/profile/${$store.state.my_name}`" class="dropdown-item">내 정보</router-link></li>
           <li><a class="dropdown-item" href="/account/update">회원정보수정</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><p class="dropdown-item" @click='logout'>로그아웃</p></li>
@@ -77,7 +77,6 @@ export default {
   data(){
     return{
       serach_word:null,
-      num:0
     }
   },
   methods:{

@@ -12,9 +12,10 @@ const routes = [
     props:true,
   },
   {
-    path: '/profile',
+    path: '/profile/:username',
     name: 'profile',
-    component: () => import('../views/ProfileView.vue')
+    component: () => import('../views/ProfileView.vue'),
+    props:true,
   },
   {
     path:'/movie/:movieId',

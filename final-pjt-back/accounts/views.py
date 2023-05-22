@@ -4,6 +4,7 @@ from .serializers import UserSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+from movies.serializers import ReviewSerializer
 # permission Decorators
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -33,3 +34,16 @@ def delete(request):
     user=get_object_or_404(User, username=request.user)
     user.delete()
     return Response('delete')
+
+@api_view(['GET'])
+def get_user(request,username):
+    try:
+        user=User.objects.get(username=username)
+    except:
+        return Response(False)
+    if user==request.user:
+        me=True
+    else:
+        me=False
+    serializer=UserSerializer(user)
+    return Response({'data':serializer.data,'me':me})
