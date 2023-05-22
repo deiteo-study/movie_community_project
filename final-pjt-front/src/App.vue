@@ -45,7 +45,6 @@
 export default {
   name:'App',
   created(){
-    console.log(document.querySelector('body'))
     if (this.$store.state.mode) {
       document.body.classList.add('dark')
     }

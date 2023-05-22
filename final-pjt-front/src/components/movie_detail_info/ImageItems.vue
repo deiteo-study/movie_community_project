@@ -16,7 +16,7 @@ export default {
         image: String
     },
     created(){
-        this.image_url = `https://image.tmdb.org/t/p/w500${this.image}`
+        this.image_url = `https://image.tmdb.org/t/p/original${this.image}`
     }
 
 }

@@ -83,7 +83,7 @@ export default {
       now_playing:null,
       popular_ten:null,
 
-      poster_url:`https://image.tmdb.org/t/p/w500`
+      poster_url:`https://image.tmdb.org/t/p/original`
     }
   },
   created(){

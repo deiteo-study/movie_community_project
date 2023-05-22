@@ -90,7 +90,7 @@ export default {
         this.moviedata=res.data.data
         this.likes=res.data.likes
         this.get_actor()
-        this.movie_poster = `https://image.tmdb.org/t/p/w300${this.moviedata.poster_path}`
+        this.movie_poster = `https://image.tmdb.org/t/p/original${this.moviedata.poster_path}`
       })
     },
     get_actor(){

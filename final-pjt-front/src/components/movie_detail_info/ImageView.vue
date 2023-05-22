@@ -63,14 +63,14 @@ export default {
             if (images.length <= 5) {
                 images.forEach(ele =>{
                   const image=ele.file_path
-                  const image_url=`https://image.tmdb.org/t/p/w500${image}`
+                  const image_url=`https://image.tmdb.org/t/p/original${image}`
                   this.image_list.push(image_url)
                 })
             }
             else {
                 for (let index = 0; index < 5; index++) {
                   const image=images[index].file_path
-                  const image_url=`https://image.tmdb.org/t/p/w500${image}`
+                  const image_url=`https://image.tmdb.org/t/p/original${image}`
                   this.image_list.push(image_url)   // push로 넣어준다.
                 }
             }
