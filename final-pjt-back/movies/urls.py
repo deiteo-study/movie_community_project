@@ -9,10 +9,13 @@ urlpatterns = [
     path('get_movies/', views.get_movies),
 
     # 한개의 영화 모든 리뷰 가져오기
-    path('get_review/', views.get_review),
+    path('<int:movieId>/get_reviews/', views.get_reviews),
 
-    # 전체영화 모든 리뷰 가져오기
-    path('get_reviews/', views.get_reviews),
+    # 한개의 영화 모든 리뷰 가져오기
+    path('<int:reviewId>/get_review/', views.get_review),
+
+    # 사용자가 좋아하는 영화 체크
+    path('<int:reviewId>/likes/', views.reviewlikes),
 
     # 한개의 영화의 리뷰 생성
     path('<int:movieId>/review_create/', views.reviewcreate),

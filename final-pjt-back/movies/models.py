@@ -24,6 +24,7 @@ class Review(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
 
 # auto 주의해서 유효성 검사 진행
 # 리뷰 댓글 모델 작성

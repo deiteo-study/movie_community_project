@@ -12,7 +12,7 @@
 
     <ReviewItemView 
     v-for = "(review, index) in reviews" :key="index"
-    :review="review"/>
+    :reviewId="review.id"/>
   </div>
 </template>
 
@@ -37,15 +37,14 @@ export default {
       movieId: String
     },
     created(){
-      this.get_review()    
+      this.get_reviews()    
     },
     methods:{
-      get_review(){
+      get_reviews(){
         const movieId= this.movieId
         axios({
-          method:'post',
-          url:`http://127.0.0.1:8000/api/v1/get_review/`,
-          data:{movieId,}
+          method:'get',
+          url:`http://127.0.0.1:8000/api/v1/${movieId}/get_reviews/`,
         })
         .then(res=>{
           this.reviews=res.data
@@ -66,7 +65,7 @@ export default {
             })
             .then(() => {
               this.content=null
-              this.get_review()
+              this.get_reviews()
             })
             .catch(err=>console.log(err))
           }

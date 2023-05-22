@@ -63,8 +63,6 @@ def get_dbdata():
 #         review=ReviewSerializer(data=data)
 #         if review.is_valid():
 #             review.save(user=user,movie=movie)
-        
-
 
 
 @api_view(['GET'])
@@ -114,21 +112,40 @@ def review(request, movieId):
         return Response({})
 
 
-@api_view(['post'])
-def get_review(request):
+@api_view(['get'])
+def get_reviews(request,movieId):
+    movie=Movie.objects.get(id=movieId)
     try:
-        reviews=Review.objects.filter(movie=request.data['movieId'])
+        reviews=Review.objects.filter(movie=movie)
         serializers=ReviewSerializer(reviews,many=True)
         return Response(serializers.data)
     except:
         return Response({})
 
 @api_view(['GET'])
-def get_reviews(request):
-    reviews=Review.objects.all()
-    serializers=ReviewSerializer(reviews, many=True)
-    return Response(serializers.data)
+def get_review(request,reviewId):
+    review=Review.objects.get(id=reviewId)
+    if review.like_users.filter(pk=request.user.pk).exists():
+        likes=True
+    else:
+        likes=False
+    serializer=ReviewSerializer(review)
+    return Response({'data':serializer.data,'likes':likes,'username':review.user.username})
 
+# 리뷰 좋아요
+@api_view(['GET'])
+def reviewlikes(request, reviewId):
+    review = Review.objects.get(id = reviewId)
+    # 좋아요한 유저 중에 존재한다면
+    if review.like_users.filter(pk=request.user.pk).exists():
+        # 좋아요 유저에서 제외
+        review.like_users.remove(request.user)
+        # 제외했으니까 false상태로 
+        return Response(False)
+    else:
+        # 좋아요 유저에 추가
+        review.like_users.add(request.user)
+        return Response(True)
 
 # 영화 좋아요
 @api_view(['GET'])
@@ -146,7 +163,7 @@ def movielikes(request, movieId):
         # 좋아요 유저에 추가
         movie.like_users.add(request.user)
         return Response(True)
-    
+
 @api_view(['post'])
 def gernemovies(request):
     genre_id=request.data['genre_id']
