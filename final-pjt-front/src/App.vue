@@ -13,7 +13,7 @@
         <img src="./assets/user.png" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" alt="profile" style="width:40px;" >
         <ul class="dropdown-menu">
           <li><router-link to="/profile" class="dropdown-item">내 정보</router-link></li>
-          <li><a class="dropdown-item" href="#">회원정보수정</a></li>
+          <li><a class="dropdown-item" href="/account/update">회원정보수정</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><p class="dropdown-item" @click='logout'>로그아웃</p></li>
         </ul>
@@ -25,7 +25,7 @@
     </div>
     <!-- 로그인 -->
     <div v-else>
-      <div class="logo" v-if="num==0">
+      <div class="logo" v-if="$store.state.startpage==0">
         <p class="logo-font">Logo(site name)</p>
         <button  class="logo-btn" @click="change_page1">로그인</button>
         <button class="logo-btn" @click="change_page2">회원가입</button>
@@ -77,20 +77,20 @@ export default {
   },
   methods:{
     change_page1(){
-      this.num=1
+      this.$store.state.startpage=1
       this.$router.push({name:'Login'})
     },
     change_page2(){
-      this.num=1
+      this.$store.state.startpage=1
       this.$router.push({name:'SignUp'})
     },
     change_home(){
-      this.num=0
+      this.$store.state.startpage=0
       this.$router.push({path: "/"})
 
     },
     logout(){
-      this.$store.commit('LOGOUT')
+      this.$store.dispatch('logout')
     },
     // 테마 색 변경
     themeChange(){
