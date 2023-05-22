@@ -18,9 +18,10 @@ export default new Vuex.Store({
     ],
     reviews: [],
     debates: [],
+    
+    startpage:0,
     token: null,
     mode:false,
-
     now_playing:null,
     popular_ten:null
   },
@@ -87,7 +88,7 @@ export default new Vuex.Store({
     },
     LOGOUT(state){
       state.token=null
-      router.push({name:'home'})
+      router.push({path: "/"})
     },
     
   },
@@ -102,6 +103,7 @@ export default new Vuex.Store({
       })
       .then((res) => {
         context.commit('SAVE_TOKEN', res.data.key)
+        context.state.startpage=0
       })
       .catch((err) => {
         console.log(err)
@@ -116,12 +118,36 @@ export default new Vuex.Store({
       })
       .then(res => {
         context.commit('SAVE_TOKEN', res.data.key)
+        context.state.startpage=0
       })
       .catch((err) => console.log(err))
 
     },
-
-
+    logout(context){
+      axios({
+        method:'post',
+        url:`http://127.0.0.1:8000/accounts/logout/`,
+        headers : {
+          Authorization: ` Token ${context.state.token }`},
+      })
+      .then(res=>{
+        console.log(res)
+        context.commit('LOGOUT')
+      })
+    },
+    change_password(context,payload){
+      axios({
+        method:'post',
+        url:`http://127.0.0.1:8000/accounts/password/change/`,
+        data:payload,
+        headers : {
+          Authorization: ` Token ${context.state.token }`},
+      })
+      .then(res=>{
+        console.log(res)
+        context.dispatch('logout')
+      })
+    },
     // DB로부터 
     GetDBMovies(context){
       axios({
