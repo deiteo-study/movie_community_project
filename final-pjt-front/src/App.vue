@@ -104,6 +104,9 @@ export default {
     }
   }
 }
+
+// yoon22
+// gkgh0107!
 </script>
 
 <style>

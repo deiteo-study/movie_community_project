@@ -88,7 +88,7 @@ export default {
         method:'get',
         url:`http://127.0.0.1:8000/api/v1/${movieId}/get_movie/`,
         headers : {
-          Authorization: ` Token ${this.$store.state.token }`}
+          Authorization: `Token ${this.$store.state.token}`}
       })
       .then((res)=>{
         this.moviedata=res.data.data
@@ -113,7 +113,7 @@ export default {
         method:'get',
         url:`http://127.0.0.1:8000/api/v1/movie/${movieId}/likes/`,
         headers : {
-          Authorization: ` Token ${this.$store.state.token }`}
+          Authorization: `Token ${this.$store.state.token}`}
       })
       .then(res=>{
         this.likes= res.data

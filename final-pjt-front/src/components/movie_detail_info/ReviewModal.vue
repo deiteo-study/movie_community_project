@@ -3,6 +3,7 @@
         <div class="white-bg">
           <p>작성자 : {{name}}</p>
           <p class="content">작성내용 : {{review.content}}</p>
+          <button  data-dismiss="modal">닫기</button>
           <!-- 리뷰 작성 폼 -->
             <div> 
                 <form @submit.prevent="create_comment">
@@ -10,7 +11,9 @@
                   <button type="submit">등록</button>  
                 </form>
             </div>
+<!--  -->    
         </div>
+    <!-- 모달창 내부에 댓글 -->
     <CommentItemView
     v-for = "(comment, index) in comments" :key="index"
     :comment="comment"/>
@@ -35,6 +38,7 @@ export default {
         name:null,
         comments: [],
         content: null,
+        modalCheck: true,
       }
     },
     created(){
@@ -120,4 +124,5 @@ export default {
     -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
 }
+
 </style>
