@@ -12,7 +12,7 @@
     </div>
     <hr> 
     <ReviewModal v-if="modalOpen"  
-    :review="review" :name='name'/>
+    :reviewId="reviewId" :name='name'/>
     
   </div>
 </template>
@@ -67,7 +67,7 @@ export default {
                     Authorization: ` Token ${this.$store.state.token }`}
             })
             .then(res =>{
-                console.log(res)
+            
                 this.likes= res.data
             })
         },

@@ -35,6 +35,7 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+        read_only_fields=('user', 'review')
 
 # 리뷰 댓글 DB에서 받아오기
 class CommentListSerializer(serializers.ModelSerializer):

@@ -1,5 +1,5 @@
 <template>
-    <div class="black_bg" >
+    <div v-if="review" class="black_bg" >
         <div class="white-bg">
           <p>작성자 : {{name}}</p>
           <p class="content">작성내용 : {{review.content}}</p>
@@ -13,7 +13,7 @@
         </div>
     <CommentItemView
     v-for = "(comment, index) in comments" :key="index"
-    :comment="comments" reviewId="reviewId"/>
+    :comment="comment"/>
     </div>
 </template>
 
@@ -27,42 +27,44 @@ export default {
       CommentItemView,
     },
     props: {
-        review: Object,
-        reviewId: String,
-        // name:String,
+        reviewId: Number,
     },
     data(){
       return {
-        // name:null,
+        review: null,
+        name:null,
         comments: [],
         content: null,
       }
     },
     created(){
-        this.get_username()
+        this.get_review()
         this.get_comment()
     },
     methods:{
-        get_username(){
-            const userid=this.debate.user
+        get_review(){
+            const reviewId=this.reviewId
             axios({
-                method:"get",
-                url:`http://127.0.0.1:8000/accounts/${userid}/get_name/`,
+                method:'get',
+                url:`http://127.0.0.1:8000/api/v1/${reviewId}/get_review/`,
+                headers : {
+                    Authorization: ` Token ${this.$store.state.token }`}
             })
-            .then(res => {
-                this.name=res.data['name']
+            .then(res =>{
+                this.name=res.data.username
+                this.review=res.data.data
             })
         },
         // 리뷰아이디를 기준으로 댓글 가져오기
         get_comment(){
           const reviewId = this.reviewId
           axios({
-          method:'post',
-          url:`http://127.0.0.1:8000/api/v1/get_comment/`,
-          data:{reviewId,}
+          method:'get',
+          url:`http://127.0.0.1:8000/api/v1/${reviewId}/get_comments/`,
           })
           .then(res=>{
             this.comments=res.data
+            // console.log(res.data)
           })
         },
         create_comment(){
@@ -72,7 +74,7 @@ export default {
           else {
             const content = this.content
             axios({
-              mtehod: 'post',
+              method: 'post',
               url:`http://127.0.0.1:8000/api/v1/${this.reviewId}/comment_create/`,
               data:{content,},
               headers : {

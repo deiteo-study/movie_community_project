@@ -24,10 +24,13 @@ urlpatterns = [
     path('<int:movieId>/review/', views.review),
 
     # 한개의 리뷰 모든 댓글 가져오기
-    path('<int:reviewId>/get_comment/', views.get_comment),
+    path('<int:reviewId>/get_comments/', views.get_comments),
 
     # 전체리뷰 모든 댓글 가져오기
-    path('<int:reviewId>/get_comments/', views.get_comments),
+    # path('<int:commentId>/get_comment/', views.get_comment),
+
+     # 리뷰의 댓글 생성
+    path('<int:reviewId>/comment_create/', views.commentcreate),
     
     # 사용자가 좋아하는 영화 체크
     path('movie/<int:movieId>/likes/', views.movielikes),

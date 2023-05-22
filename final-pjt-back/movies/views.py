@@ -152,7 +152,7 @@ def reviewlikes(request, reviewId):
 def movielikes(request, movieId):
     # 해당 영화를 movie로 받아서
     movie = Movie.objects.get(id = movieId)
-    print(movie)
+   
     # 좋아요한 유저 중에 존재한다면
     if movie.like_users.filter(pk=request.user.pk).exists():
         # 좋아요 유저에서 제외
@@ -185,15 +185,14 @@ def gernemovies(request):
 
 # 리뷰댓글 작성하기
 @api_view(['POST'])
-def commentcreate(request, movieId):
-    user=get_object_or_404(User, username=request.user)
-    movie=get_object_or_404(Movie, id=movieId)
+def commentcreate(request, reviewId):
+    review=get_object_or_404(Review, id=reviewId)
     serializer=CommentSerializer(data=request.data)
     if serializer.is_valid():
         # 참조키를 넣기 위해 (read_only_fields)로 참조키를 제외한 데이터만 입력받아도
         # 유효성 검사에 통과하도록 함
         # save시에 참조키를 대칭해서 넣어준 뒤 저장
-        serializer.save(user=user, movie=movie)
+        serializer.save(user=request.user, review=review)
         return Response(serializer.data)
     return Response({'error':'저장 실패'})
 
@@ -212,17 +211,18 @@ def comment(request, reviewId):
     except:
         return Response({})
     
-@api_view(['post'])
-def get_comment(request):
+@api_view(['GET'])
+def get_comments(request, reviewId):
     try:
-        comments=Comment.objects.filter(movie=request.data['reviewId'])
+        review=Review.objects.get(id=reviewId)
+        comments=Comment.objects.filter(review=review)
         serializers=CommentSerializer(comments,many=True)
         return Response(serializers.data)
     except:
         return Response({})
+    
+# @api_view(['GET'])
+# def get_comment(request, commentId):
+#     comment = get_object_or_404(Comment, id=commentId)
 
-@api_view(['GET'])
-def get_comments(request):
-    comments=Comment.objects.all()
-    serializers=CommentSerializer(comments, many=True)
-    return Response(serializers.data)
+
