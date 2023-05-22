@@ -1,9 +1,15 @@
 <template>
 <!-- 영화 디테일 페이지의 youtube 예고편(컴포넌트) -->
   <div>
-    <h1>Youtube</h1>
+    <div>
+       <img src="@/assets/youtube.png" alt="home" style="width:45px;" >
+       <h5>Youtube</h5>
+    </div>
     <!-- 예고편 url이 있을 경우 가져오기 -->
-    <iframe v-if="movie_url" :src="movie_url" frameborder="0" width="1000" height="600"></iframe>
+    <div>
+      <iframe v-if="movie_url" :src="movie_url" frameborder="0" width="1000" height="600"></iframe>
+    </div>
+    
   </div>
 </template>
 
@@ -45,6 +51,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+img {
+  margin-bottom: 5px;
+}
 
 </style>

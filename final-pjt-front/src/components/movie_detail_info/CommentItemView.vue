@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="comment-list">
     <p>{{name}} : {{comment.content}}</p>
   </div>
 </template>
@@ -38,6 +38,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.comment-list {
+  text-align: left;
+  margin-left: 40px;
+}
 
 </style>
