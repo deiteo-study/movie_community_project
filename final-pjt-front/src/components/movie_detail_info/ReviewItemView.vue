@@ -2,9 +2,13 @@
   <div>
     <!-- 기본 리뷰창 -->
     <!-- 개별 리뷰 클릭시 모달창으로 -->
-    <div class="review" @click="modalopen">
+    <div v-if='review' class="review" @click="modalopen">
       <p>작성자 : {{name}}</p>
       <p class="content">작성내용 : {{review.content}}</p>
+        <button @click="reviewlike"> 
+            <span v-if="!likes">좋아요</span> 
+            <span v-else>좋아요 취소</span> 
+        </button>
     </div>
     <hr> 
     <ReviewModal v-if="modalOpen"  
@@ -21,33 +25,54 @@ import ReviewModal from './ReviewModal.vue'
 export default {
     name: 'ReviewItemView',
     props: {
-        review: Object,
+        reviewId: Number,
     },
     components:{
         ReviewModal,
     },
     data(){
         return {
+            review:null,
             name:null,
+            likes:null,
             // 초기값 false로 모달창 숨겨 주는 변수 선언
             // true(보일때), false(보이지 않을 때)
             modalOpen: false,
         }
     },
     created(){
-        this.get_username()
+        this.get_review()
     },
     methods:{
-        get_username(){
-            const userid=this.review.user
+        get_review(){
+            const reviewId=this.reviewId
             axios({
-                method:"get",
-                url:`http://127.0.0.1:8000/accounts/${userid}/get_name/`,
+                method:'get',
+                url:`http://127.0.0.1:8000/api/v1/${reviewId}/get_review/`,
+                headers : {
+                    Authorization: ` Token ${this.$store.state.token }`}
             })
-            .then(res => {
-                this.name=res.data['name']
+            .then(res =>{
+                this.name=res.data.username
+                this.review=res.data.data
+                this.likes=res.data.likes
             })
         },
+        reviewlike(){
+            const reviewId=this.reviewId
+            axios({
+                method:'get',
+                url:`http://127.0.0.1:8000/api/v1/${reviewId}/likes/`,
+                headers : {
+                    Authorization: ` Token ${this.$store.state.token }`}
+            })
+            .then(res =>{
+                console.log(res)
+                this.likes= res.data
+            })
+        },
+
+
         modalopen(){
             this.modalOpen=true
             // document.body.classList.add('Notouch')

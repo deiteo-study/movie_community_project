@@ -17,7 +17,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
-        read_only_fields=('user','movie',)
+        read_only_fields=('user','movie','like_users')
 
 # 리뷰 DB에서 뽑아오기 위해
 class ReviewListSerializer(serializers.ModelSerializer):
