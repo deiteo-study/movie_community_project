@@ -9,7 +9,6 @@
       <!-- <input type="checkbox"> -->
       
       <!-- 모달 내용 -->
-      
       <div class="modal-wrap" v-show="modalCheck" @click="modalOpen">
         <div class="modal-container" @click.stop="">
          <!--  모달창 content  -->
@@ -18,30 +17,39 @@
                 <!-- <button @click="modalOpen">닫기</button> -->
                 <!-- <button @click="modalOpen">확인</button> -->
             </div>
-         <div class="d-flex flex-row" >
-            <img class="mt-1 col-3" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
-            <div class="modal-review col-11">
+         <div class="d-flex flex-row">
+          <div class="col-6">
+            <img class="mt-1" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
+            <div class="modal-review">
                 <p class="name mb-1">{{name}}</p>
-          
-                <p v-if='name==this.$store.state.my_name'><span @click='modify'>수정</span> <span @click='review_delete'>삭제</span></p>
-                <p v-if='!update' class="mb-2 modalcontent">{{review.content}}</p>
-                <p v-else class="mb-2 modalcontent">
-                  <input type="text" v-model='review.content' @keyup.enter="review_update">
-                  <button @click='review_update'>수정완료</button>
-                </p>
                 <hr>
+                <p v-if='!update' class="mb-2 modalcontent">{{review.content}}</p>
+                <hr>
+                <div v-if='name==this.$store.state.my_name'>
+                  <button  class="modify" @click='modify'>수정</button> |
+                  <button class="delete" @click='review_delete'>삭제</button></div>
+                
+                <p v-else class="mb-2 modalcontent">
+                  <input class="modify-input" type="text" v-model='review.content' @keyup.enter="review_update">
+                  <button class="modify-btn" @click='review_update'>수정완료</button>
+                </p>
             </div>
+            <br>
+            </div>
+                <div class="col-6">
+                  <div class="commentbox">
+                  <CommentItemView
+                    v-for = "(comment, index) in comments" :key="index"
+                    :comment="comment"/>
+                  </div>
+                    <hr>
+                      <form @submit.prevent="create_comment">
+                      <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
+                      </form>
+                      <button class="btn2" type="submit">등록</button>
+                    
+                </div>
          </div>
-            <!-- 리뷰 작성 폼 -->
-            <CommentItemView
-            v-for = "(comment, index) in comments" :key="index"
-            :comment="comment"/>
-            <div> 
-                <form @submit.prevent="create_comment">
-                <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
-                <button class="btn2" type="submit">등록</button>
-                </form>
-            </div>
         </div>
        </div>
 <!-- 리뷰 좋아요 버튼 -->
@@ -205,7 +213,7 @@ export default {
     margin: 2px auto 5px auto;
     padding: 15px 20px 0px 20px;
     width: 70%;
-    font-family: 'Sunflower', sans-serif;
+    /* font-family: 'Sunflower', sans-serif; */
     
 } 
 .content{
@@ -249,7 +257,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 550px;
+  width: 700px;
   background: #fff;
   border-radius: 10px;
   padding: 8px 45px 20px 30px;
@@ -261,18 +269,21 @@ export default {
     margin-left: 10px;
 }
 .modalcontent{
-  height: 150px;
+  height: 190px;
   overflow-y: scroll;
   -ms-overflow-style: none;
   margin-top: 10px;
+  padding: auto 0 auto 0;
+  
 }
 .modalcontent ::-webkit-scrollbar {
     display: none;
 }
 .name {
-    font-family: 'Sunflower', sans-serif;
-    margin-top: 5px;
-    margin-bottom: 10px;
+    /* font-family: 'Sunflower', sans-serif; */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 .modal-close{
     margin-left: 100%;
@@ -300,5 +311,40 @@ hr {
     width: 50px;
     margin-left: 95%;
     margin-bottom: 10px;
+}
+.modify{
+  border: none;
+  background-color: #ddf2f5;
+  border-radius: 0.7rem;
+}
+.delete {
+  border: none;
+  background-color: rgb(245, 204, 204);
+  border-radius: 0.7rem;
+}
+.modify-input{
+  border: solid 1px gray;
+  border-radius: 0.7rem;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 7px;
+}
+.modify-btn{
+  border: solid gray 1px;
+  border-radius: 0.7rem;
+  background-color: rgb(194, 195, 195);
+}
+.commentbox{
+  border: solid 0.5px rgb(235, 244, 255);
+  height: 330px;
+  width: 270px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+.col-6 {
+  margin-left: 15px;
 }
 </style>

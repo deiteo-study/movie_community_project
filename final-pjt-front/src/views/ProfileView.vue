@@ -5,8 +5,6 @@
 
       <div v-if='me'>
         <h2>My Profile</h2>
-        <p> 임시로 구조 짜놓은 디자인!</p>
-        <p> 댓글 단게 너무 많으면 더보기로 줄일지! 고민</p>
         <div>
         <img src="@/assets/user5.png" alt="home" style="width:170px; height:170px;" >
         <span><p>followers: {{user.followers.length}}  | followings: {{user.followings.length}}</p></span>
@@ -15,8 +13,6 @@
       
       <div v-else>
         <h2>{{username}}님의 프로필</h2>
-        <p> 임시로 구조 짜놓은 디자인!</p>
-        <p> 댓글 단게 너무 많으면 더보기로 줄일지! 고민</p>
         <div>
           <img src="@/assets/user5.png" alt="home" style="width:170px; height:170px;" >
           <br>
@@ -51,6 +47,12 @@
       
         <h5>☃︎{{username}}이 작성한 댓글</h5>
           <div class="box2">
+            <!-- serializer참조 -->
+            <!--모달창을 바로 가져올 수 있는 자식을 만듦 하지만// 댓글의 경우, 이중구조(reviewview - comment)  -->
+
+            <!-- <profileReviewItemView 
+              v-for = "(comment, index) in user.write_comments" :key="index"
+              :commentId="String(comment.id)"/> -->
             <p v-for="(wc,idx) in user.write_comments" :key='idx'>- {{wc.content}}</p>
         </div>
     
@@ -65,11 +67,14 @@
 <script>
 import axios from 'axios'
 import profileReviewItemView from '@/components/movie_detail_info/profileReviewItemView.vue'
+// import CommentItemView from '@/components/movie_detail_info/CommentItemView.vue'
+
 
 export default {
   name: 'ProfileView',
   components:{
     profileReviewItemView,
+    // CommentItemView
   },
   props:{
     username:String,

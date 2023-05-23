@@ -31,14 +31,13 @@
             />
             <div class="modal-review col-11">
               <p class="name mb-1">{{ name }}</p>
-
-              <p v-if="name == this.$store.state.my_name">
-                <span @click="modify">수정</span>
-                <span @click="review_delete">삭제</span>
-              </p>
               <p v-if="!update" class="mb-2 modalcontent">
                 {{ review.content }}
               </p>
+              <div v-if="name == this.$store.state.my_name">
+                <button class="modify" @click="modify">수정</button> |
+                <button class="delete" @click="review_delete">삭제</button>
+              </div>
               <p v-else class="mb-2 modalcontent">
                 <input
                   type="text"
@@ -56,7 +55,7 @@
             :key="index"
             :comment="comment"
           />
-          <div>
+          <!-- <div>
             <form @submit.prevent="create_comment">
               <input
                 class="btn1 mt-2"
@@ -66,7 +65,7 @@
               />
               <button class="btn2" type="submit">등록</button>
             </form>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -310,5 +309,15 @@ hr {
   width: 50px;
   margin-left: 95%;
   margin-bottom: 10px;
+}
+.modify{
+  border: none;
+  background-color: #ddf2f5;
+  border-radius: 0.7rem;
+}
+.delete {
+  border: none;
+  background-color: rgb(245, 204, 204);
+  border-radius: 0.7rem;
 }
 </style>

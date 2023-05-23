@@ -3,8 +3,12 @@
     <p v-if='!update'><span class='add_cursor' @click='move_profile'>{{name}}</span> : {{content}}</p>
     <p v-else><span class='add_cursor' @click='move_profile'>{{name}}</span> : <input type="text" v-model='content'>
     <button @click='comment_update'>완료</button> </p>
-    <p v-if='name==this.$store.state.my_name'><span @click='modify'>수정</span> 
-    <span @click='comment_delete'>삭제</span></p>
+    <div v-if='name==this.$store.state.my_name'>
+      <div>
+        <button class="modify" @click='modify'>수정</button> |
+        <button class="delete" @click='comment_delete'>삭제</button>
+      </div>
+    </div>
   </div>
   <div v-else>
 
@@ -87,6 +91,16 @@ export default {
 .comment-list {
   text-align: left;
   margin-left: 40px;
+}
+.modify{
+  border: none;
+  background-color: #ddf2f5;
+  border-radius: 0.7rem;
+}
+.delete {
+  border: none;
+  background-color: rgb(245, 204, 204);
+  border-radius: 0.7rem;
 }
 
 </style>
