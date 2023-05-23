@@ -7,6 +7,7 @@
       <input type="text" v-model='content' placeholder="리뷰를 작성해주세요 💬">
       <button type="submit">등록</button>
     </form>
+    <hr>
     <br>
     <h5>[워드클라우드 들어가기]</h5>
 
@@ -85,9 +86,15 @@ button {
 }
 
 input {
-  width: 300px;
-  height: 50px;
+  border: solid 1px gray;
+  border-radius: 0.7rem;
+  width: 350px;
+  height: 40px;
   padding-left: 70px;
   margin-right: 10px;
+}
+hr {
+  width: 80%;
+  margin: 20px auto 10px auto;
 }
 </style>

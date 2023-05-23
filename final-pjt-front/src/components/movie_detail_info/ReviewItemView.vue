@@ -5,8 +5,8 @@
     <div class="review">
       <p class="underline add_cursor" @click='move_profile'>작성자 : {{name}}</p>
       <!-- 구역 말고 리뷰 내용을 눌렀을때 모달창 등장 -->
-      <p class="content add_cursor" @click="modalOpen">작성내용 : {{review.content}}</p>
-      <input type="checkbox" class="card-content__more-btn">
+      <p class="content add_cursor" @click="modalOpen">{{review.content}}</p>
+      <!-- <input type="checkbox"> -->
       
       <!-- 모달 내용 -->
       
@@ -14,15 +14,15 @@
         <div class="modal-container" @click.stop="">
          <!--  모달창 content  -->
          <div @click="modalOpen">
-                <img class="modal-img" src="@/assets/close.png" alt="no" style="width:20px; height:20px" >
+              <img class="modal-close" src="@/assets/close.png" alt="no" style="width:20px; height:20px" >
                 <!-- <button @click="modalOpen">닫기</button> -->
                 <!-- <button @click="modalOpen">확인</button> -->
             </div>
          <div class="d-flex flex-row" >
-            <img class="mt-1" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
-            <div class="modal-review">
+            <img class="mt-1 col-3" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
+            <div class="modal-review col-11">
                 <p class="name mb-1">{{name}}</p>
-                <p class="mb-2">{{review.content}}</p> 
+                <p class="mb-2 modalcontent">{{review.content}}</p> 
                 <hr>
             </div>
          </div>
@@ -38,7 +38,7 @@
             </div>
         </div>
        </div>
-
+<!-- 리뷰 좋아요 버튼 -->
         <span @click="reviewlike"> 
             <i v-if="!likes" class="bi bi-suit-heart"></i>
             <i v-else class="bi bi-suit-heart-fill"></i>
@@ -158,12 +158,14 @@ export default {
 }
 </style>
 <style>
+/* 리뷰 한 칸씩 적용 */
 .review{
     border: solid 1px rgb(221, 212, 212);
     border-radius: 0.9rem;
-    margin-bottom: 5px;
-    padding: 8px 0px;
-    
+    margin: 2px auto 5px auto;
+    padding: 15px 20px 0px 20px;
+    width: 70%;
+    font-family: 'Sunflower', sans-serif;
     
 } 
 .content{
@@ -173,7 +175,7 @@ export default {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-.card-content__more-btn {
+/* .card-content__more-btn {
   appearance: none;
   border: none;
   padding: 0.5em;
@@ -192,7 +194,7 @@ export default {
 
 .content:has(+ .card-content__more-btn:checked) {
   -webkit-line-clamp:unset
-}
+} */
 .modal-wrap {
   position: fixed;
   left: 0;
@@ -210,7 +212,7 @@ export default {
   width: 550px;
   background: #fff;
   border-radius: 10px;
-  padding: 8px 20px 20px 40px;
+  padding: 8px 45px 20px 30px;
   box-sizing: border-box;
   /* margin-top: 5px; */
 }
@@ -218,12 +220,24 @@ export default {
     text-align: left;
     margin-left: 10px;
 }
+.modalcontent{
+  height: 150px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  margin-top: 10px;
+}
+.modalcontent ::-webkit-scrollbar {
+    display: none;
+}
 .name {
     font-family: 'Sunflower', sans-serif;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
-.modal-img{
-    margin-left: 95%;
+.modal-close{
+    margin-left: 100%;
     cursor: pointer;
+
 }
 .btn1{
     border-radius: 0.7rem;
@@ -242,6 +256,9 @@ hr {
 }
 .bi {
     color: rgb(219, 45, 74);
-    size: 17px;
+    height: 20px;
+    width: 50px;
+    margin-left: 95%;
+    margin-bottom: 10px;
 }
 </style>
