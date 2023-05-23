@@ -27,6 +27,25 @@
     <!-- 로그인 -->
     <div v-else>
       <div class="logo" v-if="$store.state.startpage==0">
+        <!-- 홈 화면 구성 -->
+        <!-- <div class="flip">
+        <div class="card" @click="detail(movie.id)" >
+
+            <div class="front">
+                <img class="card-img-top" :src="poster_url" />
+                <div class="card-body">
+                <b class="card-title">{{ movie.title }}</b>  
+                </div>
+            </div>
+
+            <div class="back"> 
+                <p class="card-top"></p>
+                <div class="card-body">
+                <p class="card-text">{{ movie.overview }}</p> 
+                </div>
+            </div>
+        </div>
+    </div> -->
         <p class="logo-font">Logo(site name)</p>
         <button  class="logo-btn" @click="change_page1">로그인</button>
         <button class="logo-btn" @click="change_page2">회원가입</button>
