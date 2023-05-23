@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if='review'>
     <!-- 기본 리뷰창 -->
     <!-- 개별 리뷰 클릭시 모달창으로 -->
     <div class="review">
@@ -56,7 +56,7 @@ import CommentItemView from './CommentItemView.vue'
 export default {
     name: 'ReviewItemView',
     props: {
-        reviewId: Number,
+        reviewId: String,
     },
     components:{
         // ReviewModal,

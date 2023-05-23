@@ -35,14 +35,13 @@
       <button @click="move_page1">예고편</button>
       <button @click="move_page2">영화리뷰</button>
       <button @click="move_page3">이미지</button>
-      <!-- <button @click="move_page4">토론방</button> -->
+
       <img id="cursor" src="@/assets/cursor.png" alt="cursor" style="width:30px">
     </div>
 
-    <YouTubeView v-if="page==1" :movieId='movieId' />
-    <ReviewView v-else-if="page==2" :movieId='movieId' />
-    <ImageView v-else-if="page==3" :movieId='movieId' />
-    <!-- <DebateView v-else-if="page==4" :movieId='movieId' /> -->
+    <YouTubeView v-if="page==1" :movieId='String(movieId)' />
+    <ReviewView v-else-if="page==2" :movieId='String(movieId)' />
+    <ImageView v-else-if="page==3" :movieId='String(movieId)' />
 
   </div>
 </template>

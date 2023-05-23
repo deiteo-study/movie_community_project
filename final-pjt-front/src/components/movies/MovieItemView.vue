@@ -44,7 +44,7 @@ export default {
         }, 
     methods: {
         detail(movie_id){
-            this.$router.push({name:'moviedetail', params:{movieId:movie_id}})
+            this.$router.push({name:'moviedetail', params:{movieId:String(movie_id)}})
         },
     }
 }

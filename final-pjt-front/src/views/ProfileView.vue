@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="profile" v-if='user'>
     <div v-if='userexist'>
       <br>
 
@@ -108,7 +108,7 @@ export default {
       })
     },
     move_movie(movieId){
-      this.$router.push({name:'moviedetail', params:{movieId:movieId}})
+      this.$router.push({name:'moviedetail', params:{movieId:String(movieId)}})
     },
     move_review(){
 

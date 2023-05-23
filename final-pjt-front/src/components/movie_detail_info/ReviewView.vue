@@ -18,7 +18,7 @@
 
     <ReviewItemView 
     v-for = "(review, index) in reviews" :key="index"
-    :reviewId="review.id"/>
+    :reviewId="String(review.id)"/>
   </div>
 </template>
 
@@ -31,7 +31,6 @@ export default {
     name:'ReviewView',
     components:{
         ReviewItemView,
-        // ReviewCreateView
     },
     data(){
       return{
