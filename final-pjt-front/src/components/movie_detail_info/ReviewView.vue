@@ -65,12 +65,26 @@ export default {
             Authorization: ` Token ${this.$store.state.token }`}
             })
             .then(() => {
-              this.content=null
+              this.make_keyword()
+              // this.content=null
               this.get_reviews()
             })
             .catch(err=>console.log(err))
           }
-        }
+        },
+        make_keyword(){
+        var content=this.content
+        axios({
+          method:'post',
+          url:`http://127.0.0.1:8000/api/v1/${this.movieId}/keyword/`,
+          data:{content,},
+        })
+        .then(res=>{
+          console.log(res)
+          this.content=null
+        })
+
+      }
     } 
 }
 </script>

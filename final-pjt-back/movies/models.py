@@ -35,3 +35,7 @@ class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Keywords(models.Model):
+    movie = models.OneToOneField(Movie, on_delete=models.CASCADE)
+    all_words=models.TextField()

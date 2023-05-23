@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from .serializers import GenreSerializer, MovieSerializer, ReviewSerializer, CommentSerializer,MovieListSerializer
-from .models import Genre, Movie,Review, Comment
+from .models import Genre, Movie,Review, Comment, Keywords
 from accounts.models import User
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -221,8 +221,64 @@ def get_comments(request, reviewId):
     except:
         return Response({})
     
-# @api_view(['GET'])
-# def get_comment(request, commentId):
-#     comment = get_object_or_404(Comment, id=commentId)
+import re
+import pandas as pd
+# from pykospacing import Spacing
+from konlpy.tag import Okt
 
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+@api_view(['POST'])
+def keyword(request,movieId):
+    review=request.data['content']
+    okt = Okt()    
+    def preprocess(text):
+        # 특수문자 제거
+        text = re.sub('[^가-힣]', '', text)
+        # 형태소 분석
+        tokens = okt.nouns(text)
+        # 불용어 제거
+        stopwords = ['은', '는', '이', '가', '을', '를', '의', '에', '도', '와', '과', '으로', '로', '에서', '에게', '한', '하다','이고','영화','뭔가']
+        tokens = [token for token in tokens if token not in stopwords and len(token)>1]
+        return tokens
+
+    word=preprocess(review)
+    movie=Movie.objects.get(id=movieId)
+    try:
+        keywords=Keywords.objects.get(movie=movie)
+        new=list(keywords.all_words.split(' '))+word
+        keywords.all_words = ' '.join(new)
+        keywords.save()
+        return Response('추가완료')
+    except:
+        keywords=Keywords.objects.create(movie=movie,all_words=' '.join(word))
+        keywords.save()
+        return Response('완료')
+    
+
+    # get_review=Review.objects.filter(movie_id=movieId).values('content')
+    # reviews=pd.DataFrame(get_review)['content'].to_list()
+    # print(reviews)
+
+    # key=[]
+    # for review in reviews:
+    #     key += preprocess(review)
+
+    # print('/'.join(key))
+    # request.data['content']
+
+@api_view(['GET'])
+def wordcloud(request,movieId):
+    movie=Movie.objects.get(id=movieId)
+    from collections import Counter
+    try:
+        keywords=Keywords.objects.get(movie=movie)
+        word_list=[]
+        
+        counter=Counter(list(keywords.all_words.split(' ')))
+        for item,cnt in counter.items():
+            word_list.append({item:cnt})
+        return Response(word_list)
+    except:
+        return Response([])
