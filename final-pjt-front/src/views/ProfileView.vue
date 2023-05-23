@@ -75,6 +75,7 @@ export default {
   },
   created(){
     this.user_check()
+    
     // axios({
     //   method:'get',
     //   url: `http://127.0.0.1:8000/accounts/user/`,
@@ -101,7 +102,6 @@ export default {
           if (res.data.me) {
             this.me=true
           }
-          // console.log(res.data)
           this.user=res.data.data
           this.now_follow=res.data.follow
         }
