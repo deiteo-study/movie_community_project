@@ -45,5 +45,22 @@ def get_user(request,username):
         me=True
     else:
         me=False
+    
+    followers=user.followers.all()
+    if request.user in followers:
+        now_follow=True
+    else:
+        now_follow=False
     serializer=UserSerializer(user)
-    return Response({'data':serializer.data,'me':me})
+    return Response({'data':serializer.data,'me':me,'follow':now_follow,})
+
+@api_view(['POST'])
+def follow(request, userId):
+    person = User.objects.get(id=userId)
+    if request.user in person.followers.all():
+        person.followers.remove(request.user)
+        return Response(False)
+    else:
+        person.followers.add(request.user)
+        return Response(True)
+

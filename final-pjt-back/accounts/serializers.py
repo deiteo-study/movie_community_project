@@ -11,6 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
     write_reviews=ReviewSerializer(many=True, read_only=True)
     # 내가 작성한 댓글
     write_comments=CommentSerializer(many=True, read_only=True)
+    followers=serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = User
-        fields = ('id','username','like_reviews','like_movies','write_comments','write_reviews')
+        fields = ('id','username','like_reviews','like_movies','write_comments','write_reviews','followings','followers')

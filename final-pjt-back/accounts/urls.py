@@ -10,5 +10,7 @@ urlpatterns = [
     path('<str:username>/get_user/', views.get_user),
 
     path('check/',views.password_check),
-    path('delete/',views.delete)
+    path('delete/',views.delete),
+
+    path('<int:userId>/follow/',views.follow)
 ]

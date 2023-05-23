@@ -2,13 +2,29 @@
   <div class="profile">
     <div v-if='userexist'>
       <br>
-      <h2 v-if='me'>My Profile</h2>
-      <h2 v-else>{{username}}님의 프로필</h2>
-      <p> 임시로 구조 짜놓은 디자인!</p>
-      <p> 댓글 단게 너무 많으면 더보기로 줄일지! 고민</p>
-      <div>
+
+      <div v-if='me'>
+        <h2>My Profile</h2>
+        <p> 임시로 구조 짜놓은 디자인!</p>
+        <p> 댓글 단게 너무 많으면 더보기로 줄일지! 고민</p>
+        <div>
         <img src="@/assets/user5.png" alt="home" style="width:170px; height:170px;" >
-        <span><p>followers: 00  | followings: 00</p></span>
+        <span><p>followers: {{user.followers.length}}  | followings: {{user.followings.length}}</p></span>
+      </div>
+      </div>
+      
+      <div v-else>
+        <h2>{{username}}님의 프로필</h2>
+        <p> 임시로 구조 짜놓은 디자인!</p>
+        <p> 댓글 단게 너무 많으면 더보기로 줄일지! 고민</p>
+        <div>
+          <img src="@/assets/user5.png" alt="home" style="width:170px; height:170px;" >
+          <br>
+          <button @click='follow'>
+            <span v-if='!now_follow'>follow</span>
+            <span v-else>follow X</span>
+          </button>
+      </div>
       </div>
       <hr>
       
@@ -52,7 +68,8 @@ export default {
     return {
       user:null,
       userexist:true,
-      me:false
+      me:false,
+      now_follow:false,
 
     }
   },
@@ -84,7 +101,9 @@ export default {
           if (res.data.me) {
             this.me=true
           }
+          // console.log(res.data)
           this.user=res.data.data
+          this.now_follow=res.data.follow
         }
       })
     },
@@ -93,6 +112,17 @@ export default {
     },
     move_review(){
 
+    },
+    follow(){
+      axios({
+        method:'post',
+        url:`http://127.0.0.1:8000/accounts/${this.user.id}/follow/`,
+        headers : {
+          Authorization: ` Token ${this.$store.state.token }`}
+      })
+      .then(res=>{
+        this.now_follow=res.data
+      })
     }
   }
 }
