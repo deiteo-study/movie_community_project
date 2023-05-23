@@ -257,18 +257,24 @@ def keyword(request,movieId):
         return Response('완료')
     
 
+@api_view(['get'])
+def wordcloud(request,movieId):
+    movie=Movie.objects.get(id=movieId)
+    try:
+        keywords=Keywords.objects.get(movie=movie)
+        words=keywords.all_words
+    except:
+        words=''
 
-# def wordcloud():
-#     df=pd.read_csv('C:/Users/SSAFY/Desktop/test/keywords.csv', encoding='cp949')
+    from wordcloud import WordCloud
+    import matplotlib.pyplot as plt
 
-#     for a,b in df.values:
-#         try:
-#             movie=Movie.objects.get(id=a)
+    # wordcloud 화하여 plt으로 그림 출력
+    wc = WordCloud(width=1000, height=600, background_color="white", random_state=0, font_path=r'c:\Windows\Fonts\malgun.ttf')
+    plt.imshow(wc.generate(words))
+    plt.axis("off")
+    # plt.show()
+    plt.savefig(f'../final-pjt-front/src/assets/wordcloud/{movieId}.png',bbox_inches='tight')
 
-#             try:
-#                 keywords=Keywords.objects.get(movie=movie)
-#             except:
-#                 keywords=Keywords.objects.create(movie=movie,all_words=b)
-#                 keywords.save()
-#         except:
-#             pass
+    return Response('d')
+    

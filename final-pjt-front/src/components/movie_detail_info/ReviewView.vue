@@ -49,6 +49,7 @@ export default {
         })
         .then(res=>{
           this.reviews=res.data
+          this.get_wordcloud()
         })
       },
       create_review(){
@@ -84,6 +85,16 @@ export default {
           this.content=null
         })
 
+      },
+      get_wordcloud(){
+        const movieId=this.movieId
+        axios({
+          method:'get',
+          url:`http://127.0.0.1:8000/api/v1/${movieId}/wordcloud/`,
+        })
+        .then(res =>{
+          console.log(res)
+        })
       }
     } 
 }
