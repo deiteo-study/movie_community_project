@@ -1,6 +1,6 @@
 <template>
   <div class="comment-list">
-    <p>{{name}} : {{comment.content}}</p>
+    <p><span class='add_cursor' @click='move_profile'>{{name}}</span> : {{comment.content}}</p>
   </div>
 </template>
 
@@ -31,7 +31,10 @@ export default {
         .then(res => {
           this.name = res.data.name
           })
-      }
+      },
+      move_profile(){
+          this.$router.push( {name:'profile', params:{username:this.name}} )
+        }
 
     }
 

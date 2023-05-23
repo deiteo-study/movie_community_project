@@ -14,17 +14,17 @@
       
       <h5>☃︎{{username}}이 좋아한 영화</h5>
         <div class="box1">
-          <p v-for="(lm,idx) in user.like_movies" :key='idx'>- {{lm.title}}</p>
+          <p v-for="(lm,idx) in user.like_movies" :key='idx' class='add_cursor' @click='move_movie(lm.id)'>- {{lm.title}}</p>
         </div>
       
       <h5>☃︎{{username}}이 좋아한 리뷰</h5>
         <div class="box2">
-          <p v-for="(lr,idx) in user.like_reviews" :key='idx'>- {{lr.content}}</p>
+          <p v-for="(lr,idx) in user.like_reviews" :key='idx' class='add_cursor' @click='move_review(lm.id)'>- {{lr.content}}</p>
         </div>
       
         <h5>☃︎{{username}}이 작성한 리뷰</h5>
           <div class="box1">
-            <p v-for="(wr,idx) in user.write_reviews" :key='idx'>- {{wr.content}}</p>
+            <p v-for="(wr,idx) in user.write_reviews" :key='idx' class='add_cursor' @click='move_review(lm.id)'>- {{wr.content}}</p>
         </div>
       
         <h5>☃︎{{username}}이 작성한 댓글</h5>
@@ -32,7 +32,7 @@
             <p v-for="(wc,idx) in user.write_comments" :key='idx'>- {{wc.content}}</p>
         </div>
  
-
+        
     </div>
     <div v-else>
       <h1>존재하지 않는 유저입니다!</h1>
@@ -87,6 +87,12 @@ export default {
           this.user=res.data.data
         }
       })
+    },
+    move_movie(movieId){
+      this.$router.push({name:'moviedetail', params:{movieId:movieId}})
+    },
+    move_review(){
+
     }
   }
 }

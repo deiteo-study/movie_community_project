@@ -3,9 +3,9 @@
     <!-- 기본 리뷰창 -->
     <!-- 개별 리뷰 클릭시 모달창으로 -->
     <div class="review">
-      <p class="underline">작성자 : {{name}}</p>
+      <p class="underline add_cursor" @click='move_profile'>작성자 : {{name}}</p>
       <!-- 구역 말고 리뷰 내용을 눌렀을때 모달창 등장 -->
-      <p class="content" @click="modalOpen">작성내용 : {{review.content}}</p>
+      <p class="content add_cursor" @click="modalOpen">작성내용 : {{review.content}}</p>
       <input type="checkbox" class="card-content__more-btn">
       
       <!-- 모달 내용 -->
@@ -140,15 +140,24 @@ export default {
         modalOpen(){
             // this.modalOpen=true
             this.modalCheck = !this.modalCheck
+            this.get_comment()
             // document.body.classList.add('Notouch')
         },
+        move_profile(){
+          this.$router.push( {name:'profile', params:{username:this.name}} )
+        }
         },
     }
 
 
 </script>
 
-<style scoped>
+<style>
+.add_cursor {
+  cursor: pointer;
+}
+</style>
+<style>
 .review{
     border: solid 1px rgb(221, 212, 212);
     border-radius: 0.9rem;

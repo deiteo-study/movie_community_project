@@ -14,10 +14,9 @@ export default new Vuex.Store({
     createPersistedState(),
   ],
   state: {
-    movies:[
-    ],
-    reviews: [],
-    debates: [],
+    // movies:[
+    // ],
+    // reviews: [],
     
     startpage:0,
     my_name:null,
