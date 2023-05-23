@@ -74,6 +74,7 @@ export default {
     }
   },
   created(){
+    console.log(this.$route.fullPath.slice(1,8)=='profile')
     this.user_check()
     
     // axios({
