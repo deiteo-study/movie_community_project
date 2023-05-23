@@ -71,6 +71,10 @@ export default {
           .then(() =>{
             this.content=null
             alert('댓글이 삭제되었습니다.')
+            if (this.$route.fullPath.slice(1,8)=="profile"){
+              this.$router.go()
+            }
+            
           })
         }
 

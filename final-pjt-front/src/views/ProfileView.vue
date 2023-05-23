@@ -35,19 +35,25 @@
       
       <h5>☃︎{{username}}이 좋아한 리뷰</h5>
         <div class="box2">
-          <p v-for="(lr,idx) in user.like_reviews" :key='idx' class='add_cursor' @click='move_review(lm.id)'>- {{lr.content}}</p>
+          <profileReviewItemView 
+              v-for = "(review, index) in user.like_reviews" :key="index"
+              :reviewId="String(review.id)"/>
+          <!-- <p v-for="(lr,idx) in user.like_reviews" :key='idx' class='add_cursor' @click='modalOpen(lm.id)'>- {{lr.content}}</p> -->
         </div>
       
         <h5>☃︎{{username}}이 작성한 리뷰</h5>
           <div class="box1">
-            <p v-for="(wr,idx) in user.write_reviews" :key='idx' class='add_cursor' @click='move_review(lm.id)'>- {{wr.content}}</p>
+            <profileReviewItemView 
+              v-for = "(review, index) in user.write_reviews" :key="index"
+              :reviewId="String(review.id)"/>
+            <!-- <p v-for="(wr,idx) in user.write_reviews" :key='idx' class='add_cursor' @click='move_review(lm.id)'>- {{wr.content}}</p> -->
         </div>
       
         <h5>☃︎{{username}}이 작성한 댓글</h5>
           <div class="box2">
             <p v-for="(wc,idx) in user.write_comments" :key='idx'>- {{wc.content}}</p>
         </div>
- 
+    
         
     </div>
     <div v-else>
@@ -58,9 +64,13 @@
 
 <script>
 import axios from 'axios'
+import profileReviewItemView from '@/components/movie_detail_info/profileReviewItemView.vue'
 
 export default {
   name: 'ProfileView',
+  components:{
+    profileReviewItemView,
+  },
   props:{
     username:String,
   },
@@ -74,7 +84,6 @@ export default {
     }
   },
   created(){
-    console.log(this.$route.fullPath.slice(1,8)=='profile')
     this.user_check()
     
     // axios({
