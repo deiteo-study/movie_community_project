@@ -1,7 +1,12 @@
 <template>
   <div>
     <h1>Review</h1>
-
+    <div v-if='!wordcloud'>
+      <h1>wordcloud를 생성할 리뷰가 없습니다. 리뷰를 작성해주세요</h1>
+    </div>
+    <div v-else>
+      <img src='@/assets/wordcloud.png'>
+    </div>
     <!-- 리뷰 작성 폼  -->
     <form @submit.prevent="create_review">
       <input type="text" v-model='content' placeholder="리뷰를 작성해주세요 💬">
@@ -32,6 +37,7 @@ export default {
       return{
         reviews:[],
         content:null,
+        wordcloud:false,
       }
     },
     props:{
@@ -93,8 +99,11 @@ export default {
           url:`http://127.0.0.1:8000/api/v1/${movieId}/wordcloud/`,
         })
         .then(res =>{
-          console.log(res)
+          if (res.data) {
+            this.wordcloud=true
+          }
         })
+        .catch(() => console.log('wordcloud 로드 실패'))
       }
     } 
 }

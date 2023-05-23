@@ -263,18 +263,18 @@ def wordcloud(request,movieId):
     try:
         keywords=Keywords.objects.get(movie=movie)
         words=keywords.all_words
+        from wordcloud import WordCloud
+        import matplotlib.pyplot as plt
+        import matplotlib
+        matplotlib.use('agg')
+        # wordcloud 화하여 plt으로 그림 출력
+        wc = WordCloud(width=1000, height=600, background_color="white", random_state=0, font_path=r'c:\Windows\Fonts\malgun.ttf')
+        plt.imshow(wc.generate(words))
+        plt.axis("off")
+        # plt.show()
+        plt.savefig(f'../final-pjt-front/src/assets/wordcloud.png',bbox_inches='tight')
+        return Response(True)
     except:
-        words=''
+        return Response(False)
 
-    from wordcloud import WordCloud
-    import matplotlib.pyplot as plt
-
-    # wordcloud 화하여 plt으로 그림 출력
-    wc = WordCloud(width=1000, height=600, background_color="white", random_state=0, font_path=r'c:\Windows\Fonts\malgun.ttf')
-    plt.imshow(wc.generate(words))
-    plt.axis("off")
-    # plt.show()
-    plt.savefig(f'../final-pjt-front/src/assets/wordcloud/{movieId}.png',bbox_inches='tight')
-
-    return Response('d')
     
