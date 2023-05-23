@@ -22,7 +22,13 @@
             <img class="mt-1 col-3" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
             <div class="modal-review col-11">
                 <p class="name mb-1">{{name}}</p>
-                <p class="mb-2 modalcontent">{{review.content}}</p> 
+          
+                <p v-if='name==this.$store.state.my_name'><span @click='modify'>수정</span> <span @click='review_delete'>삭제</span></p>
+                <p v-if='!update' class="mb-2 modalcontent">{{review.content}}</p>
+                <p v-else class="mb-2 modalcontent">
+                  <input type="text" v-model='review.content' @keyup.enter="review_update">
+                  <button @click='review_update'>수정완료</button>
+                </p>
                 <hr>
             </div>
          </div>
@@ -44,6 +50,9 @@
             <i v-else class="bi bi-suit-heart-fill"></i>
         </span>
     </div>
+  </div>
+  <div v-else>
+    
   </div>
 </template>
 
@@ -72,6 +81,7 @@ export default {
             // 초기값 false로 모달창 숨겨 주는 변수 선언
             // true(보일때), false(보이지 않을 때)
             modalCheck: false,
+            update:false
         }
     },
     created(){
@@ -145,8 +155,38 @@ export default {
         },
         move_profile(){
           this.$router.push( {name:'profile', params:{username:this.name}} )
+        },
+        modify(){
+          this.update=true
+        },
+        review_update(){
+          const content=this.review.content
+          axios({
+            method:'post',
+            url:`http://127.0.0.1:8000/api/v1/${this.reviewId}/review_update/`,
+            data:{content,},
+            headers : {
+              Authorization: ` Token ${this.$store.state.token }`}
+          })
+          .then(() =>{
+            this.update=false
+          })
+        },
+        review_delete(){
+          axios({
+            method:'DELETE',
+            url:`http://127.0.0.1:8000/api/v1/${this.reviewId}/review_update/`,
+            headers : {
+              Authorization: ` Token ${this.$store.state.token }`}
+          })
+          .then(() =>{
+            this.modalCheck=false
+            this.review=null
+            alert('리뷰가 삭제되었습니다.')
+          })
         }
         },
+        
     }
 
 

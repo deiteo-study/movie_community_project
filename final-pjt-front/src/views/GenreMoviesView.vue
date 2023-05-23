@@ -27,12 +27,12 @@
       <label class="btn btn-outline-primary" for="btnradio2" @click='sort_change'>최신순</label>
     </div>
    
-    <div>
+    <div v-if='movie_list'>
       <GenreMovieView :movies="movie_list[page]" />
     </div>
 
     
-    <div class='f'>
+    <div v-if="movie_list" class='f'>
         <div>
            <ul class="pagination" v-if='movie_list.length<5'>
             <li v-if='page==0' class="page-item disabled"><p class="page-link" @click='prev'>Prev</p></li>
@@ -163,6 +163,9 @@ export default {
             genre_id = 10752;
         } else if (this.genre == "TV_Movie") {
             genre_id = 10770;
+        }
+        else {
+            return
         }
         }
         axios({

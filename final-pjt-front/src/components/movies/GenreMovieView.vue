@@ -1,5 +1,5 @@
 <template>
-  <div class='GenreMovie'>
+  <div class='GenreMovie' v-if='movies'>
     
     <div class="card" v-for='movie,index in movies' :key="index" @click="detail(movie.id)">
         <img class="card-img-top" :src="poster_url+movie.poster_path" />
@@ -23,7 +23,7 @@ export default {
     },
     methods:{
       detail(movie_id){
-            this.$router.push({name:'moviedetail', params:{movieId:movie_id}})
+            this.$router.push({name:'moviedetail', params:{movieId:String(movie_id)}})
         },
     }
 }

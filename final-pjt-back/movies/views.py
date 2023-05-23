@@ -277,4 +277,25 @@ def wordcloud(request,movieId):
     except:
         return Response(False)
 
+@api_view(['post','delete'])
+def reviewupdate(request,reviewId):
+    review=Review.objects.get(id=reviewId)
+    if request.method=='POST':
+        review.content=request.data['content']
+        review.save()
+        return Response('수정완료')
+    else:
+        review.delete()
+        return Response('삭제완료')
+    
+@api_view(['post','delete'])
+def commentupdate(request,commentId):
+    comment=Comment.objects.get(id=commentId)
+    if request.method=='POST':
+        comment.content=request.data['content']
+        comment.save()
+        return Response('수정완료')
+    else:
+        comment.delete()
+        return Response('삭제완료')
     

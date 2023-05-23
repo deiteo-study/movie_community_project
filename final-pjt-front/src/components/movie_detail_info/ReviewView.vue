@@ -43,6 +43,7 @@ export default {
       movieId: String
     },
     created(){
+      this.get_wordcloud()
       this.get_reviews()    
     },
     methods:{
@@ -54,7 +55,6 @@ export default {
         })
         .then(res=>{
           this.reviews=res.data
-          this.get_wordcloud()
         })
       },
       create_review(){
@@ -88,6 +88,7 @@ export default {
         .then(res=>{
           console.log(res)
           this.content=null
+          this.get_wordcloud()
         })
 
       },

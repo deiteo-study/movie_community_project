@@ -20,6 +20,8 @@ urlpatterns = [
     # 한개의 영화의 리뷰 생성
     path('<int:movieId>/review_create/', views.reviewcreate),
 
+    path('<int:reviewId>/review_update/', views.reviewupdate),
+
     path('<int:movieId>/keyword/', views.keyword),
 
     path('<int:movieId>/wordcloud/', views.wordcloud),
@@ -35,7 +37,9 @@ urlpatterns = [
 
      # 리뷰의 댓글 생성
     path('<int:reviewId>/comment_create/', views.commentcreate),
-    
+
+    path('<int:commentId>/comment_update/', views.commentupdate),
+
     # 사용자가 좋아하는 영화 체크
     path('movie/<int:movieId>/likes/', views.movielikes),
 
