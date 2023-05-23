@@ -257,28 +257,18 @@ def keyword(request,movieId):
         return Response('완료')
     
 
-    # get_review=Review.objects.filter(movie_id=movieId).values('content')
-    # reviews=pd.DataFrame(get_review)['content'].to_list()
-    # print(reviews)
 
-    # key=[]
-    # for review in reviews:
-    #     key += preprocess(review)
+# def wordcloud():
+#     df=pd.read_csv('C:/Users/SSAFY/Desktop/test/keywords.csv', encoding='cp949')
 
-    # print('/'.join(key))
-    # request.data['content']
+#     for a,b in df.values:
+#         try:
+#             movie=Movie.objects.get(id=a)
 
-@api_view(['GET'])
-def wordcloud(request,movieId):
-    movie=Movie.objects.get(id=movieId)
-    from collections import Counter
-    try:
-        keywords=Keywords.objects.get(movie=movie)
-        word_list=[]
-        
-        counter=Counter(list(keywords.all_words.split(' ')))
-        for item,cnt in counter.items():
-            word_list.append({item:cnt})
-        return Response(word_list)
-    except:
-        return Response([])
+#             try:
+#                 keywords=Keywords.objects.get(movie=movie)
+#             except:
+#                 keywords=Keywords.objects.create(movie=movie,all_words=b)
+#                 keywords.save()
+#         except:
+#             pass

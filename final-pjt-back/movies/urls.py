@@ -22,8 +22,6 @@ urlpatterns = [
 
     path('<int:movieId>/keyword/', views.keyword),
 
-    path('<int:movieId>/wordcloud/', views.wordcloud),
-
     # 한개의 영화 모든 리뷰 요청
     path('<int:movieId>/review/', views.review),
 
