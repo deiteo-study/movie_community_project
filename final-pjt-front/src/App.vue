@@ -152,11 +152,13 @@ export default {
   border-color: #bbb;
 }
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  font-family: 'Do Hyeon', sans-serif;
+  /* font-family: 'Sunflower', sans-serif; */
 }
 
 .dark {
@@ -213,7 +215,7 @@ input::placeholder {
 }
 
 .logo {
-  font-family: 'Hi Melody', cursive;
+  /* font-family: 'Hi Melody', cursive; */
   text-align: center;
   margin-top: 20%;
 }
@@ -226,6 +228,7 @@ input::placeholder {
   background-color: #dfe5e8;
   font-size: 17px;
 }
+
 </style>
 
 <style scoped>

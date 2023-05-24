@@ -126,17 +126,17 @@ button {
 
 h2 {
   /* font-family: 'Hi Melody', cursive; */
-  font-family: 'Sunflower', sans-serif;
+  /* font-family: 'Sunflower', sans-serif; */
   font-size: 45px;
 }
 .btn {
-  font-family: 'Dongle', sans-serif;
+  /* font-family: 'Dongle', sans-serif; */
   font-size: 23px;
   /* font-family: 'Sunflower', sans-serif; */
 }
 /* 메인 홈 출력 영화 제목 */
 .category{
-  font-family: 'Dongle', sans-serif;
+  /* font-family: 'Dongle', sans-serif; */
   font-size: 30px;
   text-align: left;
   margin-left: 10px;

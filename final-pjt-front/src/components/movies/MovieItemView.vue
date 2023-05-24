@@ -64,7 +64,7 @@ img {
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical; */
-  font-family: 'Sunflower', sans-serif;
+  /* font-family: 'Sunflower', sans-serif; */
 }
 /* .card {
     width: 200px;
@@ -89,7 +89,7 @@ img {
   padding: 0;
   list-style: none;
   box-sizing: border-box;  
-  font-family: Pretendard;
+  /* font-family: Pretendard; */
 }
 
 .flip { 
