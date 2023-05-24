@@ -30,9 +30,12 @@ def get_dbdata():
     for page in range(1,101):
         movielist_url=f'https://api.themoviedb.org/3/movie/popular?language=ko-KR&page={page}&api_key={api_key}'
         res=requests.get(movielist_url).json()['results']
+        okt = Okt()
+        def preprocess(text):
+            text = re.sub('[^가-힣a-zA-Z0-9]', '', text)
+            tokens = okt.morphs(text)
+            return ' '.join(tokens)
         for data in res:
-            # if 10749 in data['genre_ids']:
-            #     continue
             try:
                 a={'id':data['id'],
                 'title':data['title'],
@@ -41,7 +44,8 @@ def get_dbdata():
                 'release_date':data['release_date'],
                 'vote_average':data['vote_average'],
                 'poster_path':data['poster_path'],
-                'genres':data['genre_ids'],}
+                'genres':data['genre_ids'],
+                'movie_key':preprocess(data['title'])}
                 movie=MovieSerializer(data=a)
                 if movie.is_valid():
                     movie.save()
@@ -292,4 +296,22 @@ def commentupdate(request,commentId):
     else:
         comment.delete()
         return Response('삭제완료')
+    
+@api_view(['POST'])
+def moviesearch(request):
+    # 받아온 검색 이름
+    search=request.data['search_title']
+  
+    okt = Okt()
+    def preprocess(text):
+        text = re.sub('[^가-힣a-zA-Z0-9]', '', text)
+        tokens = okt.morphs(text)
+        tokens = [token for token in tokens]
+        return tokens
+
+    # word=preprocess(review)
+    
+    movies=Movie.objects.all()
+    for movie in movies:
+        movie.title
     

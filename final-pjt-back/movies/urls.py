@@ -39,4 +39,6 @@ urlpatterns = [
 
     # 장르별 영화데이터 가져가기
     path('gernemovies/', views.gernemovies),
+
+    path('moviesearch/', views.moviesearch),
 ]

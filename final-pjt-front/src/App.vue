@@ -7,7 +7,7 @@
         <img src="./assets/home.png" alt="home" style="width:35px;" >
       </router-link>
       <input type="text" name="" id="serch"  placeholder="검색어를 입력해주세요 :)" v-model="serach_word" 
-      @keyup.enter="$router.push({name:'search',query:{title:serach_word}}), serach_word=null">
+      @keyup.enter="$router.push({ name:'search',query:{title:serach_word} } ), serach_word=null">
         <!-- <img src="./assets/magnify.png" alt="serch" style="width:18px; height:18px" >  -->
 
       <div class="btn-group c">
