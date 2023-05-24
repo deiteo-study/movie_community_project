@@ -3,14 +3,15 @@
         <div class="card" @click="detail(movie.id)" >
             <!-- 카드 앞면 -->
             <div class="front">
-                <img class="card-img-top" :src="poster_url" />
-                <div class="card-body">
-                <b class="card-title">{{ movie.title }}</b>  
-                </div>
+                <img class="card" :src="poster_url" />
+                <!-- <div class="card-body"> -->
+                <!-- </div> -->
             </div>
             <!-- 카드 뒷면 -->
             <div class="back"> 
                 <p class="card-top"></p>
+                <br>
+                <b class="card-title">{{ movie.title }}</b>  
                 <div class="card-body">
                 <p class="card-text">{{ movie.overview }}</p> 
                 </div>
@@ -110,7 +111,7 @@ img {
   /* width: 100%; 
   height: 100%;  */
   width: 200px;
-  height: 350px;
+  height: 300px;
   position: relative;
   transition: .4s;
   transform-style: preserve-3d;
@@ -118,8 +119,8 @@ img {
 
 .front, .back {
   position: absolute;
-  /* width: 100%; 
-  height: 100%; */
+  /* width: 100%;  */
+  /* height: 30px; */
   backface-visibility: hidden;
   justify-content: center;
   align-items: center;
