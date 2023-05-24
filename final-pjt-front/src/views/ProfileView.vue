@@ -146,7 +146,7 @@ export default {
 <style scoped>
 h5 {
   /* font-family: 'Dongle', sans-serif; */
-  font-family: 'Gaegu', cursive;
+  /* font-family: 'Gaegu', cursive; */
   /* font-family: 'Hi Melody', cursive; */
   /* font-family: 'Sunflower', sans-serif; */
   text-align: left;

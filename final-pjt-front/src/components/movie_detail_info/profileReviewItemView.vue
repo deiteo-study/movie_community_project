@@ -221,7 +221,7 @@ export default {
   margin: 2px auto 5px auto;
   padding: 15px 20px 0px 20px;
   width: 70%;
-  font-family: "Sunflower", sans-serif;
+  /* font-family: "Sunflower", sans-serif; */
 }
 .content {
   overflow: hidden;
@@ -286,7 +286,7 @@ export default {
   display: none;
 }
 .name {
-  font-family: "Sunflower", sans-serif;
+  /* font-family: "Sunflower", sans-serif; */
   margin-top: 5px;
   margin-bottom: 10px;
 }
