@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!check">
+    <!-- <div v-if="!check">
       
       <div class="pw">
         <h1>Check Password</h1>
@@ -16,24 +16,33 @@
             
       </div>
      
-    </div>
-    <div v-else>
+    </div> -->
+    <!-- <div v-else> -->
+        <div>
         <h1>회원정보수정</h1>
         <div class="ff">
             <div class='set_box'>
-                <h1>프로필 변경</h1>
-                <h3>공사중</h3>
-                <img src="@/assets/open.png" alt="">
+                <h2>Change Profile</h2>
+                <br>
+                <br>         
+                <br>       
+                <img class="img" src="@/assets/gongsa.png" alt="-ing" >
+                <br>
+                <br>
+                <h6>프로필 업데이트 기능 준비중 입니다..⌛️</h6>
+                <p></p>
+                <!-- <img src="@/assets/open.png" alt=""> -->
             </div>
             <div class='set_box'>
-                <h1>비밀번호 변경</h1>
-                <label for="">아이디 : </label>
+                <h2>Change Password</h2>
+                <br>
+                <label for="">username</label>
                 <input type="text" :value='user.username' disabled/>
                 <br>
-                <label for="">비밀번호 : </label>
+                <label for="">password</label>
                 <input type="password" v-model="password1" />
                 <br>
-                <label for="">비밀번호 확인 : </label>
+                <label for="">password confirmation</label>
                 <input type="password" v-model="password2" @keyup.enter="change_password"/>
                 <br>
                 <button  class="check" @click='change_password'>확인</button>
@@ -128,10 +137,13 @@ export default {
     margin:0 10%
 }
 .set_box {
-    border: 2px solid blue;
-    width: 80%;
-    margin: 20px;
+    border: 1.5px solid rgb(156, 166, 171);
+    border-radius: 0.9rem;
+    width: 38%;
+    margin: 30px;
     padding: 50px;
+    box-shadow: 6px 6px 3px 3px gray;
+
 }
 .form{
     top: 20px;
@@ -143,15 +155,40 @@ input {
     border: solid 2px rgb(217, 221, 223);
     border-radius: 0.7rem;
     width: 320px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    height: 40px;
+    padding-left: 10px;
 }
 /* 확인 버튼 */
 .check{
     border: none;
-    background-color: rgb(179, 224, 235);
+    background-color: rgb(185, 219, 228);
     border-radius: 0.7rem;
     margin-left: 5px;
 }
 .pw {
-    margin-top: 30%;
+    margin-top: 20%;
+}
+label{
+    font-size: 20px;
+}
+button{
+    border: solid 1.5px rgb(159, 188, 188);
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.7rem;
+    margin-left: 5px;
+    height: 35px;
+    width: 75px;
+}
+button:hover {
+  /* background-color:#edeee3; */
+   background-color:#d2e3e7;
+   border: solid rgb(181, 183, 184);
+  outline: 0;
+}
+.img{
+    width: 60px;
+    height: 60px;
 }
 </style>
