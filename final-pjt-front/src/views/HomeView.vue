@@ -36,6 +36,7 @@
         </button>
       </div>
     </div>
+    <div class="genrebtn">
     <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/All' ">All</button>
     <button type="button" class="btn" onclick = "location.href = '/movies/Comedy' ">코미디</button>
     <button type="button" class="btn" onclick = "location.href = '/movies/ScienceFiction' ">SF</button>
@@ -54,7 +55,7 @@
     <button type="button" class="btn" onclick = "location.href = '/movies/Music' ">음악</button>
     <button type="button" class="btn"  onclick = "location.href = '/movies/Family' ">가족</button>
     <button type="button" class="btn" onclick = "location.href = '/movies/War' ">전쟁</button>
-  
+  </div>
     <!-- <button type="button" class="btn btn-outline-info fs-s" onclick = "location.href = '/movies/All' ">All</button>
     <button type="button" class="btn btn-outline-primary" onclick = "location.href = '/movies/Comedy' ">코미디</button>
     <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/ScienceFiction' ">SF</button>
@@ -77,15 +78,15 @@
     <!-- <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Romance' ">로맨스</button> -->
     <br>
 
-    <p class="category">인기영화 10개 출력</p>
+    <p class="category">인기영화 Top10</p>
     <hr>
     <MovieListView :movies="popular_ten"/>
 
-    <p class="category">{{$store.state.my_name}}님의 맞춤 추천영화!</p>
+    <p class="category">{{$store.state.my_name}}님이 좋아할 만한 추천 영화!</p>
     <hr>
     <MovieListView :movies="recommend_movies"/>
     
-    <p class="category">랜덤영화 출력 (뜻밖의 발견을 해보세요!)</p>
+    <p class="category">이런 영화는 어떤가요?</p>
     <hr>
     <MovieListView :movies="random_movies"/>
 
@@ -192,7 +193,7 @@ img{
 } */
 button {
   margin: 0 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   /* font-family: 'Sunflower', sans-serif; */
 }
 .btn:hover {
@@ -222,6 +223,9 @@ h2 {
   font-size: 30px;
   text-align: left;
   margin-left: 10px;
+}
+.genrebtn{
+  margin: 0px 70px;
 }
 
 </style>

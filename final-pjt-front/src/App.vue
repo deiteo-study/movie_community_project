@@ -32,28 +32,25 @@
     <div v-else>
       <div class="logo" v-if="$store.state.startpage==0">
         <!-- 홈 화면 구성 -->
-        <!-- <div class="flip">
+      <p class="logo-font">Logo(site name)임시구상// 배경 뭘로하지</p>
+        <div class="flip">
         <div class="card" @click="detail(movie.id)" >
-
             <div class="front">
-                <img class="card-img-top" :src="poster_url" />
-                <div class="card-body">
-                <b class="card-title">{{ movie.title }}</b>  
-                </div>
+              
+              <img class="logoimg" src="@/assets/logo.png" alt="logo">
             </div>
-
             <div class="back"> 
-                <p class="card-top"></p>
-                <div class="card-body">
-                <p class="card-text">{{ movie.overview }}</p> 
-                </div>
+              <button  class="logo-btn" @click="change_page1">로그인</button>
+              <button class="logo-btn" @click="change_page2">회원가입</button>
+            </div>
             </div>
         </div>
-    </div> -->
-        <p class="logo-font">Logo(site name)</p>
+    </div>
+        <!-- <img class="logoimg" src="@/assets/logo.png" alt="logo" >
+        <br>
         <button  class="logo-btn" @click="change_page1">로그인</button>
-        <button class="logo-btn" @click="change_page2">회원가입</button>
-      </div>
+        <button class="logo-btn" @click="change_page2">회원가입</button> -->
+      <!-- </div> -->
       <div v-else>
         <router-view/>
         <button class="mt-2 homebtn" @click="change_home">뒤로가기</button>
@@ -183,7 +180,7 @@ body {
 }
 
 .dark {
-  background: #121212;
+  background: #252525;
   color: #c9cccf;
 }
 
@@ -192,7 +189,7 @@ body {
   color: #c9cccf;
 }
 .dark .card {
-  background-color: #121212;
+  background-color: #252525;
   color: #a3a5a8;
 }
 .dark a {
@@ -259,6 +256,8 @@ input::placeholder {
   border: solid rgb(235, 242, 249);
   background-color: #e3eef4;
   font-size: 17px;
+  width: 80px;
+  height: 40px;
 }
 
 
@@ -268,5 +267,68 @@ input::placeholder {
 div > hr {
   margin-top:0;
   margin-bottom: 0;
+}
+.logoimg{
+  width: 500px;
+  width: 500px;
+}
+.flip { 
+  /* width: 700px;
+  height: 650px; */
+  /* top: 20%; */
+  position: relative; 
+  perspective: 700px;
+  margin: 2rem;
+  margin: 0px auto 40px auto;
+}
+
+.card {
+  top: 20px;
+  /* margin: 40px auto; */
+  /* width: 100%; 
+  height: 100%;  */
+  width: 500px;
+  height: 500px;
+  position: relative;
+  transition: .7s;
+  transform-style: preserve-3d;
+  background-color: #fffefb;
+  margin: 0px auto;
+  border: none;
+} 
+
+.front{
+  position: absolute;
+  /* width: 100%;  */
+  /* height: 30px; */
+  backface-visibility: hidden;
+  justify-content: center;
+  align-items: center;
+  color: #1f1f21;
+  padding: 0px auto;
+}
+.back {
+  margin: 40px;
+  /* position: absolute; */
+  backface-visibility: hidden;
+}
+.logo-btn:hover {
+  /* background-color:#edeee3; */
+   background-color:#d2e3e7;
+   border: solid rgb(181, 183, 184);
+  outline: 0;
+}
+
+.front {
+  /* background: tomato;  */
+}
+
+.back { 
+  /* background: rgb(38, 39, 42);  */
+  transform: rotateY(180deg);
+}
+
+.flip:hover .card {
+  transform: rotateY(180deg);
 }
 </style>

@@ -34,6 +34,7 @@ export default {
 .movie {
   display:flex;
 	overflow:scroll;
+  /* margin-right: 5px; */
 }
 
 
