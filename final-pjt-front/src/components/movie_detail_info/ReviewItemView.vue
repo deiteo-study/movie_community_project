@@ -42,18 +42,18 @@
             <br>
             </div>
                 <div class="col-4">
-          
                   <hr>
                   <div class="commentbox">
                   <CommentItemView
                     v-for = "(comment, index) in comments" :key="index"
                     :comment="comment" :update="false"/>
                   </div>
+                  <br>
                       <form @submit.prevent="create_comment">
                         <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
                         <button class="btn2" type="submit">등록</button>
                       </form>
-                </div>
+                  </div>
          </div>
         </div>
        </div>
@@ -216,7 +216,7 @@ export default {
     border: solid 1px rgb(221, 212, 212);
     border-radius: 0.9rem;
     margin: 2px auto 5px auto;
-    padding: 15px 20px 0px 20px;
+    padding: 10px 20px 0px 20px;
     width: 70%;
     /* font-family: 'Sunflower', sans-serif; */
     
@@ -257,12 +257,11 @@ export default {
     margin-left: 10px;
 }
 .modalcontent{
-  
   height: 250px;
   overflow-y: scroll;
   -ms-overflow-style: none;
-  margin-top: 40px;
-  padding: 10px 10px 10px 10px;
+  margin-top: 20px;
+  padding: 5px 10px 10px 10px;
   /* text-align: center; */
   /* position: absolute; */
   /* top: 50%; */
@@ -333,14 +332,17 @@ hr {
   border: solid 0.5px rgb(235, 244, 255);
   height: 330px;
   width: 270px;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-top: 60px; */
+  margin-left: 10px;
+  margin-right: 10px;
   overflow-y: scroll;
   -ms-overflow-style: none;
   padding-top: 10px;
 }
 .col-8 {
   margin-right: 35px;
+}
+.col-4 {
+  margin-top: 65px;
 }
 </style>

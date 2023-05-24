@@ -9,12 +9,9 @@
             </div>
             <!-- 카드 뒷면 -->
             <div class="back"> 
-                <p class="card-top"></p>
                 <br>
-                <b class="card-title">{{ movie.title }}</b>  
-                <div class="card-body">
-                <p class="card-text">{{ movie.overview }}</p> 
-                </div>
+                <b class="cardtitle">{{ movie.title }}</b>  
+                <p class="cardtext">{{ movie.overview }}</p> 
             </div>
         </div>
     </div>
@@ -63,7 +60,7 @@ img {
     height: 300px;
     margin-bottom: 10px;
 }
-.card-title {
+.cardtitle {
     white-space:normal;
     margin: auto;;
   /* overflow: hidden;
@@ -78,9 +75,9 @@ img {
     height: 380px;
 } */
 .card-body {
-    display: flex;
+    /* display: flex; */
 }
-.card-text{
+.cardtext{
     white-space:normal;
     margin: 10px;    
     padding-top: 40px;
@@ -115,6 +112,7 @@ img {
   position: relative;
   transition: .4s;
   transform-style: preserve-3d;
+  background-color: #fffefb;
 } 
 
 .front, .back {
