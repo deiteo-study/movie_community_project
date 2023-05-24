@@ -44,7 +44,13 @@ export default {
         }, 
     methods: {
         detail(movie_id){
-            this.$router.push({name:'moviedetail', params:{movieId:String(movie_id)}})
+            if (this.$route.fullPath.slice(1,6)=="movie") {
+                this.$router.push({name:'moviedetail', params:{movieId:String(movie_id)}})
+                this.$router.go()
+            }
+            else {
+                this.$router.push({name:'moviedetail', params:{movieId:String(movie_id)}})
+            }
         },
     }
 }

@@ -22,7 +22,8 @@
         <div class="ff">
             <div class='set_box'>
                 <h1>프로필 변경</h1>
-                <p>프로필 변경에 대한것 추가...</p>
+                <h3>공사중</h3>
+                <img src="@/assets/preparing.png" alt="">
             </div>
             <div class='set_box'>
                 <h1>비밀번호 변경</h1>

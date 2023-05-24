@@ -21,6 +21,7 @@
             <p v-else class="bi bi-suit-heart-fill"></p> -->
           </div>
           <p>{{ moviedata.overview }}</p>
+          <h2>배우</h2>
           <div class="wrap">
           <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
           </div>
