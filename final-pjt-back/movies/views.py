@@ -20,8 +20,6 @@ def get_dbdata():
     genre_url=f'https://api.themoviedb.org/3/genre/movie/list?language=ko&api_key={api_key}'
     res=requests.get(genre_url).json()['genres']
     for data in res:
-        # if data['id']==10749:
-        #     continue
         genre=GenreSerializer(data=data)
         if genre.is_valid():
             genre.save()
@@ -51,6 +49,7 @@ def get_dbdata():
                     movie.save()
             except:
                 continue
+
 # 리뷰 가져오기...
 # def reviewpush():
 #     df=pd.read_csv('C:/Users/SSAFY/Desktop/data/review.csv')
@@ -301,17 +300,37 @@ def commentupdate(request,commentId):
 def moviesearch(request):
     # 받아온 검색 이름
     search=request.data['search_title']
-  
     okt = Okt()
     def preprocess(text):
         text = re.sub('[^가-힣a-zA-Z0-9]', '', text)
         tokens = okt.morphs(text)
-        tokens = [token for token in tokens]
         return tokens
-
-    # word=preprocess(review)
-    
+    word=preprocess(search)
+    if not word:
+        return Response('검색결과X')
     movies=Movie.objects.all()
-    for movie in movies:
-        movie.title
+
+    import numpy as np
+    from numpy import dot
+    from numpy.linalg import norm
+
+    def cos_sim(A,B):
+        return dot(A,B)/(norm(A)*norm(B))
     
+    # doc1=np.array(word)
+
+    lst2=[]
+    for movie in movies:
+        lst=list(movie.title_key.split(' '))
+        doc_union = set(word).union(set(lst))
+        doc_intersection = set(word).intersection(set(lst))
+        jaccard_similarity = len(doc_intersection) / len(doc_union)
+        ids=int(movie.id)
+        if jaccard_similarity>0:
+            lst2.append([ids,jaccard_similarity])
+        # doc2=np.array(lst)
+        # print(cos_sim(doc1,doc2))
+        # lst.append([movie.id, cos_sim(word,list(movie.title_key.split(' ')))])
+    lst2.sort(key=lambda x:-x[1])
+    print(lst2)
+    return Response('d')
