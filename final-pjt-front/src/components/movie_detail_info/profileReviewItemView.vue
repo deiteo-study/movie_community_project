@@ -9,52 +9,57 @@
       <!-- <input type="checkbox"> -->
 
       <!-- 모달 내용 -->
-
       <div class="modal-wrap" v-show="modalCheck" @click="modalOpen">
         <div class="modal-container" @click.stop="">
-          <!--  모달창 content  -->
-          <div @click="modalOpen">
-            <img
-              class="modal-close"
-              src="@/assets/close.png"
-              alt="no"
-              style="width: 20px; height: 20px"
-            />
-
-          </div>
-          <div class="d-flex flex-row">
-            <img
-              class="mt-1 col-3"
-              src="@/assets/user4.png"
-              alt="user3"
-              style="width: 35px; height: 37px"
-            />
-            <div class="modal-review col-11">
-              <p class="name mb-1">{{ name }}</p>
-              <p v-if="!update" class="mb-2 modalcontent">
-                {{ review.content }}
-              </p>
-              <div v-if="name == this.$store.state.my_name">
-                <button class="modify" @click="modify">수정</button> |
-                <button class="delete" @click="review_delete">삭제</button>
-              </div>
-              <p v-else class="mb-2 modalcontent">
-                <input
-                  type="text"
-                  v-model="review.content"
-                  @keyup.enter="review_update"
-                />
-                <button @click="review_update">수정완료</button>
-              </p>
-              <hr />
+         <!--  모달창 content  -->
+         <div @click="modalOpen">
+              <img class="modal-close" src="@/assets/close.png" alt="no" style="width:20px; height:20px" >
+                <!-- <button @click="modalOpen">닫기</button> -->
+                <!-- <button @click="modalOpen">확인</button> -->
             </div>
-          </div>
-          <!-- 리뷰 작성 폼 -->
-          <CommentItemView
-            v-for="(comment, index) in comments"
-            :key="index"
-            :comment="comment"
-          />
+         <div class="d-flex flex-row">
+          <div class="col-8">
+            <img class="mt-1" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
+            <div class="modal-review">
+                <p class="name mb-1"  @click='move_profile'>{{name}}</p>
+                <hr>
+                <p v-if='!update' class="mb-2 modalcontent">{{review.content}}</p>
+                <p v-else class="mb-2 modalcontent">
+                  <input class="modify-input" type="text" v-model='review.content' @keyup.enter="review_update">
+                </p>
+                <hr>
+                <div v-if='name==this.$store.state.my_name'>
+                  <div v-if='!update'>
+                    <button class="modify" @click='update=true'>수정</button> |
+                    <button class="delete" @click='review_delete'>삭제</button>
+                  </div>
+                  <div v-else>
+                    <button class="modify-btn" @click='review_update'>완료</button> |
+                    <button lass="modify" @click='update=false'>취소</button>
+                  </div>
+                </div>
+                </div>
+                
+                
+
+            <br>
+            </div>
+                <div class="col-4">
+                  <form @submit.prevent="create_comment">
+                        <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
+                        <button class="btn2" type="submit">등록</button>
+                      </form>
+                      <hr>
+                  <div class="commentbox">
+                  <CommentItemView
+                    v-for = "(comment, index) in comments" :key="index"
+                    :comment="comment"/>
+                  </div>
+                 
+                </div>
+         </div>
+
+
           <!-- <div>
             <form @submit.prevent="create_comment">
               <input
@@ -259,7 +264,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 550px;
+  width: 1200px;
+  height: 800px;
   background: #fff;
   border-radius: 10px;
   padding: 8px 45px 20px 30px;

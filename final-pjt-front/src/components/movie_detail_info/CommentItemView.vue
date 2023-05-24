@@ -1,12 +1,15 @@
 <template>
   <div class="comment-list" v-if='content'>
     <p v-if='!update'><span class='add_cursor' @click='move_profile'>{{name}}</span> : {{content}}</p>
-    <p v-else><span class='add_cursor' @click='move_profile'>{{name}}</span> : <input type="text" v-model='content'>
-    <button @click='comment_update'>완료</button> </p>
+    <p v-else><span class='add_cursor' @click='move_profile'>{{name}}</span> : <input type="text" v-model='content'></p>
     <div v-if='name==this.$store.state.my_name'>
-      <div>
-        <button class="modify" @click='modify'>수정</button> |
+      <div v-if='!update'>
+        <button class="modify" @click='update=true'>수정</button> |
         <button class="delete" @click='comment_delete'>삭제</button>
+      </div>
+      <div v-else>
+        <button @click='comment_update'>완료</button> |
+        <button class="modify" @click='update=false'>취소</button> 
       </div>
     </div>
   </div>
@@ -49,9 +52,6 @@ export default {
       move_profile(){
           this.$router.push( {name:'profile', params:{username:this.name}} )
         },
-      modify(){
-        this.update=true
-      },
       comment_update(){
           const content=this.content
           axios({
