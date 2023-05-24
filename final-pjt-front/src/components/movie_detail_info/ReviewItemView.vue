@@ -25,7 +25,7 @@
                 <hr>
                 <p v-if='!update' class="mb-2 modalcontent">{{review.content}}</p>
                 <p v-else class="mb-2 modalcontent">
-                  <input class="modify-input" type="text" v-model='review.content' @keyup.enter="review_update">
+                  <textarea class="modify-input" type="text" v-model='review.content' @keyup.enter="review_update"></textarea>
                 </p>
                 <hr>
                 <div v-if='name==this.$store.state.my_name'>
@@ -47,7 +47,7 @@
                   <div class="commentbox">
                   <CommentItemView
                     v-for = "(comment, index) in comments" :key="index"
-                    :comment="comment"/>
+                    :comment="comment" :update="false"/>
                   </div>
                       <form @submit.prevent="create_comment">
                         <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
@@ -164,6 +164,9 @@ export default {
             // this.modalOpen=true
             this.modalCheck = !this.modalCheck
             this.get_comment()
+            if (!this.modalCheck) {
+              this.update=false
+            }
             // document.body.classList.add('Notouch')
         },
         move_profile(){
@@ -315,9 +318,11 @@ hr {
 .modify-input{
   border: solid 1px gray;
   border-radius: 0.7rem;
-  width: 300px;
-  height: 50px;
+  width: 500px;
+  height: 250px;
   margin-bottom: 7px;
+  overflow: scroll;
+
 }
 .modify-btn{
   border: solid gray 1px;

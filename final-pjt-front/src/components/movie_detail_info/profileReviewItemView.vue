@@ -5,7 +5,10 @@
     <!-- <div class="review"> -->
       
       <!-- 구역 말고 리뷰 내용을 눌렀을때 모달창 등장 -->
-      <p class="content add_cursor" @click="modalOpen">- {{ review.content }}</p>
+      <p class="content add_cursor" @click="modalOpen">
+        <span v-if='num=="0"'>- {{ review.content }}</span>
+        <span v-else>- {{ comment_content }}</span></p>
+      <!-- <p v-else class="content add_cursor" @click="modalOpen">- {{ comment_content }}</p> -->
       <!-- <input type="checkbox"> -->
 
       <!-- 모달 내용 -->
@@ -45,17 +48,16 @@
             <br>
             </div>
                 <div class="col-4">
-                  <form @submit.prevent="create_comment">
-                        <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
-                        <button class="btn2" type="submit">등록</button>
-                      </form>
                       <hr>
                   <div class="commentbox">
                   <CommentItemView
                     v-for = "(comment, index) in comments" :key="index"
-                    :comment="comment"/>
+                    :comment="comment" :update="false" />
                   </div>
-                 
+                      <form @submit.prevent="create_comment">
+                        <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
+                        <button class="btn2" type="submit">등록</button>
+                      </form>
                 </div>
          </div>
 
@@ -87,6 +89,8 @@ export default {
   name: "ReviewItemView",
   props: {
     reviewId: String,
+    num:String,
+    comment_content:String,
   },
   components: {
     CommentItemView,
@@ -169,6 +173,9 @@ export default {
       // this.modalOpen=true
       this.modalCheck = !this.modalCheck;
       this.get_comment();
+       if (!this.modalCheck) {
+              this.update=false
+            }
       // document.body.classList.add('Notouch')
     },
     move_profile() {
@@ -212,48 +219,28 @@ export default {
 };
 </script>
 
-<style>
-.add_cursor {
+<style scoped>
+.add_cursor{
   cursor: pointer;
 }
-</style>
-<style>
 /* 리뷰 한 칸씩 적용 */
-.review {
-  border: solid 1px rgb(221, 212, 212);
-  border-radius: 0.9rem;
-  margin: 2px auto 5px auto;
-  padding: 15px 20px 0px 20px;
-  width: 70%;
-  /* font-family: "Sunflower", sans-serif; */
-}
-.content {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-/* .card-content__more-btn {
-  appearance: none;
-  border: none;
-  padding: 0.5em;
-  border-radius: 0.25em;
-  cursor: pointer;
-  margin: 1rem;
-  color: blue;
+.review{
+    border: solid 1px rgb(221, 212, 212);
+    border-radius: 0.9rem;
+    margin: 2px auto 5px auto;
+    padding: 15px 20px 0px 20px;
+    width: 70%;
+    /* font-family: 'Sunflower', sans-serif; */
+    
+} 
+.content{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
-.card-content__more-btn::before {
-  content: '더보기';
-}
-.card-content__more-btn:checked::before {
-  content: '닫기';
-}
-
-.content:has(+ .card-content__more-btn:checked) {
-  -webkit-line-clamp:unset
-} */
 .modal-wrap {
   position: fixed;
   left: 0;
@@ -268,57 +255,67 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1200px;
-  height: 800px;
+  width: 1000px;
+  height: 700px;
   background: #fff;
   border-radius: 10px;
   padding: 8px 45px 20px 30px;
   box-sizing: border-box;
+  padding: 30px 65px 20px 65px;
   /* margin-top: 5px; */
 }
-.modal-review {
-  text-align: left;
-  margin-left: 10px;
+.modal-review{
+    text-align: left;
+    margin-left: 10px;
 }
-.modalcontent {
-  height: 150px;
+.modalcontent{
+  
+  height: 250px;
   overflow-y: scroll;
   -ms-overflow-style: none;
-  margin-top: 10px;
+  margin-top: 40px;
+  padding: 10px 10px 10px 10px;
+  /* text-align: center; */
+  /* position: absolute; */
+  /* top: 50%; */
+  /* margin-top: -25px; */
+  
 }
 .modalcontent ::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 .name {
-  /* font-family: "Sunflower", sans-serif; */
-  margin-top: 5px;
-  margin-bottom: 10px;
+    /* font-family: 'Sunflower', sans-serif; */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
 }
-.modal-close {
-  margin-left: 100%;
-  cursor: pointer;
+.modal-close{
+    margin-left: 95%;
+    cursor: pointer;
+
 }
-.btn1 {
-  border-radius: 0.7rem;
-  border: solid 1px rgb(177, 190, 200);
-  width: 250px;
-  padding-left: 20px;
+.btn1{
+    border-radius: 0.7rem;
+    border: solid 1px rgb(177, 190, 200);
+    width: 250px;
+    padding-left: 20px;
 }
-.btn2 {
-  border-radius: 0.5rem;
-  border: none;
-  background-color: rgb(232, 239, 243);
-  margin-left: 5px;
+.btn2{
+    border-radius: 0.5rem;
+    border: none;
+    background-color: rgb(232, 239, 243);
+    margin-left: 5px;
 }
 hr {
-  width: 99%;
+    width: 99%;
 }
 .bi {
-  color: rgb(219, 45, 74);
-  height: 20px;
-  width: 50px;
-  margin-left: 95%;
-  margin-bottom: 10px;
+    color: rgb(219, 45, 74);
+    height: 20px;
+    width: 50px;
+    margin-left: 95%;
+    margin-bottom: 10px;
 }
 .modify{
   border: none;
@@ -329,5 +326,31 @@ hr {
   border: none;
   background-color: rgb(245, 204, 204);
   border-radius: 0.7rem;
+}
+.modify-input{
+  border: solid 1px gray;
+  border-radius: 0.7rem;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 7px;
+}
+.modify-btn{
+  border: solid gray 1px;
+  border-radius: 0.7rem;
+  background-color: rgb(194, 195, 195);
+}
+.commentbox{
+  border: solid 0.5px rgb(235, 244, 255);
+  height: 330px;
+  width: 270px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  padding-top: 10px;
+}
+.col-8 {
+  margin-right: 35px;
 }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>{{$route.query.title}} 의 검색 결과입니다.</h1>
+    
     <div class=main>
         <MovieItemView v-for='movie in movies' :key='movie.id' :movie='movie'/>
     </div>

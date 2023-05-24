@@ -26,6 +26,7 @@ export default {
     name: 'CommentItemView',
     props:{
       comment: Object,
+      // update:Boolean,
     },
     data(){
       return{
