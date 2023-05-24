@@ -221,6 +221,7 @@ nav a.router-link-exact-active {
   width: 70px;
   margin-bottom: 10px;
   cursor: pointer;
+  
 }
 </style>
 
@@ -253,9 +254,10 @@ input::placeholder {
   font-size: 53px;
 }
 .logo-btn{
+  border-radius: 0.6rem;
   margin: 5px;
-  border: solid rgb(218, 229, 240);
-  background-color: #dfe5e8;
+  border: solid rgb(235, 242, 249);
+  background-color: #e3eef4;
   font-size: 17px;
 }
 

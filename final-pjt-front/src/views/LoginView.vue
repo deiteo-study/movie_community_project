@@ -55,21 +55,25 @@ h1{
   margin: 5% auto 0 auto;
   padding-top: 40px;
   padding-bottom: 5px;
+  font-size: 18px;
 
 }
 input{
   border: solid 2px gray;
   border-radius: 0.7rem;
-  width: 200px;
+  width: 180px;
   margin-bottom: 10px;
   cursor: pointer;
+  margin-left: 5px;
+  font-size: 22px;
 }
 button{
   border: none;
   border-radius: 0.7rem;
-  width: 50px;
+  width: 53px;
+  height: 30px;
   margin-bottom: 10px;
   cursor: pointer;
-  background-color: antiquewhite;
+  background-color: rgb(224, 246, 249);
 }
 </style>

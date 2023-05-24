@@ -4,23 +4,24 @@
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  style="width:900px">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="@/assets/movie1.png" alt="home" >
+            <img class="d-block w-100" src="@/assets/movie2.png" alt="home" >
             <!-- <img :src="poster_url+now_playing[0]['backdrop_path']" class="d-block w-100" alt="..."> -->
             <!-- <h2>{{ now_playing[0]['title'] }}</h2> -->
           </div>
-          <!-- <div class="carousel-item">
-            <img :src="poster_url+now_playing[1]['backdrop_path']" class="d-block w-100" alt="...">
-            <h2>{{ now_playing[1]['title'] }}</h2>
-          </div>
           <div class="carousel-item">
+            <img class="d-block w-100 movie2" src="@/assets/movie4.png" alt="home">
+            <!-- <img :src="poster_url+now_playing[1]['backdrop_path']" class="d-block w-100" alt="...">
+            <h2>{{ now_playing[1]['title'] }}</h2> -->
+          </div>
+          <!-- <div class="carousel-item">
             <img :src="poster_url+now_playing[2]['backdrop_path']" class="d-block w-100" alt="...">
             <h2>{{ now_playing[2]['title'] }}</h2>
-          </div>
-          <div class="carousel-item">
+          </div> -->
+          <!-- <div class="carousel-item">
             <img :src="poster_url+now_playing[3]['backdrop_path']" class="d-block w-100" alt="...">
             <h2>{{ now_playing[3]['title'] }}</h2>
-          </div>
-          <div class="carousel-item">
+          </div> -->
+          <!-- <div class="carousel-item">
             <img :src="poster_url+now_playing[4]['backdrop_path']" class="d-block w-100" alt="...">
             <h2>{{ now_playing[4]['title'] }}</h2>
           </div> -->
@@ -170,7 +171,7 @@ export default {
 
 <style scoped>
 #main {
-  margin-bottom:20px;
+  margin-bottom:0px;
 }
 #carouselExampleControls{
   width: 1300px;
@@ -217,6 +218,6 @@ h2 {
   font-size: 30px;
   text-align: left;
   margin-left: 10px;
-
 }
+
 </style>
