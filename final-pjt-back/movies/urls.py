@@ -5,9 +5,6 @@ urlpatterns = [
     # 영화 한개 데이터 가져오기
     path('<int:movieId>/get_movie/', views.get_movie),
 
-    # 모든 영화 데이터 가져오기
-    path('get_movies/', views.get_movies),
-
     # 한개의 영화 모든 리뷰 가져오기
     path('<int:movieId>/get_reviews/', views.get_reviews),
 
@@ -32,10 +29,7 @@ urlpatterns = [
     # 한개의 리뷰 모든 댓글 가져오기
     path('<int:reviewId>/get_comments/', views.get_comments),
 
-    # 전체리뷰 모든 댓글 가져오기
-    # path('<int:commentId>/get_comment/', views.get_comment),
-
-     # 리뷰의 댓글 생성
+    # 리뷰의 댓글 생성
     path('<int:reviewId>/comment_create/', views.commentcreate),
 
     path('<int:commentId>/comment_update/', views.commentupdate),

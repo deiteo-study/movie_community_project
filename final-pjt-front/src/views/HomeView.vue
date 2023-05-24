@@ -93,8 +93,8 @@ export default {
     this.now_playing=this.$store.state.now_playing
     this.popular_ten=this.$store.state.popular_ten
 
-    this.$store.dispatch('GetDBMovies')
-    this.movies=this.$store.state.movies
+    // this.$store.dispatch('GetDBMovies')
+    // this.movies=this.$store.state.movies
     if (!this.$store.state.token){
       this.$router.push({path: "/"})
     }

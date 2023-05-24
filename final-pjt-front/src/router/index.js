@@ -43,6 +43,11 @@ const routes = [
     path:'/account/update',
     name:'accountupdate',
     component: () => import('../views/AccountUpdateView.vue'),
+  },
+  {
+    path:'/search',
+    name:'search',
+    component: () => import('../views/SearchPageView.vue'),
   }
 ]
 

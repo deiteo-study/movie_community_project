@@ -76,12 +76,6 @@ def get_movie(request,movieId):
     
     return Response({'data':serializer.data,'likes':likes})
 
-@api_view(['GET'])
-def get_movies(request):
-    movies=Movie.objects.all()
-    serializer=MovieSerializer(movies,many=True)
-    return Response(serializer.data)
-
 # 리뷰작성하기
 @api_view(['POST'])
 def reviewcreate(request, movieId):

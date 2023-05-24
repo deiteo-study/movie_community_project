@@ -13,11 +13,7 @@ export default new Vuex.Store({
   plugins:[
     createPersistedState(),
   ],
-  state: {
-    // movies:[
-    // ],
-    // reviews: [],
-    
+  state: {    
     startpage:0,
     my_name:null,
     token: null,
@@ -70,17 +66,6 @@ export default new Vuex.Store({
         // console.log(state.popular_ten)
       })
       .catch(err=>console.log(err))
-    },
-
-
-    GET_MOVIES(state,movies){
-      state.movies=movies
-    },
-    GET_REVIEWS(state,reviews){
-      state.reviews=reviews
-    },
-    GET_DEBATE(state, debates){
-      state.debates = debates
     },
     SAVE_TOKEN(state,token) {
       state.token = token
@@ -156,41 +141,6 @@ export default new Vuex.Store({
         context.dispatch('logout')
       })
     },
-    // DB로부터 
-    GetDBMovies(context){
-      axios({
-        method: 'get',
-        url: 'http://127.0.0.1:8000/api/v1/get_movies/',
-        headers : {
-          Authorization: ` Token ${context.state.token }`}
-      })
-      .then(res=>{
-        context.commit('GET_MOVIES',res.data)
-      })
-    },
-    // get_dbreview(context){
-    //   axios({
-    //     method: 'get',
-    //     url:`http://127.0.0.1:8000/api/v1/get_reviews/`,
-    //   })
-    //   .then(res => {
-    //     context.commit('GET_REVIEWS',res.data)
-    //   }) 
-    // },
-    // axios의 요청이 views.py의 request로 -> axios의 then으로 응답
-
-    // 토론
-    // vue에서의 axios와 index.js(여기)에서의 axios의 차이는?
-    GetDebate(context, movieId){
-      axios({
-        method: 'get',
-        url: `http://127.0.0.1:8000/api/v1/${movieId}/debate/`,
-      })
-      .then(res => {
-        context.commit('GET_DEBATE', res.data)
-      })
-    }
-
   },
   modules: {
   }
