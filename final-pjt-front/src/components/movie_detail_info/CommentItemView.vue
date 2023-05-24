@@ -1,20 +1,20 @@
 <template>
   <div class="comment-list" v-if='content'>
-    <p v-if='!update'><span class='add_cursor' @click='move_profile'>{{name}}</span> : {{content}}</p>
+    <p class="commentitem" v-if='!update'><span class='add_cursor' @click='move_profile'>{{name}}</span> : {{content}}</p>
     <p v-else><span class='add_cursor' @click='move_profile'>{{name}}</span> : <input type="text" v-model='content'></p>
     <div v-if='name==this.$store.state.my_name'>
       <div v-if='!update'>
-        <button class="modify" @click='update=true'>수정</button> |
-        <button class="delete" @click='comment_delete'>삭제</button>
+        <button class="modify1" @click='update=true'>수정</button> |
+        <button class="delete1" @click='comment_delete'>삭제</button>
       </div>
       <div v-else>
         <button @click='comment_update'>완료</button> |
         <button class="modify" @click='update=false'>취소</button> 
       </div>
     </div>
+    <hr>
   </div>
   <div v-else>
-
   </div>
 </template>
 
@@ -101,6 +101,7 @@ export default {
 .comment-list {
   text-align: left;
   margin-left: 40px;
+  margin-bottom: 10px;
 }
 .modify{
   border: none;
@@ -112,5 +113,19 @@ export default {
   background-color: rgb(245, 204, 204);
   border-radius: 0.7rem;
 }
-
+.commentitem {
+  margin-bottom: 4px;
+}
+.modify1{
+  border: none;
+  background-color: #ddf2f5;
+  border-radius: 0.7rem;
+  font-size: 13px;
+}
+.delete1 {
+  border: none;
+  background-color: rgb(245, 204, 204);
+  border-radius: 0.7rem;
+  font-size: 13px;
+}
 </style>

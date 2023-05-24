@@ -39,9 +39,6 @@
                   </div>
                 </div>
                 </div>
-                
-                
-
             <br>
             </div>
                 <div class="col-4">
@@ -210,7 +207,7 @@ export default {
   cursor: pointer;
 }
 </style>
-<style>
+<style scoped>
 /* 리뷰 한 칸씩 적용 */
 .review{
     border: solid 1px rgb(221, 212, 212);
@@ -228,26 +225,7 @@ export default {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-/* .card-content__more-btn {
-  appearance: none;
-  border: none;
-  padding: 0.5em;
-  border-radius: 0.25em;
-  cursor: pointer;
-  margin: 1rem;
-  color: blue;
-}
 
-.card-content__more-btn::before {
-  content: '더보기';
-}
-.card-content__more-btn:checked::before {
-  content: '닫기';
-}
-
-.content:has(+ .card-content__more-btn:checked) {
-  -webkit-line-clamp:unset
-} */
 .modal-wrap {
   position: fixed;
   left: 0;
@@ -262,12 +240,13 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1200px;
-  height: 800px;
+  width: 1000px;
+  height: 700px;
   background: #fff;
   border-radius: 10px;
   padding: 8px 45px 20px 30px;
   box-sizing: border-box;
+  padding: 30px 65px 20px 65px;
   /* margin-top: 5px; */
 }
 .modal-review{
@@ -275,11 +254,16 @@ export default {
     margin-left: 10px;
 }
 .modalcontent{
-  height: 190px;
+  
+  height: 250px;
   overflow-y: scroll;
   -ms-overflow-style: none;
-  margin-top: 10px;
-  padding: auto 0 auto 0;
+  margin-top: 40px;
+  padding: 10px 10px 10px 10px;
+  /* text-align: center; */
+  /* position: absolute; */
+  /* top: 50%; */
+  /* margin-top: -25px; */
   
 }
 .modalcontent ::-webkit-scrollbar {
@@ -292,7 +276,7 @@ export default {
     text-align: center;
 }
 .modal-close{
-    margin-left: 100%;
+    margin-left: 95%;
     cursor: pointer;
 
 }
@@ -349,8 +333,9 @@ hr {
   margin-right: auto;
   overflow-y: scroll;
   -ms-overflow-style: none;
+  padding-top: 10px;
 }
-.col-6 {
-  margin-left: 15px;
+.col-8 {
+  margin-right: 35px;
 }
 </style>
