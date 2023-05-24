@@ -28,7 +28,8 @@ urlpatterns = [
 
     # 한개의 리뷰 모든 댓글 가져오기
     path('<int:reviewId>/get_comments/', views.get_comments),
-
+    # 영화추천
+    path('<int:movieId>/recommend/', views.recommend),
     # 리뷰의 댓글 생성
     path('<int:reviewId>/comment_create/', views.commentcreate),
 

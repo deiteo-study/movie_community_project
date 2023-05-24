@@ -298,39 +298,64 @@ def commentupdate(request,commentId):
     
 @api_view(['POST'])
 def moviesearch(request):
-    # 받아온 검색 이름
-    search=request.data['search_title']
-    okt = Okt()
-    def preprocess(text):
-        text = re.sub('[^가-힣a-zA-Z0-9]', '', text)
-        tokens = okt.morphs(text)
-        return tokens
-    word=preprocess(search)
-    if not word:
-        return Response('검색결과X')
+    okt=Okt()
+    import math
+    # search=okt.nouns(request.data['search_title'])
+    search= list(request.data['search_title'])
     movies=Movie.objects.all()
-
-    import numpy as np
-    from numpy import dot
-    from numpy.linalg import norm
-
-    def cos_sim(A,B):
-        return dot(A,B)/(norm(A)*norm(B))
-    
-    # doc1=np.array(word)
-
-    lst2=[]
+    # 코사인 유사도 계산
+    def cosine_similarity(v1, v2):
+        dot_product = sum([a*b for a,b in zip(v1,v2)])
+        magnitude = math.sqrt(sum([a**2 for a in v1])) * math.sqrt(sum([b**2 for b in v2]))
+        if magnitude == 0:
+            return 0
+        else:
+            return dot_product / magnitude
+    lst=[]
     for movie in movies:
-        lst=list(movie.title_key.split(' '))
-        doc_union = set(word).union(set(lst))
-        doc_intersection = set(word).intersection(set(lst))
-        jaccard_similarity = len(doc_intersection) / len(doc_union)
-        ids=int(movie.id)
-        if jaccard_similarity>0:
-            lst2.append([ids,jaccard_similarity])
-        # doc2=np.array(lst)
-        # print(cos_sim(doc1,doc2))
-        # lst.append([movie.id, cos_sim(word,list(movie.title_key.split(' ')))])
-    lst2.sort(key=lambda x:-x[1])
-    print(lst2)
-    return Response('d')
+        # mv=okt.nouns(movie.title)
+        mv=list(movie.title)
+        keywords = set(search+mv)
+        vectorA=[1 if keyword in search else 0 for keyword in keywords]
+        vectorB=[1 if keyword in mv else 0 for keyword in keywords]
+        # 코사인 유사도 출력
+        if cosine_similarity(vectorA, vectorB)>0.3:
+            lst.append([movie, cosine_similarity(vectorA, vectorB)])
+    lst.sort(key=lambda x:-x[1])
+    movies=[l[0] for l in lst]
+    seri=MovieSerializer(movies,many=True)
+    return Response(seri.data)
+
+@api_view(['GET'])
+def recommend(request,movieId):
+    mv=Movie.objects.get(id=movieId)
+    po=Keywords.objects.get(movie=mv)
+    search=po.all_words.split(' ')
+    all_key=Keywords.objects.all()
+
+    
+    import math
+    # 코사인 유사도 계산
+    def cosine_similarity(v1, v2):
+        dot_product = sum([a*b for a,b in zip(v1,v2)])
+        magnitude = math.sqrt(sum([a**2 for a in v1])) * math.sqrt(sum([b**2 for b in v2]))
+        if magnitude == 0:
+            return 0
+        else:
+            return dot_product / magnitude
+    lst=[]
+    for key in all_key:
+        if key==po:
+            continue
+        kw=key.all_words.split(' ')
+
+        keywords = set(search+kw)
+        vectorA=[1 if keyword in search else 0 for keyword in keywords]
+        vectorB=[1 if keyword in kw else 0 for keyword in keywords]
+        # 코사인 유사도 출력
+        if cosine_similarity(vectorA, vectorB)>0.3:
+            lst.append([key.movie, cosine_similarity(vectorA, vectorB)])
+    lst.sort(key=lambda x:-x[1])
+    movies=[l[0] for l in lst]
+    seri=MovieSerializer(movies,many=True)
+    return Response(seri.data)

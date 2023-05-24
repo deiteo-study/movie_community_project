@@ -16,7 +16,6 @@ class Movie(models.Model):
     poster_path=models.TextField()
     genres = models.ManyToManyField(Genre)
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_movies')
-    title_key= models.TextField()
 # 리뷰
 class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='write_reviews')

@@ -22,13 +22,12 @@
           <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
           </div>
         </div>
-        
       </div>
       
       <br>
       <hr>      
     </div>
-  
+ 
     <br>
     <hr>
     
@@ -53,7 +52,8 @@ import ActorInfoView from '@/components/actors_info/ActorInfoView'
 import YouTubeView from '../components/movie_detail_info/YouTubeView.vue'
 import ReviewView from '../components/movie_detail_info/ReviewView.vue'
 import ImageView from '../components/movie_detail_info/ImageView.vue'
-// import DebateView from '../components/movie_detail_info/DebateView.vue'
+// import MovieItemView from '../components/movies/MovieItemView.vue'
+
 
 
 export default {
@@ -63,7 +63,7 @@ export default {
     YouTubeView,
     ReviewView,
     ImageView,
-    // DebateView
+    // MovieItemView
   },
   data(){
     return{
@@ -72,7 +72,7 @@ export default {
       likes:null,
       moviedata:null,
       movie_poster:null,
-
+      cc_movies:null
     }
   },
   props: {
@@ -80,6 +80,7 @@ export default {
   },
   created(){
     this.get_moviedata()
+    // this.recommend()
     
   },
   methods:{
@@ -133,6 +134,16 @@ export default {
     move_page4(){
       this.page=4
     },
+    recommend(){
+      axios({
+        method:'get',
+        url:`http://127.0.0.1:8000/api/v1/${this.movieId}/recommend/`
+      })
+      .then(res =>{
+        console.log(res)
+        this.cc_movies=res.data
+      })
+    }
   },
   
 
