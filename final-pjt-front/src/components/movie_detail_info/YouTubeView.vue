@@ -1,6 +1,6 @@
 <template>
 <!-- 영화 디테일 페이지의 youtube 예고편(컴포넌트) -->
-  <div>
+  <div class='add_mg'>
     <div>
        <img src="@/assets/youtube.png" alt="home" style="width:45px;" >
        <h5>Youtube</h5>
@@ -52,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+.add_mg{
+  margin-top:50px;
+  margin-bottom: 100px;;
+}
 img {
   margin-bottom: 5px;
 }

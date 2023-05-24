@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class='add_mg'>
     <h1>Image</h1>
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -85,6 +85,10 @@ export default {
 </script>
 
 <style scoped>
+.add_mg{
+  margin-top:50px;
+  margin-bottom: 100px;;
+}
 img {
     width:800px;
 }

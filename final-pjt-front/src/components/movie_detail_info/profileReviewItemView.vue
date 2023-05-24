@@ -269,25 +269,12 @@ export default {
     text-align: left;
     margin-left: 10px;
 }
-<<<<<<< HEAD
-.modalcontent{
-  
-=======
 .modalcontent {
->>>>>>> 00d807e0d5bb15630a47789db61823a93d711d1b
   height: 250px;
   overflow-y: scroll;
   -ms-overflow-style: none;
   margin-top: 40px;
   padding: 10px 10px 10px 10px;
-<<<<<<< HEAD
-  /* text-align: center; */
-  /* position: absolute; */
-  /* top: 50%; */
-  /* margin-top: -25px; */
-  
-=======
->>>>>>> 00d807e0d5bb15630a47789db61823a93d711d1b
 }
 .modalcontent ::-webkit-scrollbar {
     display: none;
@@ -335,10 +322,6 @@ hr {
   background-color: rgb(245, 204, 204);
   border-radius: 0.7rem;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 00d807e0d5bb15630a47789db61823a93d711d1b
 .modify-input{
   border: solid 1px gray;
   border-radius: 0.7rem;

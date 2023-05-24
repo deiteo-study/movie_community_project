@@ -1,13 +1,20 @@
 <template>
-  <div class='GenreMovie' v-if='movies'>
-    
-    <div class="card" v-for='movie,index in movies' :key="index" @click="detail(movie.id)">
-        <img class="card-img-top" :src="poster_url+movie.poster_path" />
-        <div class="card-body">
-        <b class="card-title">{{ movie.title }}</b>
-      </div>
+  <div class="flip">
+        <div class="card" v-for='movie,index in movies' :key="index" @click="detail(movie.id)" >
+            <!-- 카드 앞면 -->
+            <div class="front">
+                <img class="card" :src="poster_url" />
+                <!-- <div class="card-body"> -->
+                <!-- </div> -->
+            </div>
+            <!-- 카드 뒷면 -->
+            <div class="back"> 
+                <br>
+                <b class="cardtitle">{{ movie.title }}</b>  
+                <p class="cardtext">{{ movie.overview }}</p> 
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -34,18 +41,11 @@ export default {
 </style>
 
 <style scoped>
-.GenreMovie{
-  display:grid;
-  margin: 30px 20px;
-  grid-template-columns: repeat(10,1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-
-}
 img {
     height: 300px;
+    margin-bottom: 10px;
 }
-.card-title {
+.cardtitle {
     white-space:normal;
     margin: auto;;
   /* overflow: hidden;
@@ -53,12 +53,73 @@ img {
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical; */
+  /* font-family: 'Sunflower', sans-serif; */
 }
-.card {
+/* .card {
     width: 200px;
     height: 380px;
-}
+} */
 .card-body {
-    display: flex;
+    /* display: flex; */
+}
+.cardtext{
+    white-space:normal;
+    margin: 10px;    
+    padding-top: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;  
+  /* font-family: Pretendard; */
+}
+
+.flip { 
+  width: 200px;
+  height: 350px;
+  position: relative; 
+  perspective: 1100px;
+  margin: 2rem;
+}
+
+.card {
+  /* width: 100%; 
+  height: 100%;  */
+  width: 200px;
+  height: 300px;
+  position: relative;
+  transition: .4s;
+  transform-style: preserve-3d;
+  background-color: #fffefb;
+} 
+
+.front, .back {
+  position: absolute;
+  /* width: 100%;  */
+  /* height: 30px; */
+  backface-visibility: hidden;
+  justify-content: center;
+  align-items: center;
+  color: #1f1f21;
+}
+
+.front {
+  /* background: tomato;  */
+}
+
+.back { 
+  /* background: rgb(38, 39, 42);  */
+  transform: rotateY(180deg);
+}
+
+.flip:hover .card {
+  transform: rotateY(180deg);
 }
 </style>
