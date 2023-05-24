@@ -12,8 +12,8 @@
           <h2>{{ moviedata.title }}</h2>
           <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️⭐️⭐️</p>
           <div class="btn1" @click="movielike"> 
-            <span v-if="!likes" class="bi">🤍</span>
-            <span v-else class="bi">💖</span>
+            <span v-if="!likes" class="bi add_cursor">🤍</span>
+            <span v-else class="bi add_cursor">💖</span>
             <!-- <p v-if="!likes" class="bi bi-suit-heart"></p>
             <p v-else class="bi bi-suit-heart-fill"></p> -->
           </div>
@@ -22,13 +22,14 @@
           <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
           </div>
         </div>
-        
       </div>
       
       <br>
       <hr>      
     </div>
-  
+    <div class='fle' v-if='cc_movies'>
+        <MovieItemView v-for="movie in cc_movies" :key="movie.id" :movie="movie"/>  
+      </div>
     <br>
     <hr>
     
@@ -53,7 +54,8 @@ import ActorInfoView from '@/components/actors_info/ActorInfoView'
 import YouTubeView from '../components/movie_detail_info/YouTubeView.vue'
 import ReviewView from '../components/movie_detail_info/ReviewView.vue'
 import ImageView from '../components/movie_detail_info/ImageView.vue'
-// import DebateView from '../components/movie_detail_info/DebateView.vue'
+import MovieItemView from '../components/movies/MovieItemView.vue'
+
 
 
 export default {
@@ -63,7 +65,7 @@ export default {
     YouTubeView,
     ReviewView,
     ImageView,
-    // DebateView
+    MovieItemView
   },
   data(){
     return{
@@ -72,7 +74,7 @@ export default {
       likes:null,
       moviedata:null,
       movie_poster:null,
-
+      cc_movies:null
     }
   },
   props: {
@@ -80,6 +82,7 @@ export default {
   },
   created(){
     this.get_moviedata()
+    this.recommend()
     
   },
   methods:{
@@ -133,6 +136,16 @@ export default {
     move_page4(){
       this.page=4
     },
+    recommend(){
+      axios({
+        method:'get',
+        url:`http://127.0.0.1:8000/api/v1/${this.movieId}/recommend/`
+      })
+      .then(res =>{
+        console.log(res.data)
+        this.cc_movies=res.data
+      })
+    }
   },
   
 
@@ -140,6 +153,9 @@ export default {
 </script>
 
 <style scoped>
+.fle{
+  display:flex;
+}
 .wrap {
   display:flex;
   width:100%;
