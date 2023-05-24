@@ -35,8 +35,26 @@
       </div>
     </div>
     <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/All' ">All</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Comedy' ">코미디</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/ScienceFiction' ">SF</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Fantasy' ">판타지</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Action' ">액션</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Crime' ">범죄</button>
+    <button type="button" class="btn" click = "location.href = '/movies/Thriller' ">스릴러</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Horror' ">공포</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Adventure' ">모험</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Animation' ">애니메이션</button>
+    <button type="button" class="btn"  onclick = "location.href = '/movies/Drama' ">드라마</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/History' ">역사</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Western' ">서부</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Documentary' ">다큐멘터리</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Mystery' ">미스터리</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Music' ">음악</button>
+    <button type="button" class="btn"  onclick = "location.href = '/movies/Family' ">가족</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/War' ">전쟁</button>
+  
+    <!-- <button type="button" class="btn btn-outline-info fs-s" onclick = "location.href = '/movies/All' ">All</button>
     <button type="button" class="btn btn-outline-primary" onclick = "location.href = '/movies/Comedy' ">코미디</button>
-    <!-- <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Romance' ">로맨스</button> -->
     <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/ScienceFiction' ">SF</button>
     <button type="button" class="btn btn-outline-danger" onclick = "location.href = '/movies/Fantasy' ">판타지</button>
     <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/Action' ">액션</button>
@@ -53,7 +71,8 @@
     <button type="button" class="btn btn-outline-success" onclick = "location.href = '/movies/Music' ">음악</button>
     <button type="button" class="btn btn-outline-danger" onclick = "location.href = '/movies/Family' ">가족</button>
     <button type="button" class="btn btn-outline-warning" onclick = "location.href = '/movies/War' ">전쟁</button>
-    <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/TV_Movie' ">TV 영화</button>
+    <button type="button" class="btn btn-outline-info" onclick = "location.href = '/movies/TV_Movie' ">TV 영화</button> -->
+    <!-- <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Romance' ">로맨스</button> -->
     <br>
 
     <p class="category">현재 상영중인 영화 10개 출력</p>
@@ -122,8 +141,13 @@ export default {
 button {
   margin: 0 10px;
   margin-bottom: 20px;
+  /* font-family: 'Sunflower', sans-serif; */
 }
-
+.btn:hover {
+  /* background-color:#edeee3; */
+   background-color:#9bdaff;
+  outline: 0;
+}
 h2 {
   /* font-family: 'Hi Melody', cursive; */
   /* font-family: 'Sunflower', sans-serif; */
@@ -131,7 +155,13 @@ h2 {
 }
 .btn {
   /* font-family: 'Dongle', sans-serif; */
-  font-size: 23px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0.7, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: 0.5s;
+  font-size: 17px;
+  border-radius: 0.8rem;
+  border: none; 
+  background-color: rgb(225, 245, 248);
   /* font-family: 'Sunflower', sans-serif; */
 }
 /* 메인 홈 출력 영화 제목 */

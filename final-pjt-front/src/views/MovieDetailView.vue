@@ -12,9 +12,10 @@
           <h2>{{ moviedata.title }}</h2>
           <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️</p>
           <div class="btn1" @click="movielike"> 
-            <i v-if="!likes" class="bi bi-suit-heart"></i>
-            <!-- <i v-else class="bi bi-person-hearts"></i> -->
-            <i v-else class="bi bi-suit-heart-fill"></i>
+            <span v-if="!likes" class="bi">🤍</span>
+            <span v-else class="bi">💖</span>
+            <!-- <p v-if="!likes" class="bi bi-suit-heart"></p>
+            <p v-else class="bi bi-suit-heart-fill"></p> -->
           </div>
           <p>{{ moviedata.overview }}</p>
           <div class="wrap">
@@ -32,9 +33,9 @@
     <hr>
     
     <div>
-      <button @click="move_page1">예고편</button>
-      <button @click="move_page2">영화리뷰</button>
-      <button @click="move_page3">이미지</button>
+      <button class="btn2" @click="move_page1">예고편</button>
+      <button class="btn2" @click="move_page2">영화리뷰</button>
+      <button class="btn2" @click="move_page3">이미지</button>
 
       <img id="cursor" src="@/assets/cursor.png" alt="cursor" style="width:30px">
     </div>
@@ -184,23 +185,25 @@ h2 {
   background-color: rgb(187, 196, 200);
   height: 35px;
   width: 40px;
-  padding-top: 5px;
-  text-align: center;
-  align-content: center;
+  padding-left: 0px;
+  /* padding-top: 5px;
   margin-bottom: 15px;
+  padding-right: 20px; */
+  /* text-align: center;
+  align-content: center; */
+
+  /* margin-bottom: 15px; */
 }
 .bi {
   color: rgb(220, 21, 68);
 }
-i {
-  size: 25px;
-}
-button{
+
+.btn2{
   border-radius: 0.7rem;
   border: none;
   background-color: rgb(214, 239, 239) ;
   width: 80px;
   height: 33px;
-  margin: 0px 5px 10px 5px;
+  margin: 0px 10px 10px 5px;
 }
 </style>
