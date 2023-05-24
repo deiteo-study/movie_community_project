@@ -1,12 +1,13 @@
 <template>
   <div>
-    <h1>Review</h1>
+    <h2>Review</h2>
     <div v-if='!wordcloud'>
-      <h1>wordcloud를 생성할 리뷰가 없습니다. 리뷰를 작성해주세요</h1>
+      <h3>wordcloud를 생성할 리뷰가 없습니다. 리뷰를 작성해주세요</h3>
     </div>
     <div v-else>
-      <img src='@/assets/wordcloud.png'>
+      <img class="wordcloud" src='@/assets/wordcloud.png'>
     </div>
+    <br>
     <!-- 리뷰 작성 폼  -->
     <form @submit.prevent="create_review">
       <input type="text" v-model='content' placeholder="리뷰를 작성해주세요 💬">
@@ -122,13 +123,16 @@ button {
 input {
   border: solid 1px gray;
   border-radius: 0.7rem;
-  width: 350px;
+  width: 400px;
   height: 40px;
-  padding-left: 70px;
+  padding-left: 15%;
   margin-right: 10px;
 }
 hr {
   width: 80%;
   margin: 20px auto 10px auto;
+}
+.wordcloud{
+  border-radius: 0.5rem;
 }
 </style>

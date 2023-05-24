@@ -50,6 +50,8 @@ def get_dbdata():
             except:
                 continue
 
+def get():
+    movies=Movie.objects.all()
 # 리뷰 가져오기...
 # def reviewpush():
 #     df=pd.read_csv('C:/Users/SSAFY/Desktop/data/review.csv')
@@ -224,7 +226,7 @@ import pandas as pd
 from konlpy.tag import Okt
 
 
-from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.feature_extraction.text import TfidfVectorizer
 
 @api_view(['POST'])
 def keyword(request,movieId):
@@ -295,38 +297,48 @@ def commentupdate(request,commentId):
     else:
         comment.delete()
         return Response('삭제완료')
-    
+
+
 @api_view(['POST'])
 def moviesearch(request):
     # 받아온 검색 이름
     search=request.data['search_title']
+    from konlpy.tag import Okt
+    import os 
+    os.environ['JAVA_HOME'] = r'C:\Program Files\Java\jdk-20'
     okt = Okt()
+    from pykospacing import Spacing
+    spacing = Spacing()
     def preprocess(text):
         text = re.sub('[^가-힣a-zA-Z0-9]', '', text)
+        text=spacing(text)
         tokens = okt.morphs(text)
         return tokens
-    word=preprocess(search)
+    # word=preprocess(search)
+    # print(word)
+    word=list(search)
     if not word:
         return Response('검색결과X')
     movies=Movie.objects.all()
 
-    import numpy as np
-    from numpy import dot
-    from numpy.linalg import norm
+    # import numpy as np
+    # from numpy import dot
+    # from numpy.linalg import norm
 
-    def cos_sim(A,B):
-        return dot(A,B)/(norm(A)*norm(B))
+    # def cos_sim(A,B):
+    #     return dot(A,B)/(norm(A)*norm(B))
     
     # doc1=np.array(word)
 
     lst2=[]
     for movie in movies:
-        lst=list(movie.title_key.split(' '))
+        lst=list(movie.title)
+        # lst=list(movie.title_key.split(' '))
         doc_union = set(word).union(set(lst))
         doc_intersection = set(word).intersection(set(lst))
         jaccard_similarity = len(doc_intersection) / len(doc_union)
         ids=int(movie.id)
-        if jaccard_similarity>0:
+        if jaccard_similarity>0.2:
             lst2.append([ids,jaccard_similarity])
         # doc2=np.array(lst)
         # print(cos_sim(doc1,doc2))

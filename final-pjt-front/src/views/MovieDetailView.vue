@@ -6,11 +6,11 @@
       <br>
       <div class="movie_detail">
 
-        <img :src="movie_poster" height="500">
+        <img class="mainimg" :src="movie_poster" height="500">
 
         <div class="movie_info" v-if="moviedata">
           <h2>{{ moviedata.title }}</h2>
-          <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️</p>
+          <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️⭐️⭐️</p>
           <div class="btn1" @click="movielike"> 
             <span v-if="!likes" class="bi">🤍</span>
             <span v-else class="bi">💖</span>
@@ -148,8 +148,8 @@ export default {
 	overflow-x:scroll;
   overflow: auto;
 }
-a {
-  /* border: 1px solid white; */
+.mainimg {
+  margin-top: 10px;
 }
 a.router-link-exact-active {
   color: #42b983;
@@ -177,15 +177,18 @@ h2 {
 #background{
   background-color: rgb(61, 65, 68);
   color: rgb(185, 211, 222);
+  padding-top: 10px;
 }
 .btn1{
   /* border: solid rgb(97, 114, 135); */
   border: none;
   border-radius: 30%;
-  background-color: rgb(187, 196, 200);
+  background-color: rgb(216, 223, 226);
   height: 35px;
   width: 40px;
-  padding-left: 0px;
+  padding-left: 10px;
+  padding-top: 5px;
+  margin-bottom: 10px;
   /* padding-top: 5px;
   margin-bottom: 15px;
   padding-right: 20px; */
@@ -196,6 +199,8 @@ h2 {
 }
 .bi {
   color: rgb(220, 21, 68);
+  width: 20px;
+  height: 30px;
 }
 
 .btn2{
@@ -205,5 +210,12 @@ h2 {
   width: 80px;
   height: 33px;
   margin: 0px 10px 10px 5px;
+  
+}
+.btn2:hover {
+  /* background-color:#edeee3; */
+   background-color:#ffffff;
+   border: solid rgb(211, 241, 255);
+  outline: 0;
 }
 </style>
