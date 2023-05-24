@@ -76,20 +76,32 @@
     <!-- <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Romance' ">로맨스</button> -->
     <br>
 
-    <p class="category">현재 상영중인 영화 10개 출력</p>
-    <hr>
-    <MovieListView :movies="now_playing"/>
-
     <p class="category">인기영화 10개 출력</p>
     <hr>
     <MovieListView :movies="popular_ten"/>
+
+    <p class="category">랜덤영화 출력 (뜻밖의 발견을 해보세요!)</p>
+    <hr>
+    <MovieListView :movies="random_movies"/>
+
+    <p class="category">{{gr1_name}} 장르 인기</p>
+    <hr>
+    <MovieListView :movies="gr1_movies"/>
+    
+    <p class="category">{{gr2_name}} 장르 인기</p>
+    <hr>
+    <MovieListView :movies="gr2_movies"/>
+
+    <p class="category">좋아요 기반 추천영화 10개 출력</p>
+    <hr>
+    <MovieListView :movies="recommend_movies"/>
 
     <hr>
   </div>
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 import MovieListView from '../components/movies/MovieListView.vue'
 // @ is an alias to /src
 
@@ -102,7 +114,13 @@ export default {
     return {
       now_playing:null,
       popular_ten:null,
+      random_movies:null,
+      recommend_movies:null,
 
+      gr1_name:null,
+      gr1_movies:null,
+      gr2_name:null,
+      gr2_movies:null,
       poster_url:`https://image.tmdb.org/t/p/original`
     }
   },
@@ -112,7 +130,8 @@ export default {
     this.$store.commit('popular_ten')
     this.now_playing=this.$store.state.now_playing
     this.popular_ten=this.$store.state.popular_ten
-
+    this.random_movie()
+    this.recommend()
     // this.$store.dispatch('GetDBMovies')
     // this.movies=this.$store.state.movies
     if (!this.$store.state.token){
@@ -120,7 +139,30 @@ export default {
     }
   },
   methods:{
-
+    random_movie(){
+      axios({
+        method:'get',
+        url:'http://127.0.0.1:8000/api/v1/random/',
+      })
+      .then(res => {
+        this.random_movies=res.data.random
+        this.gr1_name=res.data.genre_random1[0]
+        this.gr2_name=res.data.genre_random2[0]
+        this.gr1_movies=res.data.genre_random1[1]
+        this.gr2_movies=res.data.genre_random2[1]
+      })
+    },
+    recommend(){
+      axios({
+        method:'get',
+        url:'http://127.0.0.1:8000/api/v1/recommendmovies/',
+        headers : {
+            Authorization: ` Token ${this.$store.state.token }`}
+      })
+      .then(res =>{
+        this.recommend_movies=res.data
+      })
+    }
   }
 }
 </script>

@@ -44,7 +44,16 @@ export default {
             const username = this.username
             const password1 = this.password1
             const password2 = this.password2
-
+            
+            if (!username) {
+              return alert('username이 입력되지 않았습니다.')
+            }
+            if (!password1 || !password2) {
+              return alert('password가 입력되지 않았습니다.')
+            }
+            if (password1!=password2) {
+              return alert('입력된 비밀번호가 다릅니다. 다시 확인해주세요')
+            }
             // 변수들 한번에 모아서
             const payload = {
                 username, password1, password2

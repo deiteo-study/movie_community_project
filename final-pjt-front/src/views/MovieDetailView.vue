@@ -82,7 +82,7 @@ export default {
   },
   created(){
     this.get_moviedata()
-    this.recommend()
+    // this.recommend()
     
   },
   methods:{

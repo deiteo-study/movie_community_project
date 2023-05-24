@@ -11,11 +11,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
 # Create your views here.
-# @api_view(['GET'])
-# def user(request):
-#     user=User.objects.filter(username=request.user)
-#     serializer=UserSerializer(data=user)
-#     return Response(serializer.data)
+@api_view(['GET'])
+def alluser(request):
+    users=User.objects.all()
+    usernames=[user.username for user in users]
+    return Response({'usernames':usernames})
 
 @api_view(['GET'])
 def get_name(request,userId):

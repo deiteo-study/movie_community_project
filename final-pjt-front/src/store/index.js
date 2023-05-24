@@ -94,8 +94,20 @@ export default new Vuex.Store({
         context.commit('MY_NAME',payload.username)
         context.state.startpage=0
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
+        axios(
+          {
+            method:'get',
+            url:'http://127.0.0.1:8000/accounts/alluser/'
+        })
+        .then(res => {
+          for (var i of res.data.usernames){
+            if (payload.username==i) {
+              return alert('이미 존재하는 username입니다')
+            }
+          }
+          return alert('규칙에 맞지않는 비밀번호입니다.')
+        })
       })
     },
     // 로그인 요청
@@ -110,7 +122,22 @@ export default new Vuex.Store({
         context.commit('MY_NAME',payload.username)
         context.state.startpage=0
       })
-      .catch((err) => console.log(err))
+      .catch(() => {
+        axios(
+          {
+            method:'get',
+            url:'http://127.0.0.1:8000/accounts/alluser/'
+        })
+        .then(res => {
+          for (var i of res.data.usernames){
+            if (payload.username==i) {
+              return alert('올바르지 않은 비밀번호입니다. 다시시도해주세요.')
+            }
+          }
+          return alert('존재하지 않는 username입니다.')
+        })
+
+      })
 
     },
     logout(context){

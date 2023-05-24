@@ -5,6 +5,12 @@ urlpatterns = [
     # 영화 한개 데이터 가져오기
     path('<int:movieId>/get_movie/', views.get_movie),
 
+    # 랜덤영화 10개 가져오기
+    path('random/',views.random),
+
+    # 사용자가 좋아요한 영화의 유사 영화 추천
+    path('recommendmovies/',views.recommendmovies),
+
     # 한개의 영화 모든 리뷰 가져오기
     path('<int:movieId>/get_reviews/', views.get_reviews),
 
@@ -30,6 +36,8 @@ urlpatterns = [
     path('<int:reviewId>/get_comments/', views.get_comments),
     # 영화추천
     path('<int:movieId>/recommend/', views.recommend),
+    # 영화 리뷰추가시 추천리스트 갱신
+    path('<int:movieId>/recommend_update/', views.recommend_update),
     # 리뷰의 댓글 생성
     path('<int:reviewId>/comment_create/', views.commentcreate),
 

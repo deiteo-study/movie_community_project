@@ -11,7 +11,7 @@ def start():
     scheduler.add_executor
     scheduler.add_job(
         mv_recommend,
-        trigger=CronTrigger(hour="16", minute="33"),
+        trigger=CronTrigger(hour="19", minute="02"),
         max_instances=1,
         name="DB_update(movie,genre)",
     )

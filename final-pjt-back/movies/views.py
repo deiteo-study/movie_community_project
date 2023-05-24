@@ -77,9 +77,44 @@ def get_movie(request,movieId):
         likes=True
     else:
         likes=False
-    serializer=MovieListSerializer(movie)
-    
+    serializer=MovieSerializer(movie)
     return Response({'data':serializer.data,'likes':likes})
+
+@api_view(['GET'])
+def random(request):
+    import random
+    movies=Movie.objects.all()
+    lst=[movies[i] for i in random.sample(range(0,len(movies)-1),10)]
+    serializers=MovieSerializer(lst,many=True)
+    genres=[12,14,16,18,27,28,35,36,37,53,80,99,878,9648,10402,10751,10752,10770]
+    random_genre=[]
+    for genre in random.sample(genres,2):
+        movies=Movie.objects.filter(genres=genre).order_by('-popularity')
+        if len(movies)>=10:
+            s=MovieSerializer(movies[0:10],many=True).data
+        else:
+            s=MovieSerializer(movies,many=True).data
+        g=Genre.objects.get(id=genre)
+        random_genre.append([g.name, s])
+        
+    return Response({'random':serializers.data,'genre_random1':random_genre[0],'genre_random2':random_genre[1]})
+
+@api_view(['GET'])
+def recommendmovies(request):
+    user=request.user
+    all=set()
+    for movie in user.like_movies.all():
+        if type(movie.recommend)==str:
+            all.update(movie.recommend.split(' '))
+    import random
+    if len(all)>10:
+        all=random.sample(all,10)
+    else:
+        all=list(all)
+    
+    movies=[Movie.objects.get(id=int(i)) for i in all]
+    serializers=MovieSerializer(movies,many=True)
+    return Response(serializers.data)
 
 # 리뷰작성하기
 @api_view(['POST'])
@@ -363,7 +398,42 @@ def recommend(request,movieId):
     seri=MovieSerializer(movies,many=True)
     return Response(seri.data)
 
+@api_view(['GET'])
+def recommend_update(request,movieId):
+    mv=Movie.objects.get(id=movieId)
+    po=Keywords.objects.get(movie=mv)
+    search=po.all_words.split(' ')
+    all_key=Keywords.objects.all()
 
+    import math
+    # 코사인 유사도 계산
+    def cosine_similarity(v1, v2):
+        dot_product = sum([a*b for a,b in zip(v1,v2)])
+        magnitude = math.sqrt(sum([a**2 for a in v1])) * math.sqrt(sum([b**2 for b in v2]))
+        if magnitude == 0:
+            return 0
+        else:
+            return dot_product / magnitude
+    lst=[]
+    for key in all_key:
+        if key==po:
+            continue
+        kw=key.all_words.split(' ')
+
+        keywords = set(search+kw)
+        vectorA=[1 if keyword in search else 0 for keyword in keywords]
+        vectorB=[1 if keyword in kw else 0 for keyword in keywords]
+        # 코사인 유사도 출력
+        if cosine_similarity(vectorA, vectorB)>0.3:
+            lst.append([key.movie, cosine_similarity(vectorA, vectorB)])
+    lst.sort(key=lambda x:-x[1])
+    movies=[l[0].id for l in lst]
+    mv.recommend=' '.join(map(str,movies))
+    mv.save()
+    return Response('추천 리스트 갱신')
+
+
+# 299534	어벤져스: 엔드게임 부터
 def mv_recommend():
     import math
     # 코사인 유사도 계산
@@ -378,6 +448,8 @@ def mv_recommend():
     movies=Movie.objects.all()
     all_key=Keywords.objects.all()
     for movie in movies:
+        if movie.id < 11011:
+            continue
         print('1')
         try:
             key=Keywords.objects.get(movie=movie)
