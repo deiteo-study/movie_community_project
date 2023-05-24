@@ -27,6 +27,7 @@
       <br>
       <hr>      
     </div>
+     <b>키워드 기반 유사영화 추천</b>
     <div class='fle' v-if='cc_movies'>
         <MovieItemView v-for="movie in cc_movies" :key="movie.id" :movie="movie"/>  
       </div>
@@ -82,7 +83,7 @@ export default {
   },
   created(){
     this.get_moviedata()
-    // this.recommend()
+    this.recommend()
     
   },
   methods:{
@@ -142,7 +143,7 @@ export default {
         url:`http://127.0.0.1:8000/api/v1/${this.movieId}/recommend/`
       })
       .then(res =>{
-        console.log(res.data)
+        // console.log(res.data)
         this.cc_movies=res.data
       })
     }
@@ -155,6 +156,7 @@ export default {
 <style scoped>
 .fle{
   display:flex;
+  overflow:scroll;
 }
 .wrap {
   display:flex;

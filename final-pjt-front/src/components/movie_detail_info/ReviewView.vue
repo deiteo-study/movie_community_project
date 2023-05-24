@@ -89,6 +89,7 @@ export default {
         .then(res=>{
           console.log(res)
           this.content=null
+          this.recommend_update()
           this.get_wordcloud()
         })
 
@@ -105,6 +106,15 @@ export default {
           }
         })
         .catch(() => console.log('wordcloud 로드 실패'))
+      },
+      recommend_update(){
+        axios({
+          method:'get',
+          url:`http://127.0.0.1:8000/api/v1/${this.movieId}/recommend_update/`,
+        })
+        .then(res => {
+          console.log(res)
+        })
       }
     } 
 }

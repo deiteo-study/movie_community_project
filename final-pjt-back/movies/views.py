@@ -366,37 +366,10 @@ def moviesearch(request):
 
 @api_view(['GET'])
 def recommend(request,movieId):
-    mv=Movie.objects.get(id=movieId)
-    po=Keywords.objects.get(movie=mv)
-    search=po.all_words.split(' ')
-    all_key=Keywords.objects.all()
-
-    
-    import math
-    # 코사인 유사도 계산
-    def cosine_similarity(v1, v2):
-        dot_product = sum([a*b for a,b in zip(v1,v2)])
-        magnitude = math.sqrt(sum([a**2 for a in v1])) * math.sqrt(sum([b**2 for b in v2]))
-        if magnitude == 0:
-            return 0
-        else:
-            return dot_product / magnitude
-    lst=[]
-    for key in all_key:
-        if key==po:
-            continue
-        kw=key.all_words.split(' ')
-
-        keywords = set(search+kw)
-        vectorA=[1 if keyword in search else 0 for keyword in keywords]
-        vectorB=[1 if keyword in kw else 0 for keyword in keywords]
-        # 코사인 유사도 출력
-        if cosine_similarity(vectorA, vectorB)>0.3:
-            lst.append([key.movie, cosine_similarity(vectorA, vectorB)])
-    lst.sort(key=lambda x:-x[1])
-    movies=[l[0] for l in lst]
-    seri=MovieSerializer(movies,many=True)
-    return Response(seri.data)
+    movie=Movie.objects.get(id=movieId)
+    movies=[Movie.objects.get(id=int(i)) for i in movie.recommend.split(' ')]
+    serializers=MovieSerializer(movies,many=True)
+    return Response(serializers.data)
 
 @api_view(['GET'])
 def recommend_update(request,movieId):

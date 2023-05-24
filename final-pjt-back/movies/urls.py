@@ -34,7 +34,7 @@ urlpatterns = [
 
     # 한개의 리뷰 모든 댓글 가져오기
     path('<int:reviewId>/get_comments/', views.get_comments),
-    # 영화추천
+    # 키워드 기반 추천 리스트업
     path('<int:movieId>/recommend/', views.recommend),
     # 영화 리뷰추가시 추천리스트 갱신
     path('<int:movieId>/recommend_update/', views.recommend_update),
