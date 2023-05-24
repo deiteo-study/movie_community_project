@@ -21,6 +21,7 @@
           <div class="col-8">
             <img class="mt-1" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
             <div class="modal-review">
+                <!-- <p>{{this.title}}</p> -->
                 <p class="name mb-1"  @click='move_profile'>{{name}}</p>
                 <hr>
                 <p v-if='!update' class="mb-2 modalcontent">{{review.content}}</p>
@@ -268,12 +269,13 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1200px;
-  height: 800px;
+  width: 1000px;
+  height: 700px;
   background: #fff;
   border-radius: 10px;
   padding: 8px 45px 20px 30px;
   box-sizing: border-box;
+  padding: 30px 65px 20px 65px;
   /* margin-top: 5px; */
 }
 .modal-review {
@@ -281,10 +283,11 @@ export default {
   margin-left: 10px;
 }
 .modalcontent {
-  height: 150px;
+  height: 250px;
   overflow-y: scroll;
   -ms-overflow-style: none;
-  margin-top: 10px;
+  margin-top: 40px;
+  padding: 10px 10px 10px 10px;
 }
 .modalcontent ::-webkit-scrollbar {
   display: none;
@@ -329,5 +332,32 @@ hr {
   border: none;
   background-color: rgb(245, 204, 204);
   border-radius: 0.7rem;
+}
+
+.modify-input{
+  border: solid 1px gray;
+  border-radius: 0.7rem;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 7px;
+}
+.modify-btn{
+  border: solid gray 1px;
+  border-radius: 0.7rem;
+  background-color: rgb(194, 195, 195);
+}
+.commentbox{
+  border: solid 0.5px rgb(235, 244, 255);
+  height: 330px;
+  width: 270px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  padding-top: 10px;
+}
+.col-8 {
+  margin-right: 35px;
 }
 </style>

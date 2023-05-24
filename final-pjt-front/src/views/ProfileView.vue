@@ -7,7 +7,7 @@
         <h2>My Profile</h2>
         <div>
         <img src="@/assets/user5.png" alt="home" style="width:170px; height:170px;" >
-        <span><p>followers: {{user.followers.length}}  | followings: {{user.followings.length}}</p></span>
+        <span><p class="follow">followers: {{user.followers.length}}  | followings: {{user.followings.length}}</p></span>
       </div>
       </div>
       
@@ -23,13 +23,13 @@
       </div>
       </div>
       <hr>
-      
-      <h5>☃︎{{username}}이 좋아한 영화</h5>
+      <br>
+      <h5>☃︎{{username}}이 좋아한 영화 🎞️</h5>
         <div class="box1">
           <p v-for="(lm,idx) in user.like_movies" :key='idx' class='add_cursor' @click='move_movie(lm.id)'>- {{lm.title}}</p>
         </div>
       
-      <h5>☃︎{{username}}이 좋아한 리뷰</h5>
+      <h5>☃︎{{username}}이 좋아한 리뷰 💌</h5>
         <div class="box2">
           <profileReviewItemView 
               v-for = "(review, index) in user.like_reviews" :key="index"
@@ -37,7 +37,7 @@
           <!-- <p v-for="(lr,idx) in user.like_reviews" :key='idx' class='add_cursor' @click='modalOpen(lm.id)'>- {{lr.content}}</p> -->
         </div>
       
-        <h5>☃︎{{username}}이 작성한 리뷰</h5>
+        <h5>☃︎{{username}}이 작성한 리뷰 💬</h5>
           <div class="box1">
             <profileReviewItemView 
               v-for = "(review, index) in user.write_reviews" :key="index"
@@ -45,7 +45,7 @@
             <!-- <p v-for="(wr,idx) in user.write_reviews" :key='idx' class='add_cursor' @click='move_review(lm.id)'>- {{wr.content}}</p> -->
         </div>
       
-        <h5>☃︎{{username}}이 작성한 댓글</h5>
+        <h5>☃︎{{username}}이 작성한 댓글 💬</h5>
           <div class="box2">
             <!-- serializer참조 -->
             <!--모달창을 바로 가져올 수 있는 자식을 만듦 하지만// 댓글의 경우, 이중구조(reviewview - comment)  -->
@@ -150,7 +150,7 @@ h5 {
   /* font-family: 'Hi Melody', cursive; */
   /* font-family: 'Sunflower', sans-serif; */
   text-align: left;
-  margin-left: 220px;
+  margin-left: 280px;
   margin-top: 5px;
 }
 
@@ -161,23 +161,30 @@ hr {
   width: 70%;
   margin: auto;
 }
+.follow {
+  font-size: 20px;
+}
 .box1 {
-  width: 70%;
+  width: 60%;
+  height: 90px;
   border: solid 1px rgb(172, 172, 201);
   border-radius: 0.7rem;
   margin: 10px auto 20px auto;
-  padding: 10px 20px;
+  padding: 15px 20px;
   text-align: left;
+  overflow: scroll;
   
 }
 
 .box2 {
-  width: 70%;
+  width: 60%;
+  height: 90px;
   border: none;
   border-radius: 0.7rem;
   background-color: rgb(232, 239, 246);
   margin: 10px auto 20px auto;
-  padding: 10px 20px;
+  padding: 15px 20px;
   text-align: left;
+  overflow: scroll;
 }
 </style>
