@@ -131,6 +131,12 @@ export default {
 </script>
 
 <style>
+body {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
+}
 .fix {
   position: fixed;
   right:30px;

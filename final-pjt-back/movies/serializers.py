@@ -28,7 +28,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Movie
-        exclude=('like_users',)
+        exclude=('like_users','recommend')
 
 # 리뷰 댓글
 class CommentSerializer(serializers.ModelSerializer):
