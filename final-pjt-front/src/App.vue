@@ -53,7 +53,7 @@
       </div>
       <div v-else>
         <router-view/>
-        <button class="mt-2" @click="change_home">홈으로</button>
+        <button class="mt-2 homebtn" @click="change_home">뒤로가기</button>
       </div>
     </div>
     <button v-if="$store.state.mode" class='rounded-circle fix' @click='themeChange'>Light</button>
@@ -194,7 +194,13 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
-
+.homebtn {
+  border: solid 2px gray;
+  border-radius: 0.7rem;
+  width: 70px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
 </style>
 
 <style scoped>

@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div class="main">
     <h1>LogIn Page</h1>
-    <h5>[나중에 꾸미기]</h5>
     <div class="loginform">
       <form @submit.prevent="trylogin">
         <label for="username">username : </label>
@@ -10,7 +9,7 @@
         <label for="password"> password : </label>
         <input type="password" id="password" v-model="password"><br>
         <br>
-        <input type="submit" value="logIn">
+        <button type="submit" value="logIn">login</button>
         <br>
       </form>  
     </div>
@@ -45,8 +44,12 @@ export default {
 h1{
   margin-top: 8%;
 }
+.main {
+  margin: 0 30%;
+  margin-top: 15%;
+}
 .loginform {
-  border: solid gray;
+  border: solid rgb(204, 206, 207) 1.5px;
   border-radius: 0.7rem;
   width: 500px;
   margin: 5% auto 0 auto;
@@ -54,5 +57,19 @@ h1{
   padding-bottom: 5px;
 
 }
-
+input{
+  border: solid 2px gray;
+  border-radius: 0.7rem;
+  width: 200px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+button{
+  border: none;
+  border-radius: 0.7rem;
+  width: 50px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background-color: antiquewhite;
+}
 </style>

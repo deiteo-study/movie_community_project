@@ -1,13 +1,14 @@
 <template>
   <div class="home">
     <div id="main">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  style="width:900px">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img :src="poster_url+now_playing[0]['backdrop_path']" class="d-block w-100" alt="...">
-            <h2>{{ now_playing[0]['title'] }}</h2>
+            <img class="d-block w-100" src="@/assets/movie1.png" alt="home" >
+            <!-- <img :src="poster_url+now_playing[0]['backdrop_path']" class="d-block w-100" alt="..."> -->
+            <!-- <h2>{{ now_playing[0]['title'] }}</h2> -->
           </div>
-          <div class="carousel-item">
+          <!-- <div class="carousel-item">
             <img :src="poster_url+now_playing[1]['backdrop_path']" class="d-block w-100" alt="...">
             <h2>{{ now_playing[1]['title'] }}</h2>
           </div>
@@ -22,7 +23,7 @@
           <div class="carousel-item">
             <img :src="poster_url+now_playing[4]['backdrop_path']" class="d-block w-100" alt="...">
             <h2>{{ now_playing[4]['title'] }}</h2>
-          </div>
+          </div> -->
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -131,6 +132,9 @@ export default {
 #carouselExampleControls{
   width: 1300px;
   margin: 0 auto;
+}
+img{
+
 }
 /* 
 #movie1{

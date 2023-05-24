@@ -1,13 +1,21 @@
 <template>
   <div>
     <div v-if="!check">
-      <h1>비밀번호 확인</h1>
-      <p>회원정보 수정을 위해 비밀번호를 입력해 주세요.</p>
-      <form @submit.prevent="password_check">
-        <label for="">비밀번호 : </label>
-        <input type="password" v-model="password" />
-        <button>확인</button>
-      </form>
+      
+      <div class="pw">
+        <h1>Check Password</h1>
+        <p>회원정보 수정을 위해 비밀번호를 입력해 주세요.</p>
+        <br>
+        <div class="form1">
+            <form class="form" @submit.prevent="password_check">
+                <label for="">PW : </label>
+                <input type="password" v-model="password" />
+                <button class="check"> 확인</button>
+            </form>
+        </div>
+            
+      </div>
+     
     </div>
     <div v-else>
         <h1>회원정보수정</h1>
@@ -27,7 +35,7 @@
                 <label for="">비밀번호 확인 : </label>
                 <input type="password" v-model="password2" @keyup.enter="change_password"/>
                 <br>
-                <button @click='change_password'>확인</button>
+                <button  class="check" @click='change_password'>확인</button>
             </div>
         </div>
         <button @click='accountdelete'>회원탈퇴</button>
@@ -123,5 +131,26 @@ export default {
     width: 80%;
     margin: 20px;
     padding: 50px;
+}
+.form{
+    top: 20px;
+    /* background-color: black; */
+    /* width: 500px;
+    margin: 10px auto 10px auto; */
+}
+input {
+    border: solid 2px rgb(217, 221, 223);
+    border-radius: 0.7rem;
+    width: 320px;
+}
+/* 확인 버튼 */
+.check{
+    border: none;
+    background-color: rgb(179, 224, 235);
+    border-radius: 0.7rem;
+    margin-left: 5px;
+}
+.pw {
+    margin-top: 30%;
 }
 </style>
