@@ -43,7 +43,7 @@
     <button type="button" class="btn" onclick = "location.href = '/movies/Fantasy' ">판타지</button>
     <button type="button" class="btn" onclick = "location.href = '/movies/Action' ">액션</button>
     <button type="button" class="btn" onclick = "location.href = '/movies/Crime' ">범죄</button>
-    <button type="button" class="btn" click = "location.href = '/movies/Thriller' ">스릴러</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/Thriller' ">스릴러</button>
     <button type="button" class="btn" onclick = "location.href = '/movies/Horror' ">공포</button>
     <button type="button" class="btn" onclick = "location.href = '/movies/Adventure' ">모험</button>
     <button type="button" class="btn" onclick = "location.href = '/movies/Animation' ">애니메이션</button>
