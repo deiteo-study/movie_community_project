@@ -50,7 +50,17 @@ export default {
           })
       },
       move_profile(){
-          this.$router.push( {name:'profile', params:{username:this.name}} )
+          if (this.$route.fullPath.slice(1,8)=='profile'){
+            if (this.name==this.$route.fullPath.slice(9)) {
+              this.$router.go()
+            }
+            else {
+              location.href=`/profile/${this.name}`
+            }
+          }
+          else{
+            this.$router.push( {name:'profile', params:{username:this.name}} )
+          }
         },
       comment_update(){
           const content=this.content

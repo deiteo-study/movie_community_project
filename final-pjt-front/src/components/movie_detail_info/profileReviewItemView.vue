@@ -172,10 +172,14 @@ export default {
       // document.body.classList.add('Notouch')
     },
     move_profile() {
-      this.$router.push({ name: "profile", params: { username: this.name } });
-    },
-    modify() {
-      this.update = true;
+      if (this.name==this.$store.state.my_name) {
+        this.$router.go()
+      }
+      else {
+         location.href=`/profile/${this.name}`
+        // this.$router.push({ name: "profile", params: { username: this.name } });
+      }
+      
     },
     review_update() {
       const content = this.review.content;
