@@ -170,6 +170,10 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  margin-left: 35px;
+  margin-right: 35px;
+}
 #main {
   margin-bottom:0px;
 }
