@@ -409,52 +409,51 @@ def recommend_update(request,movieId):
     return Response('추천 리스트 갱신')
 
 
-# 299534	어벤져스: 엔드게임 부터
-def mv_recommend():
-    import math
-    # 코사인 유사도 계산
-    def cosine_similarity(v1, v2):
-        dot_product = sum([a*b for a,b in zip(v1,v2)])
-        magnitude = math.sqrt(sum([a**2 for a in v1])) * math.sqrt(sum([b**2 for b in v2]))
-        if magnitude == 0:
-            return 0
-        else:
-            return dot_product / magnitude
+# def mv_recommend():
+#     import math
+#     # 코사인 유사도 계산
+#     def cosine_similarity(v1, v2):
+#         dot_product = sum([a*b for a,b in zip(v1,v2)])
+#         magnitude = math.sqrt(sum([a**2 for a in v1])) * math.sqrt(sum([b**2 for b in v2]))
+#         if magnitude == 0:
+#             return 0
+#         else:
+#             return dot_product / magnitude
         
-    movies=Movie.objects.all()
-    all_key=Keywords.objects.all()
-    for movie in movies:
-        if movie.id < 11011:
-            continue
-        print('1')
-        try:
-            key=Keywords.objects.get(movie=movie)
-        except:
-            continue
-        print('2')
-        search=key.all_words.split(' ')
-        lst=[]
-        for k in all_key:
-            if k!=key:
-                kw=k.all_words.split(' ')
+#     movies=Movie.objects.all()
+#     all_key=Keywords.objects.all()
+#     for movie in movies:
+#         if movie.id < 985939:
+#             continue
+#         print('1')
+#         try:
+#             key=Keywords.objects.get(movie=movie)
+#         except:
+#             continue
+#         print('2')
+#         search=key.all_words.split(' ')
+#         lst=[]
+#         for k in all_key:
+#             if k!=key:
+#                 kw=k.all_words.split(' ')
 
-                keywords = set(search+kw)
-                vectorA=[1 if keyword in search else 0 for keyword in keywords]
-                vectorB=[1 if keyword in kw else 0 for keyword in keywords]
-                # 코사인 유사도 출력
-                if cosine_similarity(vectorA, vectorB)>0.3:
-                    lst.append([k.movie, cosine_similarity(vectorA, vectorB)])
-                    print('3')
+#                 keywords = set(search+kw)
+#                 vectorA=[1 if keyword in search else 0 for keyword in keywords]
+#                 vectorB=[1 if keyword in kw else 0 for keyword in keywords]
+#                 # 코사인 유사도 출력
+#                 if cosine_similarity(vectorA, vectorB)>0.3:
+#                     lst.append([k.movie, cosine_similarity(vectorA, vectorB)])
+#                     print('3')
                 
-        lst.sort(key=lambda x:-x[1])
-        if len(lst)==0:
-            continue
-        elif len(lst)>10:
-            ids=[l[0].id for l in lst[0:10]]
-        else:
-            ids=[l[0].id for l in lst]
-        print(ids)
-        movie.recommend=' '.join(map(str,ids))
-        movie.save()
-        print('clear')
+#         lst.sort(key=lambda x:-x[1])
+#         if len(lst)==0:
+#             continue
+#         elif len(lst)>10:
+#             ids=[l[0].id for l in lst[0:10]]
+#         else:
+#             ids=[l[0].id for l in lst]
+#         print(ids)
+#         movie.recommend=' '.join(map(str,ids))
+#         movie.save()
+#         print('clear')
 
