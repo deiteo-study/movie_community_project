@@ -9,7 +9,7 @@
       <div class="search_div">
         <input type="text" id="serch"  placeholder="검색어를 입력해주세요 :)" v-model="serach_word" 
         @keyup.enter="serach_title">
-          <img src="./assets/magnify.png" alt="serch" style="width:18px; height:18px" > 
+          <img src="./assets/magnify.png" alt="serch" style="width:18px; height:18px" class='add_cursor' > 
       </div>
 
 

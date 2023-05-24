@@ -42,17 +42,17 @@
             <br>
             </div>
                 <div class="col-4">
-                  <form @submit.prevent="create_comment">
-                        <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
-                        <button class="btn2" type="submit">등록</button>
-                      </form>
-                      <hr>
+          
+                  <hr>
                   <div class="commentbox">
                   <CommentItemView
                     v-for = "(comment, index) in comments" :key="index"
                     :comment="comment"/>
                   </div>
-                 
+                      <form @submit.prevent="create_comment">
+                        <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
+                        <button class="btn2" type="submit">등록</button>
+                      </form>
                 </div>
          </div>
         </div>
