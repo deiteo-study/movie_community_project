@@ -6,9 +6,12 @@
       <router-link to="/home">
         <img src="./assets/home.png" alt="home" style="width:35px;" >
       </router-link>
-      <input type="text" name="" id="serch"  placeholder="검색어를 입력해주세요 :)" v-model="serach_word" 
-      @keyup.enter="$router.push({ name:'search',query:{title:serach_word} } ), serach_word=null">
-        <!-- <img src="./assets/magnify.png" alt="serch" style="width:18px; height:18px" >  -->
+      <div class="search_div">
+        <input type="text" id="serch"  placeholder="검색어를 입력해주세요 :)" v-model="serach_word" 
+        @keyup.enter="serach_title">
+          <img src="./assets/magnify.png" alt="serch" style="width:18px; height:18px" > 
+      </div>
+
 
       <div class="btn-group c">
         <img src="./assets/user.png" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" alt="profile" style="width:40px;" >
@@ -123,6 +126,18 @@ export default {
       document.body.classList.toggle('dark') 
       document.querySelector('#app').classList.toggle('text-white')
     },
+    serach_title(){
+      if (this.$route.fullPath.slice(1,7)=="search") {
+        this.$router.push({ name:'search',query:{title:this.serach_word} } )
+        this.serach_word=null
+        this.$router.go()
+      }
+      else{
+        this.$router.push({ name:'search',query:{title:this.serach_word} } )
+        this.serach_word=null
+      }
+
+    }
   }
 }
 
@@ -210,6 +225,9 @@ nav a.router-link-exact-active {
 </style>
 
 <style scoped>
+.search_div{
+  width:80%
+}
 input {
   width: 50%;
   height: 30px;

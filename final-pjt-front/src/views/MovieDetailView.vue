@@ -31,6 +31,9 @@
     <div class='fle' v-if='cc_movies'>
         <MovieItemView v-for="movie in cc_movies" :key="movie.id" :movie="movie"/>  
       </div>
+      <div v-else>
+        <p>리뷰가 부족해요.. ㅠㅠ</p>
+      </div>
     <br>
     <hr>
     

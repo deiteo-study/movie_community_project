@@ -1,6 +1,9 @@
 <template>
   <div>
-    <MovieItemView v-for='movie in movies' :key='movie.id' :movie='movie'/>
+    <h1>{{$route.query.title}} 의 검색 결과입니다.</h1>
+    <div class=main>
+        <MovieItemView v-for='movie in movies' :key='movie.id' :movie='movie'/>
+    </div>
   </div>
 </template>
 
@@ -38,6 +41,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.main {
+    display: flex;
+    /* overflow:auto */
+}
 </style>

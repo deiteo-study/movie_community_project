@@ -80,6 +80,10 @@
     <hr>
     <MovieListView :movies="popular_ten"/>
 
+    <p class="category">{{$store.state.my_name}}님의 맞춤 추천영화!</p>
+    <hr>
+    <MovieListView :movies="recommend_movies"/>
+    
     <p class="category">랜덤영화 출력 (뜻밖의 발견을 해보세요!)</p>
     <hr>
     <MovieListView :movies="random_movies"/>
@@ -92,9 +96,6 @@
     <hr>
     <MovieListView :movies="gr2_movies"/>
 
-    <p class="category">좋아요 기반 추천영화 10개 출력</p>
-    <hr>
-    <MovieListView :movies="recommend_movies"/>
 
     <hr>
   </div>
