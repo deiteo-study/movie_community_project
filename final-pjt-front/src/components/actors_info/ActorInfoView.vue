@@ -27,12 +27,12 @@ export default {
 
 <style scoped>
 div {
-    margin: auto;
+    margin: 0px auto;
 }
 img {
     width: 75px;
     height: 109px;
-    margin: 10px 26px;
+    margin: 0px 26px;
 }
 p {
     white-space:normal;

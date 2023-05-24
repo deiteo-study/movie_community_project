@@ -11,7 +11,7 @@
         <div class="movie_info" v-if="moviedata">
           <h2>{{ moviedata.title }}</h2>
           <div class='genres'>
-            <span v-for='(genre,idx) in moviedata.genres' :key='idx'>{{genre_list[genre]}}</span>
+            <button v-for='(genre,idx) in moviedata.genres' :key='idx'>{{genre_list[genre]}}</button>
           </div>
           <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️⭐️⭐️</p>
           <div class="btn1" @click="movielike"> 
@@ -21,17 +21,16 @@
             <p v-else class="bi bi-suit-heart-fill"></p> -->
           </div>
           <p>{{ moviedata.overview }}</p>
-          <h2>배우</h2>
+          <br>
+          <h4>출연 배우</h4>
           <div class="wrap">
           <ActorInfoView v-for="(actor,idx) in actors" :key="idx" :actor='actor' />
           </div>
         </div>
       </div>
-      
-      <br>
       <hr>      
     </div>
-     <b>키워드 기반 유사영화 추천</b>
+     <h4>'{{moviedata.title}}' 관련 영화 추천</h4>
     <div class='fle' v-if='cc_movies'>
         <MovieItemView v-for="movie in cc_movies" :key="movie.id" :movie="movie"/>  
       </div>
@@ -169,12 +168,14 @@ export default {
   margin: 20px 0px;
 
 }
-.genres span {
-  border:1px solid black;
-  margin:0 5px;
-  padding:10px;
+.genres button {
+  border:none;
+  margin-right: 10px;
+  /* padding:10px; */
+  height: 30px;
   border-radius: 0.7rem;
-  background-color:grey;
+  background-color:rgb(205, 205, 200);
+  /* padding: auto; */
 
 }
 .fle{
@@ -182,15 +183,18 @@ export default {
   overflow:scroll;
 }
 .wrap {
+  margin-top: 5px;
   display:flex;
   width:100%;
-  height:250px;
+  height:200px;
   white-space:nowrap;
 	overflow-x:scroll;
   overflow: auto;
 }
 .mainimg {
   margin-top: 10px;
+  border-radius: 0.8rem;
+  box-shadow: 10px 10px 2px 0px rgb(62, 61, 61);
 }
 a.router-link-exact-active {
   color: #42b983;
@@ -208,6 +212,9 @@ a.router-link-exact-active {
   width:85%;
   padding: 0 60px;
   text-align: left;;
+  /* border: none; */
+  margin: 0px 10px;
+  /* border-radius: 0.8rem; */
 }
 h2 {
   font-size: 30px;
@@ -218,7 +225,10 @@ h2 {
 #background{
   background-color: rgb(61, 65, 68);
   color: rgb(185, 211, 222);
-  padding-top: 10px;
+  padding: 30px 20px 12px 10px;
+  border: none;
+  margin: 0px 30px 7px 0px;
+  border-radius: 0.8rem;
 }
 .btn1{
   /* border: solid rgb(97, 114, 135); */
