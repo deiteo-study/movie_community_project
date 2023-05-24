@@ -23,7 +23,7 @@
             <div class='set_box'>
                 <h1>프로필 변경</h1>
                 <h3>공사중</h3>
-                <img src="@/assets/preparing.png" alt="">
+                <img src="@/assets/open.png" alt="">
             </div>
             <div class='set_box'>
                 <h1>비밀번호 변경</h1>

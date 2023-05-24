@@ -259,6 +259,7 @@ input::placeholder {
   font-size: 17px;
 }
 
+
 </style>
 
 <style scoped>
