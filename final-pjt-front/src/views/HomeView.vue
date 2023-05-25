@@ -96,7 +96,7 @@
         </div>
       </div>
       
-
+      <br>
       <div>
         <p class="category color">인기영화 Top10</p>
         <hr>
