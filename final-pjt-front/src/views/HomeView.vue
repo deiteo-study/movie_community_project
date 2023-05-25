@@ -102,19 +102,19 @@
         <hr>
         <MovieListView :movies="popular_ten"/>
       </div>
-      
+      <br>
       <div>
         <p class="category color2">이런 영화는 어떤가요?</p>
         <hr>
         <MovieListView :movies="random_movies"/>
-      </div>
-
+      </div>  
+      <br>
       <div>
         <p class="category color">{{gr1_name}} 장르 인기</p>
         <hr>
         <MovieListView :movies="gr1_movies"/>
       </div>
-
+      <br>
       <div>
         <p class="category color2">{{gr2_name}} 장르 인기</p>
         <hr>
