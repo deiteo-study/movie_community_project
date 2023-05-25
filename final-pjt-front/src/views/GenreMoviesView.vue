@@ -2,7 +2,7 @@
   <div>
     <h1>{{ genre }}</h1>
 
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+    <div class="btn-group " role="group" aria-label="Basic radio toggle button group">
       <input
         type="radio"
         class="btn-check"
@@ -227,6 +227,25 @@ ul {
   -webkit-user-select: none;
   user-select: none;
 }
+/* .page-link {
+  color: #000; 
+  background-color: #fff;
+  border: 1px solid #ccc; 
+}
+
+.page-link:focus, .page-link:hover {
+  color: #000;
+  background-color: #fafafa; 
+  border-color: #ccc;
+}
+.page-item.active .page-link {
+ z-index: 1;
+ color: #555;
+ font-weight:bold;
+ background-color: rgb(225, 245, 248);
+ border-color: #ccc;
+ 
+} */
 .f {
     /* display:flex; */
     justify-content: center;
