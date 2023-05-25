@@ -3,13 +3,18 @@
     <div id="main">
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  style="width:900px; height:550px;">
         <div class="carousel-inner">
-          <div class="carousel-item active" data-bs-interval="10000">
-            <img class="d-block w-100" src="@/assets/movie2.png" alt="home" >
+          <div class="carousel-item active"  data-bs-interval="10000">
+            <img class="d-block w-100 movie2" src="@/assets/main1.png" alt="home" >
             <!-- <img :src="poster_url+now_playing[0]['backdrop_path']" class="d-block w-100" alt="..."> -->
             <!-- <h2>{{ now_playing[0]['title'] }}</h2> -->
           </div>
-          <div class="carousel-item" data-bs-interval="10000">
-            <img class="d-block w-100 movie2" src="@/assets/movie4.png" alt="home">
+          <div class="carousel-item"  data-bs-interval="10000">
+            <img class="d-block w-100 movie2" src="@/assets/main3.png" alt="home">
+            <!-- <img :src="poster_url+now_playing[1]['backdrop_path']" class="d-block w-100" alt="...">
+            <h2>{{ now_playing[1]['title'] }}</h2> -->
+          </div>
+          <div class="carousel-item"  data-bs-interval="10000">
+            <img class="d-block w-100 movie2" src="@/assets/main2.png" alt="home">
             <!-- <img :src="poster_url+now_playing[1]['backdrop_path']" class="d-block w-100" alt="...">
             <h2>{{ now_playing[1]['title'] }}</h2> -->
           </div>
@@ -197,10 +202,20 @@ export default {
 }
 #carouselExampleControls{
   width: 1300px;
-  margin: 0 auto;
+  margin: 0 auto 10px auto;
+  
 }
-img{
-
+.movie2{
+   /* -webkit-box-reflect: below 0 linear-gradient(transparent, rgba(0,0,0,0), rgba(0,0,0,0.4)); */
+    /* box-shadow: 
+      inset 0 0 20px #0f0e0e ,
+      inset 0 0 20px #fff,
+      inset 0 0 20px #fff,
+      inset 0 0 20px #fff; */
+}
+.carousel-inner {
+  -webkit-box-reflect: below 0 linear-gradient(transparent, rgba(0,0,0,0), rgba(0,0,0,0.25));
+  
 }
 /* 
 #movie1{
@@ -209,7 +224,7 @@ img{
 
 } */
 button {
-  margin: 0 10px;
+  margin: 15px 10px;
   margin-bottom: 15px;
   /* font-family: 'Sunflower', sans-serif; */
 }
@@ -245,4 +260,5 @@ h2 {
   margin: 0px 5%;
   position: relative;
 }
+
 </style>
