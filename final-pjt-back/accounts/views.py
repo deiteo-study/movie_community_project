@@ -23,12 +23,6 @@ def get_name(request,userId):
     name=user.username
     return Response({'name':name})
 
-@api_view(['POST'])
-def password_check(request):
-    print(request.user)
-    print(request.data['password'])
-    return Response('d')
-
 @api_view(['GET'])
 def delete(request):
     user=get_object_or_404(User, username=request.user)

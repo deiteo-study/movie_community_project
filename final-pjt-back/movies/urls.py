@@ -29,9 +29,6 @@ urlpatterns = [
 
     path('<int:movieId>/wordcloud/', views.wordcloud),
 
-    # 한개의 영화 모든 리뷰 요청
-    path('<int:movieId>/review/', views.review),
-
     # 한개의 리뷰 모든 댓글 가져오기
     path('<int:reviewId>/get_comments/', views.get_comments),
     # 키워드 기반 추천 리스트업

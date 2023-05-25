@@ -50,8 +50,6 @@ def get_dbdata():
             except:
                 continue
 
-def get():
-    movies=Movie.objects.all()
 # 리뷰 가져오기...
 # def reviewpush():
 #     df=pd.read_csv('C:/Users/SSAFY/Desktop/data/review.csv')
@@ -129,22 +127,6 @@ def reviewcreate(request, movieId):
         serializer.save(user=user, movie=movie)
         return Response(serializer.data)
     return Response({'error':'저장 실패'})
-
-# 전역변수와 연결
-@api_view(['GET'])
-def review(request, movieId):
-    # (디테일페이지의) 영화에 해당하는 영화를 movie로 받고
-    
-    # 받아온 영화와 리뷰모델에 참조되어 있는 영화랑 동일한 것 뽑아오기 
-    # 리뷰가 없는 초기화 상태에서 404에러 발생 -> 리뷰가 있으면 가져오고, 없으면 빈 결과 출력(오류 수정)
-    try:
-        reviews = get_list_or_404(Review,movie_id=movieId)
-        # 데이터 전송
-        serializer = ReviewSerializer(reviews,many=True)
-        return Response(serializer.data)
-    except:
-        return Response({})
-
 
 @api_view(['get'])
 def get_reviews(request,movieId):
