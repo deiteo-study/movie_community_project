@@ -3,17 +3,17 @@
     <div id="main">
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  style="width:900px; height:550px;">
         <div class="carousel-inner">
-          <div class="carousel-item active"  data-bs-interval="10000">
+          <div class="carousel-item active"  data-bs-interval="8000">
             <img class="d-block w-100 movie2" src="@/assets/main1.png" alt="home" >
             <!-- <img :src="poster_url+now_playing[0]['backdrop_path']" class="d-block w-100" alt="..."> -->
             <!-- <h2>{{ now_playing[0]['title'] }}</h2> -->
           </div>
-          <div class="carousel-item"  data-bs-interval="10000">
+          <div class="carousel-item"  data-bs-interval="8000">
             <img class="d-block w-100 movie2" src="@/assets/main3.png" alt="home">
             <!-- <img :src="poster_url+now_playing[1]['backdrop_path']" class="d-block w-100" alt="...">
             <h2>{{ now_playing[1]['title'] }}</h2> -->
           </div>
-          <div class="carousel-item"  data-bs-interval="10000">
+          <div class="carousel-item"  data-bs-interval="8000">
             <img class="d-block w-100 movie2" src="@/assets/main2.png" alt="home">
             <!-- <img :src="poster_url+now_playing[1]['backdrop_path']" class="d-block w-100" alt="...">
             <h2>{{ now_playing[1]['title'] }}</h2> -->
@@ -85,16 +85,22 @@
     <br>
 
     <div>
+
+      <div>
+        <p class="category">{{$store.state.my_name}}님만을 위한 추천 영화!</p>
+        <hr>
+        <MovieListView v-if='recommend_movies && recommend_movies.length>0' :movies="recommend_movies"/>
+        <div v-else>
+          <h2>영화 추천을 위한 데이터가 없습니다 😢</h2>
+          <h4>{{$store.state.my_name}}님께 영화 추천을 위한 리뷰 혹은 좋아요를 남겨보세요!</h4>
+        </div>
+      </div>
+      
+
       <div>
         <p class="category">인기영화 Top10</p>
         <hr>
         <MovieListView :movies="popular_ten"/>
-      </div>
-      
-      <div v-if='recommend_movies'>
-        <p class="category">{{$store.state.my_name}}님이 좋아할 만한 추천 영화!</p>
-        <hr>
-        <MovieListView :movies="recommend_movies"/>
       </div>
       
       <div>
@@ -184,6 +190,7 @@ export default {
             Authorization: ` Token ${this.$store.state.token }`}
       })
       .then(res =>{
+        console.log(res.data)
         this.recommend_movies=res.data
       })
       .catch(()=>{})
