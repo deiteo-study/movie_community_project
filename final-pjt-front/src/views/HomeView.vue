@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div id="main">
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  style="width:900px">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  style="width:900px; height:550px;">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img class="d-block w-100" src="@/assets/movie2.png" alt="home" >
@@ -55,6 +55,7 @@
     <button type="button" class="btn" onclick = "location.href = '/movies/Music' ">음악</button>
     <button type="button" class="btn"  onclick = "location.href = '/movies/Family' ">가족</button>
     <button type="button" class="btn" onclick = "location.href = '/movies/War' ">전쟁</button>
+    <button type="button" class="btn" onclick = "location.href = '/movies/TV_Movie' ">TV 영화</button>
   </div>
     <!-- <button type="button" class="btn btn-outline-info fs-s" onclick = "location.href = '/movies/All' ">All</button>
     <button type="button" class="btn btn-outline-primary" onclick = "location.href = '/movies/Comedy' ">코미디</button>
@@ -78,25 +79,39 @@
     <!-- <button type="button" class="btn btn-outline-secondary" onclick = "location.href = '/movies/Romance' ">로맨스</button> -->
     <br>
 
-    <p class="category">인기영화 Top10</p>
-    <hr>
-    <MovieListView :movies="popular_ten"/>
+    <div>
+      <div>
+        <p class="category">인기영화 Top10</p>
+        <hr>
+        <MovieListView :movies="popular_ten"/>
+      </div>
+      
+      <div v-if='recommend_movies'>
+        <p class="category">{{$store.state.my_name}}님이 좋아할 만한 추천 영화!</p>
+        <hr>
+        <MovieListView :movies="recommend_movies"/>
+      </div>
+      
+      <div>
+        <p class="category">이런 영화는 어떤가요?</p>
+        <hr>
+        <MovieListView :movies="random_movies"/>
+      </div>
 
-    <p class="category">{{$store.state.my_name}}님이 좋아할 만한 추천 영화!</p>
-    <hr>
-    <MovieListView :movies="recommend_movies"/>
-    
-    <p class="category">이런 영화는 어떤가요?</p>
-    <hr>
-    <MovieListView :movies="random_movies"/>
+      <div>
+        <p class="category">{{gr1_name}} 장르 인기</p>
+        <hr>
+        <MovieListView :movies="gr1_movies"/>
+      </div>
 
-    <p class="category">{{gr1_name}} 장르 인기</p>
-    <hr>
-    <MovieListView :movies="gr1_movies"/>
-    
-    <p class="category">{{gr2_name}} 장르 인기</p>
-    <hr>
-    <MovieListView :movies="gr2_movies"/>
+      <div>
+        <p class="category">{{gr2_name}} 장르 인기</p>
+        <hr>
+        <MovieListView :movies="gr2_movies"/>
+      </div>
+    </div>
+
+
 
 
     <hr>
@@ -154,6 +169,7 @@ export default {
         this.gr1_movies=res.data.genre_random1[1]
         this.gr2_movies=res.data.genre_random2[1]
       })
+      .catch(()=>{})
     },
     recommend(){
       axios({
@@ -165,6 +181,7 @@ export default {
       .then(res =>{
         this.recommend_movies=res.data
       })
+      .catch(()=>{})
     }
   }
 }
@@ -225,7 +242,7 @@ h2 {
   margin-left: 10px;
 }
 .genrebtn{
-  margin: 0px 70px;
+  margin: 0px 5%;
+  position: relative;
 }
-
 </style>

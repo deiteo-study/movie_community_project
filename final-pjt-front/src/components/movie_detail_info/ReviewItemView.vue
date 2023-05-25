@@ -3,8 +3,21 @@
     <!-- 기본 리뷰창 -->
     <!-- 개별 리뷰 클릭시 모달창으로 -->
     <div class="review">
-      <p class="underline add_cursor" @click='move_profile'>작성자 : {{name}}</p>
+      <div class=" user">
+        <span class='add_cursor' @click='move_profile'>
+        <img src="@/assets/user4.png" alt="user3" style="width:30px; height:30px" >
+        {{name}}
+        </span>
+        <!-- 리뷰 좋아요 버튼 -->
+        <span v-if="!likes" @click="reviewlike" class="bi bi-suit-heart add_cursor">
+        </span>
+        <span v-else  @click="reviewlike" class="bi bi-suit-heart-fill add_cursor" ></span>
+        </div>
+        
       <!-- 구역 말고 리뷰 내용을 눌렀을때 모달창 등장 -->
+      <!-- <br> -->
+      <hr class='hd2'>
+      <!-- <hr> -->
       <p class="content add_cursor" @click="modalOpen">{{review.content}}</p>
       <!-- <input type="checkbox"> -->
       
@@ -19,7 +32,7 @@
             </div>
          <div class="d-flex flex-row">
           <div class="col-8">
-            <img class="mt-1" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
+            <img class="mt-1 writer" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
             <div class="modal-review">
                 <p class="name mb-1"  @click='move_profile'>{{name}}</p>
                 <hr>
@@ -35,7 +48,7 @@
                   </div>
                   <div v-else>
                     <button class="modify-btn" @click='review_update'>완료</button> |
-                    <button lass="modify" @click='update=false'>취소</button>
+                    <button class="modify" @click='update=false'>취소</button>
                   </div>
                 </div>
                 </div>
@@ -46,22 +59,16 @@
                   <div class="commentbox">
                   <CommentItemView @delete_react="get_comment"
                     v-for = "(comment, index) in comments" :key="index"
-                    :comment="comment" :update="false"/>
+                    :comment="comment" ref='childComponent' />
                   </div>
                   <br>
                       <form @submit.prevent="create_comment">
-                        <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
-                        <button class="btn2" type="submit">등록</button>
+                        <textarea class='btn1' v-model='content' placeholder="댓글을 작성해주세요 💬"></textarea>                        <button class="btn2" type="submit">등록</button>
                       </form>
                   </div>
          </div>
         </div>
        </div>
-<!-- 리뷰 좋아요 버튼 -->
-        <span @click="reviewlike"> 
-            <i v-if="!likes" class="bi bi-suit-heart add_cursor"></i>
-            <i v-else class="bi bi-suit-heart-fill add_cursor"></i>
-        </span>
     </div>
   </div>
   <div v-else>
@@ -140,6 +147,7 @@ export default {
             this.comments=res.data
             // console.log(res.data)
           })
+          .catch(()=>{})
         },
         create_comment(){
           if(!this.content) {
@@ -168,6 +176,11 @@ export default {
             this.get_comment()
             if (!this.modalCheck) {
               this.update=false
+              document.body.classList.remove('hd')
+              // console.log(this.$refs.childComponent())
+            }
+            else {
+              document.body.classList.add('hd')
             }
             // document.body.classList.add('Notouch')
         },
@@ -195,11 +208,13 @@ export default {
             
               this.$emit('delete_re1')
               this.$emit('delete_re2')
-            });
+            })
+            .catch(()=>{});
             this.review.content=this.new_content
             this.update=false
             
           })
+          .catch(()=>{})
         },
         review_delete(){
           axios({
@@ -222,8 +237,10 @@ export default {
               this.$emit('delete_react2')
               this.review=null
               alert('리뷰가 삭제되었습니다.')
-            });
+            })
+            .catch(()=>{});
           })
+          .catch(()=>{})
         },
         },
         
@@ -240,11 +257,13 @@ export default {
 <style scoped>
 /* 리뷰 한 칸씩 적용 */
 .review{
+    text-align: left;
     border: solid 1px rgb(221, 212, 212);
     border-radius: 0.9rem;
-    margin: 2px auto 5px auto;
-    padding: 10px 20px 0px 20px;
-    width: 70%;
+    margin: 5px auto;
+    padding: 10px 10px 0px 10px;
+    width: 95%;
+    
     /* font-family: 'Sunflower', sans-serif; */
     
 } 
@@ -254,6 +273,7 @@ export default {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    padding: 0 20px
 }
 
 .modal-wrap {
@@ -282,9 +302,10 @@ export default {
 .modal-review{
     text-align: left;
     margin-left: 10px;
+    /* height: 700px; */
 }
 .modalcontent{
-  height: 250px;
+  height: 400px;
   overflow-y: scroll;
   -ms-overflow-style: none;
   margin-top: 20px;
@@ -310,50 +331,70 @@ export default {
 
 }
 .btn1{
+    /* display:flex; */
     border-radius: 0.7rem;
     border: solid 1px rgb(177, 190, 200);
-    width: 250px;
-    padding-left: 20px;
+    width: 270px;
+    height: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    word-wrap:break-word;
+    /* overflow:auto; */
+
+    /* padding-left: 20px; */
 }
 .btn2{
     border-radius: 0.5rem;
     border: none;
     background-color: rgb(232, 239, 243);
     margin-left: 5px;
+    margin-top: 5px;
+  
 }
 hr {
-    width: 99%;
+    margin-left:20px;
+    margin-right:20px;
+}
+.hd .hd2 {
+    visibility: hidden;
 }
 .bi {
     color: rgb(219, 45, 74);
     height: 20px;
     width: 50px;
-    margin-left: 95%;
-    margin-bottom: 10px;
+    padding-top:5px
+    /* right:10px; */
+    /* margin-left: 95%; */
+    /* margin-bottom: 10px;  */
 }
 .modify{
   border: none;
   background-color: #ddf2f5;
   border-radius: 0.7rem;
+  
 }
 .delete {
   border: none;
   background-color: rgb(245, 204, 204);
   border-radius: 0.7rem;
+
 }
 .modify-input{
-  border: solid 1px gray;
+  border: none;
+  background-color: #e8eff0;
   border-radius: 0.7rem;
   width: 500px;
   height: 250px;
   margin-bottom: 7px;
   overflow: scroll;
+  padding: 10px;
 
 }
 .modify-btn{
-  border: solid gray 1px;
+  border: none;
+  background-color: #ddf2f5;
   border-radius: 0.7rem;
-  background-color: rgb(194, 195, 195);
 }
 .commentbox{
   border: solid 0.5px rgb(235, 244, 255);
@@ -365,11 +406,35 @@ hr {
   overflow-y: scroll;
   -ms-overflow-style: none;
   padding-top: 10px;
+  margin-top: 10px;
 }
 .col-8 {
-  margin-right: 35px;
+  box-sizing: border-box;
+  margin-right: 20px;
 }
 .col-4 {
-  margin-top: 65px;
+  margin-top: 75px;
+  /* margin-left: 20px; */
 }
+.dark .modal-wrap {
+  background: rgb(177, 190, 200,0.8);
+}
+.dark .modal-container {
+  background-color: #252525;
+}
+.writer {
+  margin-left: 48%;
+}
+</style>
+
+<style scoped>
+.user {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  padding: 0 10px;
+} 
+/* .d {
+  width: 100%;
+} */
 </style>

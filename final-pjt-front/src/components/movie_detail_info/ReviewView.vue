@@ -10,12 +10,12 @@
           :reviewId="String(review.id)"
         />
       </div>
-      <div  class='col-4'>
+      <div class='col-4'>
         <div v-if="!wordcloud">
         <h3>wordcloud를 생성할 리뷰가 없습니다. 리뷰를 작성해주세요</h3>
       </div>
       <div v-else>
-        <h5>WORD CLOUD</h5>
+        <h4>WORD CLOUD</h4>
         <img class="wordcloud" src="@/assets/wordcloud.png" />
       </div>
               <!-- 리뷰 작성 폼  -->
@@ -131,9 +131,12 @@ export default {
 <style scoped>
 .reviewbox {
   box-sizing: border-box;
+  /* width: ; */
   height: 800px;
   overflow: scroll;
   overflow-x:hidden;
+  margin: 0;
+  padding: 0;
   /* margin-right:15px; */
 }
 .main {

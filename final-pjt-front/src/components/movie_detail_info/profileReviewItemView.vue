@@ -24,12 +24,11 @@
           <div class="col-8">
             <img class="mt-1" src="@/assets/user4.png" alt="user3" style="width:35px; height:37px" >
             <div class="modal-review">
-                <!-- <p>{{this.title}}</p> -->
                 <p class="name mb-1"  @click='move_profile'>{{name}}</p>
                 <hr>
                 <p v-if='!update' class="mb-2 modalcontent">{{review.content}}</p>
                 <p v-else class="mb-2 modalcontent">
-                  <input class="modify-input" type="text" v-model='new_content' @keyup.enter="review_update">
+                  <textarea class="modify-input" type="text" v-model='new_content' @keyup.enter="review_update"></textarea>
                 </p>
                 <hr>
                 <div v-if='name==this.$store.state.my_name'>
@@ -43,25 +42,22 @@
                   </div>
                 </div>
                 </div>
-                
-                
-
             <br>
             </div>
                 <div class="col-4">
-                      <hr>
+                  <hr>
                   <div class="commentbox">
-                  <CommentItemView @delete_react="get_comment" @cu='cuu'
+                  <CommentItemView @delete_react="get_comment"
                     v-for = "(comment, index) in comments" :key="index"
-                    :comment="comment" :update="false" />
+                    :comment="comment" :update="false"/>
                   </div>
+                  <br>
                       <form @submit.prevent="create_comment">
                         <input class="btn1 mt-2" type="text" v-model='content' placeholder="댓글을 작성해주세요 💬"> 
                         <button class="btn2" type="submit">등록</button>
                       </form>
-                </div>
+                  </div>
          </div>
-
 
           <!-- <div>
             <form @submit.prevent="create_comment">
@@ -255,7 +251,7 @@ export default {
     border: solid 1px rgb(221, 212, 212);
     border-radius: 0.9rem;
     margin: 2px auto 5px auto;
-    padding: 15px 20px 0px 20px;
+    padding: 10px 20px 0px 20px;
     width: 70%;
     /* font-family: 'Sunflower', sans-serif; */
     
@@ -295,12 +291,17 @@ export default {
     text-align: left;
     margin-left: 10px;
 }
-.modalcontent {
+.modalcontent{
   height: 250px;
   overflow-y: scroll;
   -ms-overflow-style: none;
-  margin-top: 40px;
-  padding: 10px 10px 10px 10px;
+  margin-top: 20px;
+  padding: 5px 10px 10px 10px;
+  /* text-align: center; */
+  /* position: absolute; */
+  /* top: 50%; */
+  /* margin-top: -25px; */
+  
 }
 .modalcontent ::-webkit-scrollbar {
     display: none;
@@ -351,9 +352,11 @@ hr {
 .modify-input{
   border: solid 1px gray;
   border-radius: 0.7rem;
-  width: 300px;
-  height: 50px;
+  width: 500px;
+  height: 250px;
   margin-bottom: 7px;
+  overflow: scroll;
+
 }
 .modify-btn{
   border: solid gray 1px;
@@ -364,14 +367,20 @@ hr {
   border: solid 0.5px rgb(235, 244, 255);
   height: 330px;
   width: 270px;
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-top: 60px; */
+  margin-left: 10px;
+  margin-right: 10px;
   overflow-y: scroll;
   -ms-overflow-style: none;
   padding-top: 10px;
 }
 .col-8 {
   margin-right: 35px;
+}
+.col-4 {
+  margin-top: 65px;
+}
+img {
+  margin-left: 48%;
 }
 </style>

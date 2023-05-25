@@ -1,15 +1,17 @@
 <template>
-  <div class="comment-list" v-if='content'>
+  <div class="comment-list" v-if='comment'>
     <p class="commentitem" v-if='!update'><span class='add_cursor' @click='move_profile'>{{name}}</span> : {{content}}</p>
-    <p v-else><span class='add_cursor' @click='move_profile'>{{name}}</span> : <input type="text" v-model='content'></p>
+    <p v-else><span class='add_cursor' @click='move_profile'>{{name}}</span> : 
+    <br>
+    <input type="text" v-model='content'></p>
     <div v-if='name==this.$store.state.my_name'>
       <div v-if='!update'>
         <button class="modify1" @click='update=true'>수정</button> |
         <button class="delete1" @click='comment_delete'>삭제</button>
       </div>
       <div v-else>
-        <button @click='comment_update'>완료</button> |
-        <button class="modify" @click='update=false'>취소</button> 
+        <button class="delete" @click='comment_update'>완료</button> |
+        <button class="modify" @click='content=comment.content, update=false'>취소</button> 
       </div>
     </div>
     <hr>
@@ -26,7 +28,7 @@ export default {
     name: 'CommentItemView',
     props:{
       comment: Object,
-      // update:Boolean,
+  
     },
     data(){
       return{
@@ -40,7 +42,9 @@ export default {
       this.content=this.comment.content
     },
     methods: {
-      
+      abc(){
+        this.update=false
+      },
       get_name(){
         axios({
           method: 'get',
@@ -65,6 +69,9 @@ export default {
         },
       comment_update(){
           const content=this.content
+          if (content=='') {
+            return this.comment_delete()
+          }
           axios({
             method:'post',
             url:`http://127.0.0.1:8000/api/v1/${this.comment.id}/comment_update/`,
@@ -111,11 +118,13 @@ export default {
   border: none;
   background-color: #ddf2f5;
   border-radius: 0.7rem;
+  font-size: 13px;
 }
 .delete {
   border: none;
   background-color: rgb(245, 204, 204);
   border-radius: 0.7rem;
+  font-size: 13px;
 }
 .commentitem {
   margin-bottom: 4px;
@@ -131,5 +140,10 @@ export default {
   background-color: rgb(245, 204, 204);
   border-radius: 0.7rem;
   font-size: 13px;
+}
+input{
+  border:2px solid black;
+  border-radius: 0.7rem;
+  padding:0 10px
 }
 </style>

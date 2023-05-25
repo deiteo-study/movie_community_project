@@ -8,9 +8,9 @@
                 <!-- </div> -->
             </div>
             <!-- 카드 뒷면 -->
-            <div class="back"> 
+            <div class="card back img1" :style="{ backgroundImage : `url(${poster_url})`}" > 
                 <br>
-                <b class="cardtitle">{{ movie.title }}</b>  
+                <p class="cardtitle">{{ movie.title }}</p>  
                 <p class="cardtext">{{ movie.overview }}</p> 
             </div>
         </div>
@@ -77,6 +77,13 @@ img {
 .card-body {
     /* display: flex; */
 }
+.back p{
+    color: #e9e1cc;
+    /* text-align: center; */
+    /* line-height: 300px;   */
+    position: relative;
+    }
+
 .cardtext{
     white-space:normal;
     margin: 10px;    
@@ -84,8 +91,9 @@ img {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 7;
+    -webkit-line-clamp: 6;
     -webkit-box-orient: vertical;
+    color: rgb(238, 228, 213);
 }
 
 * {
@@ -101,12 +109,15 @@ img {
   height: 350px;
   position: relative; 
   perspective: 1100px;
-  margin: 2rem;
+  margin: 1rem 2rem;
+  margin-bottom: 0rem;
+
 }
 
 .card {
   /* width: 100%; 
   height: 100%;  */
+  margin-bottom: 0;
   width: 200px;
   height: 300px;
   position: relative;
@@ -125,16 +136,30 @@ img {
   color: #1f1f21;
 }
 
-.front {
-  /* background: tomato;  */
-}
-
 .back { 
-  /* background: rgb(38, 39, 42);  */
+  /* background: rgb(38, 39, 42, 0.8);  */
   transform: rotateY(180deg);
+  background-size: cover;
+/* opacity: 0.5; */
+padding-bottom: 20px;
 }
+.back::before{
+        content: "";
+        opacity: 0.8;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: #383737;
+    }
 
 .flip:hover .card {
   transform: rotateY(180deg);
 }
+.img2 {
+    /* background: rgba(142, 143, 146, 0.8);  */
+}
+
+
 </style>

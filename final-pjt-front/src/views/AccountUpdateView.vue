@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <div v-if="!check">
+    <div v-if="!check">
       
       <div class="pw">
         <h1>Check Password</h1>
@@ -16,9 +16,9 @@
             
       </div>
      
-    </div> -->
-    <!-- <div v-else> -->
-        <div>
+    </div>
+    <div v-else>
+        <div class='changediv'>
         <h1>회원정보수정</h1>
         <div class="ff">
             <div class='set_box'>
@@ -48,8 +48,10 @@
                 <button  class="check" @click='change_password'>확인</button>
             </div>
         </div>
+        <br>
         <button @click='accountdelete'>회원탈퇴</button>
     </div>
+  </div>
   </div>
 </template>
 
@@ -131,9 +133,12 @@ export default {
 </script>
 
 <style scoped>
+.changediv {
+    margin-top: 10%;
+}
 .ff {
     display: flex;
-    justify-content: space-between;
+    justify-content: center ;
     margin:0 10%
 }
 .set_box {

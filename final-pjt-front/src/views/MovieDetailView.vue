@@ -11,9 +11,9 @@
         <div class="movie_info" v-if="moviedata">
           <h2>{{ moviedata.title }}</h2>
           <div class='genres'>
-            <button v-for='(genre,idx) in moviedata.genres' :key='idx'>{{genre_list[genre]}}</button>
+            <button v-for='(genre,idx) in moviedata.genres' :key='idx' @click='move_genre(genre)'>{{genre_list[genre]}}</button>
           </div>
-          <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️⭐️⭐️</p>
+          <p id="score">관객 평점: {{ moviedata.vote_average }}  ⭐️</p>
           <div class="btn1" @click="movielike"> 
             <span v-if="!likes" class="bi add_cursor">🤍</span>
             <span v-else class="bi add_cursor">💖</span>
@@ -96,6 +96,66 @@ export default {
     
   },
   methods:{
+    move_genre(genre){
+      if (genre==12){
+        this.$router.push({name:'genremovies', params:{genre:'Adventure'}})
+      }
+      else if (genre==14) {
+        this.$router.push({name:'genremovies', params:{genre:'Fantasy'}})
+      }
+      else if (genre==16) {
+        this.$router.push({name:'genremovies', params:{genre:'Animation'}})
+      }
+      else if (genre==18) {
+        this.$router.push({name:'genremovies', params:{genre:'Drama'}})
+      }
+      else if (genre==27) {
+        this.$router.push({name:'genremovies', params:{genre:'Horror'}})
+      }
+      else if (genre==28) {
+        this.$router.push({name:'genremovies', params:{genre:'Action'}})
+      }
+      else if (genre==35) {
+        this.$router.push({name:'genremovies', params:{genre:'Comedy'}})
+      }
+      else if (genre==36) {
+        this.$router.push({name:'genremovies', params:{genre:'History'}})
+      }
+      else if (genre==37) {
+        this.$router.push({name:'genremovies', params:{genre:'Western'}})
+      }
+      else if (genre==53) {
+        this.$router.push({name:'genremovies', params:{genre:'Thriller'}})
+      }
+      else if (genre==80) {
+        this.$router.push({name:'genremovies', params:{genre:'Crime'}})
+      }
+      else if (genre==99) {
+        this.$router.push({name:'genremovies', params:{genre:'Documentary'}})
+      }
+      else if (genre==878) {
+        this.$router.push({name:'genremovies', params:{genre:'ScienceFiction'}})
+      }
+      else if (genre==9648) {
+        this.$router.push({name:'genremovies', params:{genre:'Mystery'}})
+      }
+      else if (genre==10402) {
+        this.$router.push({name:'genremovies', params:{genre:'Music'}})
+      }
+      // else if (genre==10749) {
+      //   this.$router.push({name:'genremovies', params:{genre:'Fantasy'}})
+      // }
+      else if (genre==10751) {
+        this.$router.push({name:'genremovies', params:{genre:'Family'}})
+      }
+      else if (genre==10752) {
+        this.$router.push({name:'genremovies', params:{genre:'War'}})
+      }
+      else if (genre==10770) {
+        this.$router.push({name:'genremovies', params:{genre:'TV_Movie'}})
+      }
+
+    },
     get_moviedata(){
       const movieId=this.movieId
       axios({
@@ -152,8 +212,12 @@ export default {
         url:`http://127.0.0.1:8000/api/v1/${this.movieId}/recommend/`
       })
       .then(res =>{
-        // console.log(res.data)
-        this.cc_movies=res.data
+        if (res.data!=false) {
+          this.cc_movies=res.data
+        }
+      })
+      .catch(()=>{
+
       })
     }
   },

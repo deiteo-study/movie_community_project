@@ -44,7 +44,9 @@ export default {
 
 <style scoped>
 .main {
-    display: flex;
-    /* overflow:auto */
+    display:flex;
+  flex-flow : row wrap;
+  margin: 0 auto;
+    justify-content: center;
 }
 </style>

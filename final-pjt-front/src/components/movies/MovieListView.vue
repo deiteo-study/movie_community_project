@@ -35,6 +35,7 @@ export default {
   display:flex;
 	overflow:scroll;
   /* margin-right: 5px; */
+  overflow-y:hidden;
 }
 
 

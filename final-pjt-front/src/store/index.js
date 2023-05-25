@@ -108,7 +108,9 @@ export default new Vuex.Store({
           }
           return alert('규칙에 맞지않는 비밀번호입니다.')
         })
+        .catch(()=>{})
       })
+      
     },
     // 로그인 요청
     login(context, payload){
@@ -136,6 +138,7 @@ export default new Vuex.Store({
           }
           return alert('존재하지 않는 username입니다.')
         })
+        .catch(()=>{})
 
       })
 
@@ -167,6 +170,7 @@ export default new Vuex.Store({
         console.log(res)
         context.dispatch('logout')
       })
+      .catch(()=>{})
     },
   },
   modules: {

@@ -143,6 +143,9 @@ export default {
 </script>
 
 <style>
+hd {
+  
+}
 body {
   -webkit-user-select:none;
   -moz-user-select:none;
@@ -177,6 +180,7 @@ body {
   color: #2c3e50;
   font-family: 'Do Hyeon', sans-serif;
   /* font-family: 'Sunflower', sans-serif; */
+  margin-bottom: 5%;
 }
 
 .dark {

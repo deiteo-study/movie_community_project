@@ -6,7 +6,7 @@
       <div v-if='me'>
         <h2>My Profile</h2>
         <div>
-        <img src="@/assets/user5.png" alt="home" style="width:170px; height:170px;" >
+        <img src="@/assets/user.png" alt="home" style="width:170px; height:170px;" >
         <span><p class="follow">followers: {{user.followers.length}}  | followings: {{user.followings.length}}</p></span>
       </div>
       </div>
@@ -40,7 +40,7 @@
         <h5>☃︎{{username}}이 작성한 리뷰 💬</h5>
           <div class="box1">
             <profileReviewItemView  @cuuu='cuuuu'
-              v-for = "(review, index) in user.write_reviews" :key="index"
+              v-for = "(review, index) in user.write_reviews.slice" :key="index"
               :reviewId="String(review.id)" num='0'/>
             <!-- <p v-for="(wr,idx) in user.write_reviews" :key='idx' class='add_cursor' @click='move_review(lm.id)'>- {{wr.content}}</p> -->
         </div>
@@ -169,19 +169,20 @@ hr {
 }
 .box1 {
   width: 60%;
-  height: 90px;
+  height: 250px;
   border: solid 1px rgb(172, 172, 201);
   border-radius: 0.7rem;
   margin: 10px auto 20px auto;
   padding: 15px 20px;
   text-align: left;
   overflow: scroll;
+  overflow-x: hidden;
   
 }
 
 .box2 {
   width: 60%;
-  height: 90px;
+  height: 250px;
   border: none;
   border-radius: 0.7rem;
   background-color: rgb(232, 239, 246);
@@ -189,5 +190,6 @@ hr {
   padding: 15px 20px;
   text-align: left;
   overflow: scroll;
+    overflow-x: hidden;
 }
 </style>
