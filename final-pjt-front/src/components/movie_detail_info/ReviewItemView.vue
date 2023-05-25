@@ -25,7 +25,7 @@
                 <hr>
                 <p v-if='!update' class="mb-2 modalcontent">{{review.content}}</p>
                 <p v-else class="mb-2 modalcontent">
-                  <textarea class="modify-input" type="text" v-model='review.content' @keyup.enter="review_update"></textarea>
+                  <textarea class="modify-input" type="text" v-model='new_content' @keyup.enter="review_update"></textarea>
                 </p>
                 <hr>
                 <div v-if='name==this.$store.state.my_name'>
@@ -59,8 +59,8 @@
        </div>
 <!-- 리뷰 좋아요 버튼 -->
         <span @click="reviewlike"> 
-            <i v-if="!likes" class="bi bi-suit-heart"></i>
-            <i v-else class="bi bi-suit-heart-fill"></i>
+            <i v-if="!likes" class="bi bi-suit-heart add_cursor"></i>
+            <i v-else class="bi bi-suit-heart-fill add_cursor"></i>
         </span>
     </div>
   </div>
@@ -94,7 +94,8 @@ export default {
             // 초기값 false로 모달창 숨겨 주는 변수 선언
             // true(보일때), false(보이지 않을 때)
             modalCheck: false,
-            update:false
+            update:false,
+            new_content:null,
         }
     },
     created(){
@@ -163,6 +164,7 @@ export default {
         modalOpen(){
             // this.modalOpen=true
             this.modalCheck = !this.modalCheck
+            this.new_content=this.review.content
             this.get_comment()
             if (!this.modalCheck) {
               this.update=false
@@ -173,16 +175,30 @@ export default {
           this.$router.push( {name:'profile', params:{username:this.name}} )
         },
         review_update(){
-          const content=this.review.content
+          // const content=this.review.content
+          const new_content=this.new_content
+          // console.log(content,new_content)
           axios({
             method:'post',
             url:`http://127.0.0.1:8000/api/v1/${this.reviewId}/review_update/`,
-            data:{content,},
+            data:{new_content},
             headers : {
               Authorization: ` Token ${this.$store.state.token }`}
           })
           .then(() =>{
+            // axios({
+            //   method: "PUT",
+            //   url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
+            //   data: { content,new_content },
+            // }).then((res) => {
+            //   console.log(res);
+            //   this.content = null;
+            //   this.recommend_update();
+            //   this.get_wordcloud();
+            // });
+            this.review.content=this.new_content
             this.update=false
+            
           })
         },
         review_delete(){
@@ -193,11 +209,25 @@ export default {
               Authorization: ` Token ${this.$store.state.token }`}
           })
           .then(() =>{
+            // const content=this.review.content
+            // const new_content=false
+            // axios({
+            //   method: "PUT",
+            //   url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
+            //   data: { content,new_content},
+            // }).then((res) => {
+            //   console.log(res);
+            //   // this.content = null;
+            //   // this.$emit(this.recommend_update())
+            //   // this.$emit(this.recommend_update())
+            //   // this.recommend_update();
+            //   // this.get_wordcloud();
+            // });
             this.modalCheck=false
             this.review=null
             alert('리뷰가 삭제되었습니다.')
           })
-        }
+        },
         },
         
     }

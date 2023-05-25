@@ -129,9 +129,9 @@ export default {
   },
   created(){
     // 현재 상영중인 영화 5개 뽑아오기
-    this.$store.commit('now_playing')
+    // this.$store.commit('now_playing')
     this.$store.commit('popular_ten')
-    this.now_playing=this.$store.state.now_playing
+    // this.now_playing=this.$store.state.now_playing
     this.popular_ten=this.$store.state.popular_ten
     this.random_movie()
     this.recommend()

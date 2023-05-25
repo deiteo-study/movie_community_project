@@ -130,8 +130,11 @@ export default {
 
 <style scoped>
 .reviewbox {
+  box-sizing: border-box;
   height: 800px;
   overflow: scroll;
+  overflow-x:hidden;
+  /* margin-right:15px; */
 }
 .main {
   display:flex;

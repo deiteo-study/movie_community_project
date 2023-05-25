@@ -30,31 +30,31 @@ export default new Vuex.Store({
     MODE(state){
       state.mode=!state.mode
     },
-    now_playing(state){
-      axios({
-        method:'get',
-        url : 'https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=1&api_key=5dcc6dd1aa73987866c715e255d2af47'
-      })
-      .then(res=>{
-        state.now_playing=res.data.results.slice(0,10)
-        // 상세정보로 무언가 트라이할거면 밑에 코드로...
-        // state.now_playing=[]
-        // res.data.results.slice(0,5).forEach(element => {
-        //   axios({
-        //     method:'get',
-        //     url:`https://api.themoviedb.org/3/movie/${element['id']}?language=ko-KR&api_key=5dcc6dd1aa73987866c715e255d2af47`
-        //   })
-        //   .then(res=>{
-        //     state.now_playing.push(res.data)
-        //     console.log(state.now_playing)
-        //   })
-        //   .catch(err=>console.log(err))
-        // });
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    },
+    // now_playing(state){
+    //   axios({
+    //     method:'get',
+    //     url : 'https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=1&api_key=5dcc6dd1aa73987866c715e255d2af47'
+    //   })
+    //   .then(res=>{
+    //     state.now_playing=res.data.results.slice(0,10)
+    //     // 상세정보로 무언가 트라이할거면 밑에 코드로...
+    //     // state.now_playing=[]
+    //     // res.data.results.slice(0,5).forEach(element => {
+    //     //   axios({
+    //     //     method:'get',
+    //     //     url:`https://api.themoviedb.org/3/movie/${element['id']}?language=ko-KR&api_key=5dcc6dd1aa73987866c715e255d2af47`
+    //     //   })
+    //     //   .then(res=>{
+    //     //     state.now_playing.push(res.data)
+    //     //     console.log(state.now_playing)
+    //     //   })
+    //     //   .catch(err=>console.log(err))
+    //     // });
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+    // },
 
     popular_ten(state){
       axios({

@@ -30,7 +30,7 @@
       </div>
       <hr>      
     </div>
-     <h4>'{{moviedata.title}}' 관련 영화 추천</h4>
+     <h4 v-if='moviedata'>'{{moviedata.title}}' 관련 영화 추천</h4>
     <div class='fle' v-if='cc_movies'>
         <MovieItemView v-for="movie in cc_movies" :key="movie.id" :movie="movie"/>  
       </div>

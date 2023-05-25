@@ -263,9 +263,8 @@ from konlpy.tag import Okt
 
 # from sklearn.feature_extraction.text import TfidfVectorizer
 
-@api_view(['POST'])
+@api_view(['POST','PUT','DELETE'])
 def keyword(request,movieId):
-    review=request.data['content']
     okt = Okt()    
     def preprocess(text):
         # 특수문자 제거
@@ -276,20 +275,47 @@ def keyword(request,movieId):
         stopwords = ['은', '는', '이', '가', '을', '를', '의', '에', '도', '와', '과', '으로', '로', '에서', '에게', '한', '하다','이고','영화','뭔가']
         tokens = [token for token in tokens if token not in stopwords and len(token)>1]
         return tokens
+    if request.method=='POST':
+        review=request.data['content']
 
-    word=preprocess(review)
-    movie=Movie.objects.get(id=movieId)
-    try:
-        keywords=Keywords.objects.get(movie=movie)
-        new=list(keywords.all_words.split(' '))+word
-        keywords.all_words = ' '.join(new)
-        keywords.save()
-        return Response('추가완료')
-    except:
-        keywords=Keywords.objects.create(movie=movie,all_words=' '.join(word))
-        keywords.save()
-        return Response('완료')
-    
+        word=preprocess(review)
+        movie=Movie.objects.get(id=movieId)
+        try:
+            keywords=Keywords.objects.get(movie=movie)
+            new=list(keywords.all_words.split(' '))+word
+            keywords.all_words = ' '.join(new)
+            keywords.save()
+            return Response('추가완료')
+        except:
+            keywords=Keywords.objects.create(movie=movie,all_words=' '.join(word))
+            keywords.save()
+            return Response('완료')
+    else:
+        if not request.data['new_content']:
+            review=request.data['content']
+            word=preprocess(review)
+            find=' '.join(word)
+            movie=Movie.objects.get(id=movieId)
+            keywords=Keywords.objects.get(movie=movie)
+            cc=keywords.all_words
+            cc.replace(find,'',1)
+            keywords.all_words=cc
+            keywords.save()
+            return Response('키워드 삭제완료')
+        else:
+            review=request.data['content']
+            new_review=request.data['new_content']
+            word=preprocess(review)
+            new_word=preprocess(new_review)
+            find=' '.join(word)
+            push=' '.join(new_word)
+            movie=Movie.objects.get(id=movieId)
+            keywords=Keywords.objects.get(movie=movie)
+            cc=keywords.all_words
+            cc.replace(find,push,1)
+            keywords.all_words=cc
+            keywords.save()
+            return Response('키워드 수정완료')
 
 @api_view(['get'])
 def wordcloud(request,movieId):
@@ -315,7 +341,7 @@ def wordcloud(request,movieId):
 def reviewupdate(request,reviewId):
     review=Review.objects.get(id=reviewId)
     if request.method=='POST':
-        review.content=request.data['content']
+        review.content=request.data['new_content']
         review.save()
         return Response('수정완료')
     else:
