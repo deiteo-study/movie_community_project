@@ -29,7 +29,14 @@ export default {
       trylogin() {
         const username = this.username
         const password = this.password
-
+        if (!username) {
+          alert('username을 입력해주세요')
+          return
+        }
+        else if (!password) {
+          alert('password를 입력해주세요')
+          return
+        }
         const payload = {
           username, password
         }

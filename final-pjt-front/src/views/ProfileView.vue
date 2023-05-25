@@ -6,7 +6,7 @@
       <div v-if='me'>
         <h2>My Profile</h2>
         <div>
-        <img src="@/assets/user.png" alt="home" style="width:170px; height:170px;" >
+        <img src="@/assets/user5.png" alt="home" style="width:170px; height:170px;" >
         <span><p class="follow">followers: {{user.followers.length}}  | followings: {{user.followings.length}}</p></span>
       </div>
       </div>
@@ -16,10 +16,12 @@
         <div>
           <img src="@/assets/user5.png" alt="home" style="width:170px; height:170px;" >
           <br>
-          <button @click='follow'>
-            <span v-if='!now_follow'>follow</span>
-            <span v-else>follow X</span>
-          </button>
+          <div v-if='!now_follow' class='fol' @click='follow'>
+            Follow
+          </div>
+          <div class='unfol' @click='follow' v-else>
+           Unfollow
+          </div>
       </div>
       </div>
       <hr>
@@ -147,6 +149,34 @@ export default {
 </script>
 
 <style scoped>
+.fol{
+  cursor: pointer;
+  border-radius: 0.7rem;
+  border: solid 2px white;
+  padding: 5px;
+  margin: 20px 48%;
+  background-color: #65aae9;
+  color:white;
+}
+.fol:hover {
+  background-color: white;
+  color:#65aae9;
+  border: solid 2px #65aae9;
+}
+.unfol{
+  cursor: pointer;
+  border-radius: 0.7rem;
+  border: solid 2px #65aae9;
+  padding: 5px;
+  margin: 20px 48%;
+  background-color: white;
+  color:#65aae9
+}
+.unfol:hover {
+  background-color: #65aae9;
+  color:white;
+  border: solid 2px white;
+}
 .poster {
   display: grid;
   grid-template-columns: repeat(8,1fr);

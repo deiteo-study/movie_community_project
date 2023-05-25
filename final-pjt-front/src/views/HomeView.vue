@@ -3,12 +3,12 @@
     <div id="main">
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  style="width:900px; height:550px;">
         <div class="carousel-inner">
-          <div class="carousel-item active">
+          <div class="carousel-item active" data-bs-interval="10000">
             <img class="d-block w-100" src="@/assets/movie2.png" alt="home" >
             <!-- <img :src="poster_url+now_playing[0]['backdrop_path']" class="d-block w-100" alt="..."> -->
             <!-- <h2>{{ now_playing[0]['title'] }}</h2> -->
           </div>
-          <div class="carousel-item">
+          <div class="carousel-item" data-bs-interval="10000">
             <img class="d-block w-100 movie2" src="@/assets/movie4.png" alt="home">
             <!-- <img :src="poster_url+now_playing[1]['backdrop_path']" class="d-block w-100" alt="...">
             <h2>{{ now_playing[1]['title'] }}</h2> -->
