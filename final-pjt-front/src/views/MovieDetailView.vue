@@ -30,12 +30,14 @@
       </div>
       <hr>      
     </div>
-     <h4 v-if='moviedata'>'{{moviedata.title}}' 관련 영화 추천</h4>
+    <br>
+     <h3 v-if='moviedata'>'{{moviedata.title}}' 관련 영화 추천</h3>
     <div class='fle' v-if='cc_movies'>
         <MovieItemView v-for="movie in cc_movies" :key="movie.id" :movie="movie"/>  
       </div>
       <div v-else>
-        <p>리뷰가 부족해요.. ㅠㅠ</p>
+        <p>추천영화를 찾을 리뷰가 부족해요.. ㅠㅠ</p>
+        <p>여러분의 리뷰를 남겨보세요!</p>
       </div>
     <br>
     <hr>
@@ -245,6 +247,8 @@ export default {
 .fle{
   display:flex;
   overflow:scroll;
+  overflow-y:hidden;
+  margin:0 2%
 }
 .wrap {
   margin-top: 5px;
@@ -265,7 +269,7 @@ a.router-link-exact-active {
 }
 .movie_detail {
   display:flex;
-    margin: 0 100px;
+  margin: 0 80px;
   /* border: 1px solid black; */
 }
 
@@ -291,7 +295,7 @@ h2 {
   color: rgb(185, 211, 222);
   padding: 30px 20px 12px 10px;
   border: none;
-  margin: 0px 30px 7px 0px;
+  margin: 0px 10px;
   border-radius: 0.8rem;
 }
 .btn1{
