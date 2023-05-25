@@ -51,7 +51,7 @@
                 <div class="col-4">
                       <hr>
                   <div class="commentbox">
-                  <CommentItemView
+                  <CommentItemView @delete_react="get_comment" @cu='cuu'
                     v-for = "(comment, index) in comments" :key="index"
                     :comment="comment" :update="false" />
                   </div>
@@ -114,6 +114,9 @@ export default {
     this.get_review();
   },
   methods: {
+    cuu(){
+      this.$emit('cuuu')
+    },
     get_review() {
       const reviewId = this.reviewId;
       axios({
@@ -142,6 +145,7 @@ export default {
     },
     // 리뷰아이디를 기준으로 댓글 가져오기
     get_comment() {
+      // console.log(d)
       const reviewId = this.reviewId;
       axios({
         method: "get",
@@ -167,6 +171,7 @@ export default {
           .then(() => {
             this.content = null;
             this.get_comment();
+            this.cuu()
           })
           .catch((err) => console.log(err));
       }
@@ -202,17 +207,15 @@ export default {
           Authorization: ` Token ${this.$store.state.token}`,
         },
       }).then(() => {
+        const content=this.review.content
+        const new_content=this.new_content
+        axios({
+              method: "PUT",
+              url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
+              data: { content,new_content },
+            }).then(() => {
+            });
         this.review.content=this.new_content
-        // axios({
-        //       method: "PUT",
-        //       url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
-        //       data: { content,new_content },
-        //     }).then((res) => {
-        //       console.log(res);
-        //       this.content = null;
-        //       this.recommend_update();
-        //       this.get_wordcloud();
-        //     });
         this.update = false;
       });
     },
@@ -224,21 +227,18 @@ export default {
           Authorization: ` Token ${this.$store.state.token}`,
         },
       }).then(() => {
-        // const content=this.review.content
-        // const new_content=false
-        // axios({
-        //       method: "PUT",
-        //       url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
-        //       data: { content,new_content },
-        //     }).then((res) => {
-        //       console.log(res);
-        //       this.content = null;
-        //       this.recommend_update();
-        //       this.get_wordcloud();
-        //     });
-        this.modalCheck = false;
-        this.review = null;
-        alert("리뷰가 삭제되었습니다.");
+        const content=this.review.content
+        const new_content=false
+        axios({
+              method: "PUT",
+              url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
+              data: { content,new_content },
+            }).then(() => {
+              this.modalCheck=false
+              this.$emit('delete_react2')
+              this.review=null
+              alert('리뷰가 삭제되었습니다.')
+            });
         // this.$router.go()
       });
     },

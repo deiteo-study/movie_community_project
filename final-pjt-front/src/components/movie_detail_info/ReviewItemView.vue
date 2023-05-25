@@ -44,7 +44,7 @@
                 <div class="col-4">
                   <hr>
                   <div class="commentbox">
-                  <CommentItemView
+                  <CommentItemView @delete_react="get_comment"
                     v-for = "(comment, index) in comments" :key="index"
                     :comment="comment" :update="false"/>
                   </div>
@@ -175,7 +175,6 @@ export default {
           this.$router.push( {name:'profile', params:{username:this.name}} )
         },
         review_update(){
-          // const content=this.review.content
           const new_content=this.new_content
           // console.log(content,new_content)
           axios({
@@ -186,16 +185,17 @@ export default {
               Authorization: ` Token ${this.$store.state.token }`}
           })
           .then(() =>{
-            // axios({
-            //   method: "PUT",
-            //   url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
-            //   data: { content,new_content },
-            // }).then((res) => {
-            //   console.log(res);
-            //   this.content = null;
-            //   this.recommend_update();
-            //   this.get_wordcloud();
-            // });
+            const content=this.review.content
+            const new_content=this.new_content
+            axios({
+              method: "PUT",
+              url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
+              data: { content,new_content },
+            }).then(() => {
+            
+              this.$emit('delete_re1')
+              this.$emit('delete_re2')
+            });
             this.review.content=this.new_content
             this.update=false
             
@@ -209,23 +209,20 @@ export default {
               Authorization: ` Token ${this.$store.state.token }`}
           })
           .then(() =>{
-            // const content=this.review.content
-            // const new_content=false
-            // axios({
-            //   method: "PUT",
-            //   url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
-            //   data: { content,new_content},
-            // }).then((res) => {
-            //   console.log(res);
-            //   // this.content = null;
-            //   // this.$emit(this.recommend_update())
-            //   // this.$emit(this.recommend_update())
-            //   // this.recommend_update();
-            //   // this.get_wordcloud();
-            // });
-            this.modalCheck=false
-            this.review=null
-            alert('리뷰가 삭제되었습니다.')
+            const content=this.review.content
+            const new_content=false
+            axios({
+              method: "PUT",
+              url: `http://127.0.0.1:8000/api/v1/${this.review.movie}/keyword/`,
+              data: { content,new_content },
+            }).then(() => {
+              this.$emit('delete_re1')
+              this.$emit('delete_re2')
+              this.modalCheck=false
+              this.$emit('delete_react2')
+              this.review=null
+              alert('리뷰가 삭제되었습니다.')
+            });
           })
         },
         },

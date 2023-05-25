@@ -31,7 +31,7 @@
       
       <h5>☃︎{{username}}이 좋아한 리뷰 💌</h5>
         <div class="box2">
-          <profileReviewItemView 
+          <profileReviewItemView  @cuuu='cuuuu'
               v-for = "(review, index) in user.like_reviews" :key="index"
               :reviewId="String(review.id)" num='0'/>
           <!-- <p v-for="(lr,idx) in user.like_reviews" :key='idx' class='add_cursor' @click='modalOpen(lm.id)'>- {{lr.content}}</p> -->
@@ -39,7 +39,7 @@
       
         <h5>☃︎{{username}}이 작성한 리뷰 💬</h5>
           <div class="box1">
-            <profileReviewItemView 
+            <profileReviewItemView  @cuuu='cuuuu'
               v-for = "(review, index) in user.write_reviews" :key="index"
               :reviewId="String(review.id)" num='0'/>
             <!-- <p v-for="(wr,idx) in user.write_reviews" :key='idx' class='add_cursor' @click='move_review(lm.id)'>- {{wr.content}}</p> -->
@@ -54,7 +54,7 @@
               v-for = "(comment, index) in user.write_comments" :key="index"
               :commentId="String(comment.id)"/> -->
             <!-- <p v-for="(wc,idx) in user.write_comments" :key='idx'>- {{wc.content}}</p> -->
-            <profileReviewItemView 
+            <profileReviewItemView @cuuu='cuuuu'
               v-for = "(review, index) in user.write_comments" :key="index"
               :reviewId="String(review.review)" num='1' :comment_content='review.content' />
         </div>
@@ -128,8 +128,8 @@ export default {
     move_movie(movieId){
       this.$router.push({name:'moviedetail', params:{movieId:String(movieId)}})
     },
-    move_review(){
-
+    cuuuu(){
+      this.user_check()
     },
     follow(){
       axios({

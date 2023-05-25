@@ -263,7 +263,7 @@ from konlpy.tag import Okt
 
 # from sklearn.feature_extraction.text import TfidfVectorizer
 
-@api_view(['POST','PUT','DELETE'])
+@api_view(['POST','PUT'])
 def keyword(request,movieId):
     okt = Okt()    
     def preprocess(text):
@@ -291,15 +291,16 @@ def keyword(request,movieId):
             keywords.save()
             return Response('완료')
     else:
-        if not request.data['new_content']:
+        if request.data['new_content']==False:
             review=request.data['content']
             word=preprocess(review)
-            find=' '.join(word)
             movie=Movie.objects.get(id=movieId)
             keywords=Keywords.objects.get(movie=movie)
-            cc=keywords.all_words
-            cc.replace(find,'',1)
-            keywords.all_words=cc
+            cc=keywords.all_words.split(' ')
+            for i in word:
+                cc.remove(i)
+            keywords.all_words=' '.join(cc)
+
             keywords.save()
             return Response('키워드 삭제완료')
         else:
@@ -307,13 +308,13 @@ def keyword(request,movieId):
             new_review=request.data['new_content']
             word=preprocess(review)
             new_word=preprocess(new_review)
-            find=' '.join(word)
-            push=' '.join(new_word)
             movie=Movie.objects.get(id=movieId)
             keywords=Keywords.objects.get(movie=movie)
-            cc=keywords.all_words
-            cc.replace(find,push,1)
-            keywords.all_words=cc
+            cc=keywords.all_words.split(' ')
+            for i in word:
+                cc.remove(i)
+            cc += new_word
+            keywords.all_words=' '.join(cc)
             keywords.save()
             return Response('키워드 수정완료')
 

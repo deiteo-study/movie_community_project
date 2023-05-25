@@ -73,6 +73,7 @@ export default {
               Authorization: ` Token ${this.$store.state.token }`}
           })
           .then(() =>{
+            this.$emit('cu')
             this.update=false
           })
         },
@@ -84,11 +85,13 @@ export default {
               Authorization: ` Token ${this.$store.state.token }`}
           })
           .then(() =>{
+            this.$emit('delete_react')
+            this.$emit('cu')
             this.content=null
             alert('댓글이 삭제되었습니다.')
-            if (this.$route.fullPath.slice(1,8)=="profile"){
-              this.$router.go()
-            }
+            // if (this.$route.fullPath.slice(1,8)=="profile"){
+            //   this.$router.go()
+            // }
             
           })
         }

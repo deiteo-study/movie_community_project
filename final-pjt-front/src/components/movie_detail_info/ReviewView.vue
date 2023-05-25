@@ -4,7 +4,7 @@
     <br><hr><br>
     <div class='main'>
       <div class='col-8 reviewbox'>
-        <ReviewItemView
+        <ReviewItemView @delete_react2="get_reviews" @delete_re1='recommend_update' @delete_re2='get_wordcloud'
           v-for="(review, index) in reviews"
           :key="index"
           :reviewId="String(review.id)"
