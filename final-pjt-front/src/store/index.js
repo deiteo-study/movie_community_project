@@ -169,6 +169,7 @@ export default new Vuex.Store({
       .then(res=>{
         console.log(res)
         context.dispatch('logout')
+        alert('비밀번호가 변경되었습니다. 재로그인해주세요!')
       })
       .catch(()=>{})
     },

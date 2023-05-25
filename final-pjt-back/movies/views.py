@@ -381,7 +381,7 @@ def moviesearch(request):
 @api_view(['GET'])
 def recommend(request,movieId):
     movie=Movie.objects.get(id=movieId)
-    if type(movie.recommend)==str:
+    if type(movie.recommend)==str and movie.recommend!='':
         movies=[Movie.objects.get(id=int(i)) for i in movie.recommend.split(' ')]
         serializers=MovieSerializer(movies,many=True)
         return Response(serializers.data)

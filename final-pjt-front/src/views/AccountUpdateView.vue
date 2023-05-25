@@ -125,6 +125,7 @@ export default {
             .then(res => {
                 console.log(res)
                 this.$store.commit('LOGOUT')
+                alert('회원탈퇴가 완료되었습니다!')
             })
             .catch((err) => console.log(err))
         }
