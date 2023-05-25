@@ -124,6 +124,10 @@ export default {
       document.querySelector('#app').classList.toggle('text-white')
     },
     serach_title(){
+      if (!this.serach_word) {
+        alert('검색어를 입력해주세요!')
+      }
+
       if (this.$route.fullPath.slice(1,7)=="search") {
         this.$router.push({ name:'search',query:{title:this.serach_word} } )
         this.serach_word=null

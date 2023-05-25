@@ -1,6 +1,13 @@
 <template>
   <div>
-    <h1>{{$route.query.title}} 의 검색 결과입니다.</h1>
+    <h1 v-if='!movies ||movies.length==0'>"{{$route.query.title}}" 의 검색 결과가 존재하지 않습니다.</h1>
+    <div v-else>
+        <h1>"{{$route.query.title}}" 의 검색 결과입니다.</h1>
+        <p>현재 TEST DB의 데이터가 많지않은 관계 =>  적용된 유사도: 0.3△</p>
+            <p>부정확한 결과가 출력될 수 있습니다.</p>
+            
+    </div>
+
     
     <div class=main>
         <MovieItemView v-for='movie in movies' :key='movie.id' :movie='movie'/>
@@ -37,6 +44,9 @@ export default {
             .then(res => {
                 this.movies=res.data
             })
+            .catch(()=>{
+                console.log('다시시도해라 닝겐')
+            })
         }
     }
 }
@@ -44,9 +54,13 @@ export default {
 
 <style scoped>
 .main {
-    display:flex;
-  flex-flow : row wrap;
-  margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+
+    margin: 0 10%;
     justify-content: center;
+}
+h1 {
+    margin-top:20px;
 }
 </style>
