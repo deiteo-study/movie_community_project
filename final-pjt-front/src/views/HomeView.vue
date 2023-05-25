@@ -87,7 +87,7 @@
     <div>
 
       <div>
-        <p class="category">{{$store.state.my_name}}님만을 위한 추천 영화!</p>
+        <p class="category color2">{{$store.state.my_name}}님만을 위한 추천 영화!</p>
         <hr>
         <MovieListView v-if='recommend_movies && recommend_movies.length>0' :movies="recommend_movies"/>
         <div v-else>
@@ -98,25 +98,25 @@
       
 
       <div>
-        <p class="category">인기영화 Top10</p>
+        <p class="category color">인기영화 Top10</p>
         <hr>
         <MovieListView :movies="popular_ten"/>
       </div>
       
       <div>
-        <p class="category">이런 영화는 어떤가요?</p>
+        <p class="category color2">이런 영화는 어떤가요?</p>
         <hr>
         <MovieListView :movies="random_movies"/>
       </div>
 
       <div>
-        <p class="category">{{gr1_name}} 장르 인기</p>
+        <p class="category color">{{gr1_name}} 장르 인기</p>
         <hr>
         <MovieListView :movies="gr1_movies"/>
       </div>
 
       <div>
-        <p class="category">{{gr2_name}} 장르 인기</p>
+        <p class="category color2">{{gr2_name}} 장르 인기</p>
         <hr>
         <MovieListView :movies="gr2_movies"/>
       </div>
@@ -267,5 +267,16 @@ h2 {
   margin: 0px 5%;
   position: relative;
 }
-
+.color {
+  background-color: #d6e7f1;
+  border-radius: 0.7rem;
+  padding-left: 15px;
+  color: rgb(82, 89, 90);
+}
+.color2 {
+  background-color: #f6f5e2;
+  border-radius: 0.7rem;
+  padding-left: 15px;
+  color: rgb(82, 89, 90);
+}
 </style>

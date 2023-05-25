@@ -78,6 +78,7 @@ input{
   width: 200px;
   margin-bottom: 10px;
   cursor: pointer;
+  padding-left: 10px;
   
 }
 hr{

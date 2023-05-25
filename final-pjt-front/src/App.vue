@@ -32,19 +32,19 @@
     <div v-else>
       <div class="logo" v-if="$store.state.startpage==0">
         <!-- 홈 화면 구성 -->
-      <p class="logo-font">Logo(site name)임시구상// 배경 뭘로하지</p>
-        <div class="flip">
-        <div class="card" @click="detail(movie.id)" >
-            <div class="front">
-              
-              <img class="logoimg" src="@/assets/logo.png" alt="logo">
+     
+        <div class="backimg"> 
+          <div class="backimgarea">
+            <p class="logo-font">Cumulus</p>
+          </div>
+              <div class="" @click="detail(movie.id)" >
+              <!-- <img class="logoimg" src="@/assets/logo11.png" alt="logo"> -->
             </div>
-            <div class="back"> 
+        </div>  
+        <div class=""> 
               <button  class="logo-btn" @click="change_page1">로그인</button>
               <button class="logo-btn" @click="change_page2">회원가입</button>
             </div>
-            </div>
-        </div>
     </div>
         <!-- <img class="logoimg" src="@/assets/logo.png" alt="logo" >
         <br>
@@ -249,14 +249,25 @@ input::placeholder {
 .c {
   cursor: pointer;
 }
-
+.backimg {
+  background-image: url('./assets/logo11.png');
+  background-color: aliceblue;
+  background-size: 2000px 1000px;
+}
+.backimgarea{
+  height: 300px;
+  padding-top: 7%;
+  margin-bottom: 10px;
+}
 .logo {
   /* font-family: 'Hi Melody', cursive; */
   text-align: center;
   margin-top: 20%;
 }
 .logo-font{
-  font-size: 53px;
+  /* margin-top: 20%; */
+  font-size: 59px;
+  font-family: 'Caveat', cursive;
 }
 .logo-btn{
   border-radius: 0.6rem;
@@ -277,8 +288,12 @@ div > hr {
   margin-bottom: 0;
 }
 .logoimg{
-  width: 500px;
-  width: 500px;
+  width: 100%;
+  height: 60%;
+  /* width: 600px;
+  height: 500px; */
+  /* border-radius:50%;
+  box-shadow: 0 4px 6px -1px rgba(0, 0.7, 0.0, 0.1), 0 2px 4px -1px rgba(0, 0.8, 0, 0.6); */
 }
 .flip { 
   /* width: 700px;
@@ -290,36 +305,30 @@ div > hr {
   margin: 0px auto 40px auto;
 }
 
-.card {
+/* .card {
   top: 20px;
-  /* margin: 40px auto; */
-  /* width: 100%; 
-  height: 100%;  */
   width: 500px;
   height: 500px;
   position: relative;
-  transition: .7s;
+  transition: .0s;
   transform-style: preserve-3d;
   background-color: #fffefb;
   margin: 0px auto;
   border: none;
-} 
+}  */
 
-.front{
+/* .front{
   position: absolute;
-  /* width: 100%;  */
-  /* height: 30px; */
   backface-visibility: hidden;
   justify-content: center;
   align-items: center;
   color: #1f1f21;
   padding: 0px auto;
-}
-.back {
+} */
+/* .back {
   margin: 40px;
-  /* position: absolute; */
   backface-visibility: hidden;
-}
+} */
 .logo-btn:hover {
   /* background-color:#edeee3; */
    background-color:#d2e3e7;
@@ -327,16 +336,12 @@ div > hr {
   outline: 0;
 }
 
-.front {
-  /* background: tomato;  */
-}
 
-.back { 
-  /* background: rgb(38, 39, 42);  */
+/* .back { 
   transform: rotateY(180deg);
 }
 
 .flip:hover .card {
   transform: rotateY(180deg);
-}
+} */
 </style>
