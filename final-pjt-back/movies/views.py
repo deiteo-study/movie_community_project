@@ -102,7 +102,7 @@ def recommendmovies(request):
     user=request.user
     all=set()
     for movie in user.like_movies.all():
-        if type(movie.recommend)==str:
+        if type(movie.recommend)==str and movie.recommend!='':
             all.update(movie.recommend.split(' '))
     import random
     if len(all)>10:

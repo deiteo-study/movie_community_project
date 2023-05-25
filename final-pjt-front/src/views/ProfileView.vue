@@ -25,8 +25,8 @@
       <hr>
       <br>
       <h5>☃︎{{username}}이 좋아한 영화 🎞️</h5>
-        <div class="box1">
-          <p v-for="(lm,idx) in user.like_movies" :key='idx' class='add_cursor' @click='move_movie(lm.id)'>- {{lm.title}}</p>
+        <div class="box1 poster">
+          <p v-for="(lm,idx) in user.like_movies" :key='idx' class='add_cursor' @click='move_movie(lm.id)'><img :src=" `https://image.tmdb.org/t/p/w300${lm.poster_path}` " alt=""></p>
         </div>
       
       <h5>☃︎{{username}}이 좋아한 리뷰 💌</h5>
@@ -40,7 +40,7 @@
         <h5>☃︎{{username}}이 작성한 리뷰 💬</h5>
           <div class="box1">
             <profileReviewItemView  @cuuu='cuuuu'
-              v-for = "(review, index) in user.write_reviews.slice" :key="index"
+              v-for = "(review, index) in user.write_reviews" :key="index"
               :reviewId="String(review.id)" num='0'/>
             <!-- <p v-for="(wr,idx) in user.write_reviews" :key='idx' class='add_cursor' @click='move_review(lm.id)'>- {{wr.content}}</p> -->
         </div>
@@ -147,6 +147,18 @@ export default {
 </script>
 
 <style scoped>
+.poster {
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  justify-items: center;
+  
+}
+.poster img {
+  width:150px;
+  border-radius: 0.7rem;
+  height: 225px;
+  border: 0.3px solid grey
+}
 h5 {
   /* font-family: 'Dongle', sans-serif; */
   /* font-family: 'Gaegu', cursive; */
@@ -175,7 +187,7 @@ hr {
   margin: 10px auto 20px auto;
   padding: 15px 20px;
   text-align: left;
-  overflow: scroll;
+  overflow: auto;
   overflow-x: hidden;
   
 }
@@ -189,7 +201,7 @@ hr {
   margin: 10px auto 20px auto;
   padding: 15px 20px;
   text-align: left;
-  overflow: scroll;
+  overflow: auto;
     overflow-x: hidden;
 }
 </style>
