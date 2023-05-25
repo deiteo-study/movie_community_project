@@ -9,7 +9,7 @@
       <div class="search_div">
         <input type="text" id="serch"  placeholder="검색어를 입력해주세요 :)" v-model="serach_word" 
         @keyup.enter="serach_title">
-          <img src="./assets/magnify.png" alt="serch" style="width:18px; height:18px" class='add_cursor' > 
+          <img src="./assets/search_icon2.png" alt="serch" style="width:25px; height:25px; margin-left:2px" class='add_cursor' @click='serach_title'> 
       </div>
 
 
@@ -125,7 +125,7 @@ export default {
     },
     serach_title(){
       if (!this.serach_word) {
-        alert('검색어를 입력해주세요!')
+        return alert('검색어를 입력해주세요!')
       }
 
       if (this.$route.fullPath.slice(1,7)=="search") {
@@ -233,14 +233,16 @@ nav a.router-link-exact-active {
 <style scoped>
 .search_div{
   width:80%
+  
 }
 input {
   width: 50%;
   height: 30px;
   border-radius: 18px;
   margin: 0 auto;
+  margin-top: 5px;
   border: solid 1.5px rgb(108, 119, 127);
-  padding-left: 20px;
+  padding:5px 20px;
 }
 input::placeholder {
     color: #d0d2d3;
@@ -272,6 +274,9 @@ input::placeholder {
 </style>
 
 <style scoped>
+.add_cursor {
+  cursor: pointer;
+}
 div > hr {
   margin-top:0;
   margin-bottom: 0;
